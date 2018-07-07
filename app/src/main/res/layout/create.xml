@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditText
+        android:textColor="#000000"
+        android:id="@+id/job_name"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:hint="Job's Name"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/desc_job"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Description"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/job_name" />
+
+    <EditText
+        android:textColor="#000000"
+        android:id="@+id/desc_input_job"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Insert Description"
+        app:layout_constraintTop_toBottomOf="@id/desc_job"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/slot_job"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Worker Slot"
+        app:layout_constraintTop_toBottomOf="@id/desc_input_job"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/slot_input_job"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="1-10"
+        app:layout_constraintTop_toBottomOf="@id/desc_input_job"
+        app:layout_constraintLeft_toRightOf="@id/slot_job"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/date_job"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Due Date"
+        app:layout_constraintTop_toBottomOf="@id/slot_job"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/date_input_job"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="Insert Date"
+        app:layout_constraintTop_toBottomOf="@id/slot_input_job"
+        app:layout_constraintLeft_toRightOf="@id/date_job"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/date_time_job"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Due Time"
+        app:layout_constraintTop_toBottomOf="@id/date_job"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/date_time_input_job"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="Insert Time"
+        app:layout_constraintTop_toBottomOf="@id/date_input_job"
+        app:layout_constraintLeft_toRightOf="@id/date_time_job"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/crt_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Create"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+</android.support.constraint.ConstraintLayout>

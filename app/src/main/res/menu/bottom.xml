@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_Home"
+        android:icon="@drawable/home"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/nav_Offer"
+        android:icon="@drawable/offer"
+        android:title="Offer"/>
+
+    <item
+        android:id="@+id/nav_Create"
+        android:icon="@drawable/create"
+        android:title="Create"/>
+
+    <item
+        android:id="@+id/nav_List"
+        android:icon="@drawable/list"
+        android:title="List"/>
+
+    <item
+        android:id="@+id/nav_Inbox"
+        android:icon="@drawable/inbox"
+        android:title="Inbox"/>
+    <!--
+        <item
+            android:id="@+id/nav_Board"
+            android:icon="@drawable/board"
+            android:title="Board"/>
+
+
+-->
+    </menu>

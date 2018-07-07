@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditText
+        android:textColor="#000000"
+        android:id="@+id/task_name2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Task's Name"
+        android:padding="10dp"
+        android:textSize="20dp"/>
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/desc_task2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        app:layout_constraintTop_toBottomOf="@id/task_name2"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+    <EditText
+        android:textColor="#000000"
+        android:id="@+id/desc_input_task2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Insert Description"
+        app:layout_constraintTop_toBottomOf="@id/desc_task2"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/diff_task2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Difficulty"
+        app:layout_constraintTop_toBottomOf="@id/desc_input_task2"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/diff_input_task2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="1-3"
+        app:layout_constraintTop_toBottomOf="@id/desc_input_task2"
+        app:layout_constraintLeft_toRightOf="@id/diff_task2"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/type_task2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        app:layout_constraintTop_toBottomOf="@id/diff_task2"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/type_input_task2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="eg: Str, Dex, Int"
+        app:layout_constraintTop_toBottomOf="@id/diff_input_task2"
+        app:layout_constraintLeft_toRightOf="@id/type_task2"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/date_task2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Due Date"
+        app:layout_constraintTop_toBottomOf="@id/type_task2"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/date_input_task2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="###"
+        app:layout_constraintTop_toBottomOf="@id/type_input_task2"
+        app:layout_constraintLeft_toRightOf="@id/date_task2"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/date_time_task2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Due Time"
+        app:layout_constraintTop_toBottomOf="@id/date_task2"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:textColor="#000000"
+        android:id="@+id/date_time_input_task2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="###"
+        app:layout_constraintTop_toBottomOf="@id/date_input_task2"
+        app:layout_constraintLeft_toRightOf="@id/date_time_task2"
+        android:padding="5dp"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/crt_task2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Apply"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

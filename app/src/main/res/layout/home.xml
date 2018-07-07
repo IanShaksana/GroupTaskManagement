@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/home_con"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#965142">
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Username"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="1dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Status :"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/username"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/strength"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Strength"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/status"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/agility"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Agility"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/strength"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/intelligence"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Intelligence"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/agility"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/str"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text=":"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/status"
+            app:layout_constraintLeft_toRightOf="@+id/strength"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/agi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text=":"
+            android:textSize="20dp"
+            app:layout_constraintLeft_toRightOf="@+id/agility"
+            app:layout_constraintTop_toBottomOf="@id/strength"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/intel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text=":"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/agility"
+            app:layout_constraintLeft_toRightOf="@+id/intelligence"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/str_qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="#"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/status"
+            app:layout_constraintLeft_toRightOf="@+id/str"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/agi_qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="#"
+            android:textSize="20dp"
+            app:layout_constraintLeft_toRightOf="@+id/agi"
+            app:layout_constraintTop_toBottomOf="@id/strength"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/intel_qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="#"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/agility"
+            app:layout_constraintLeft_toRightOf="@+id/intel"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/experience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Experience"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/intelligence"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/exp_cur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="#"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/experience"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/slash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="/"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/experience"
+            app:layout_constraintLeft_toRightOf="@+id/exp_cur"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/exp_nex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="#"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/experience"
+            app:layout_constraintLeft_toRightOf="@+id/slash"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:textColor="#000000"
+            android:id="@+id/exp_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="#"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/exp_cur"
+            tools:layout_editor_absoluteX="0dp" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_board"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="26dp"
+        android:text="Board"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/intel_qty"
+        app:layout_constraintTop_toBottomOf="@+id/exp_bar" />
+
+    <Button
+        android:id="@+id/LogOut"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginTop="10dp"
+        android:text="Log Out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_board" />
+
+
+
+</android.support.constraint.ConstraintLayout>
