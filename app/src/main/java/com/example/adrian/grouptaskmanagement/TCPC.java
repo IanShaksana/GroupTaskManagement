@@ -3,10 +3,15 @@ package com.example.adrian.grouptaskmanagement;
 import android.graphics.Bitmap;
 import android.util.Base64;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -33,6 +38,19 @@ public class TCPC {
             socket.connect(sockaddr,0);
             //socket.setSoTimeout(1000);
 
+            OutputStream outputStream = socket.getOutputStream();
+            FileInputStream fis = new FileInputStream(new File("C:\\Users\\Adrian\\Pictures\\"+/*filename+*/".jpg"));
+            DataOutputStream dos  = new DataOutputStream(outputStream);
+            BufferedOutputStream dos1  = new BufferedOutputStream(outputStream);
+            int io;
+            while((io=fis.read())> -1){
+                dos1.write(io);
+            }
+            fis.close();
+            dos1.close();
+            socket.close();
+
+            /*
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             newData.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] imageBytes = baos.toByteArray();
@@ -43,6 +61,7 @@ public class TCPC {
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             data = bufferedReader.readLine();
+            */
 
         }catch (SocketTimeoutException e){
             e.printStackTrace();
