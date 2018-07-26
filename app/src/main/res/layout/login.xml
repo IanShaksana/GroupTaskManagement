@@ -53,4 +53,12 @@
         android:background="@drawable/round_edit_text"
         android:backgroundTint="#FEFBDE"/>
 
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_above="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/logo" />
+
 </RelativeLayout>
