@@ -19,11 +19,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static android.os.Environment.DIRECTORY_PICTURES;
+
 public class camera_test extends AppCompatActivity {
     ImageView IMG;
     Button buttonC,buttonU;
     Bitmap imageBitmap;
-    static final  int Request=1;
     String mCurrentPhotoPath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +57,24 @@ public class camera_test extends AppCompatActivity {
 
     }
 
-    /*
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, Request);
-        }
-    }*/
-
 
     static final int REQUEST_TAKE_PHOTO = 1;
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        /*
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File f = new File(storageDir,imageFileName);
+        Uri contentUri = Uri.fromFile(f);
+
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
+        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+*/
+
+
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
@@ -80,7 +86,8 @@ public class camera_test extends AppCompatActivity {
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
+                Toast.makeText(camera_test.this,"File exist",Toast.LENGTH_SHORT).show();
+                Uri photoURI = FileProvider.getUriForFile(camera_test.this,
                         "com.example.android.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
@@ -91,13 +98,15 @@ public class camera_test extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        //super.onActivityResult(requestCode, resultCode, data);
         if(resultCode != RESULT_OK){
             if (requestCode == REQUEST_TAKE_PHOTO) {
-                imageBitmap = (Bitmap) data.getExtras().get("data");
-                IMG.setImageBitmap(imageBitmap);
+                //Bundle extras = data.getExtras();
+                //imageBitmap = (Bitmap) extras.get("data");
+                //IMG.setImageBitmap(imageBitmap);
             }
         }
+        //galleryAddPic();
         /*
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
@@ -113,7 +122,9 @@ public class camera_test extends AppCompatActivity {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = getExternalFilesDir(DIRECTORY_PICTURES);
+        //File f = new File(storageDir,imageFileName);
+        //Uri contentUri = Uri.fromFile(f);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -123,5 +134,12 @@ public class camera_test extends AppCompatActivity {
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
+    }
+    private void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(mCurrentPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
     }
 }
