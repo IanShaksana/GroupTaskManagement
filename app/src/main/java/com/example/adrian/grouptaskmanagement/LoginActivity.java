@@ -40,6 +40,9 @@ public class LoginActivity extends AppCompatActivity {
                     loginBackground.getListener(new background.OnUpdateListener() {
                         @Override
                         public void onUpdate(String obj) {
+                            if(obj.contains("Failed")){
+                                Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
+                            }else {
                                 Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
                                 SharedPreferences preferences = getSharedPreferences("State",MODE_PRIVATE);
                                 String login_state = username.getText().toString();
@@ -48,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.commit();
                                 LoginActivity.this.startActivityForResult(new Intent(LoginActivity.this,MainActivity.class),LOGIN_REQUEST);
                                 finish();
+                            }
+
                         }
                     });
                     loginBackground.execute(sendUsrPass);

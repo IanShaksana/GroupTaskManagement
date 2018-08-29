@@ -50,7 +50,7 @@ public class Frag_List extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                        Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
                         if (choosen.equals("User as Worker")){
                             getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_worker()).addToBackStack(null).commit();
                         }else if (choosen.equals("User as Leader")){
