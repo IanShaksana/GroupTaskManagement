@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom"
-        android:background="?android:attr/windowBackground">
+        android:background="@drawable/bottom">
 
     </android.support.design.widget.BottomNavigationView>
 

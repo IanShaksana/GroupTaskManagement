@@ -17,18 +17,17 @@ import java.net.UnknownHostException;
  */
 
 public class TCP {
-    public String setupCon (String newData){
-        String data=null;
-        try {
-            //String address = "192.168.142.230";
-            //String address ="192.168.43.138"
-            String address = "192.168.138.57";
+    public String setupCon (String newData)  {
+        String data;
+        //String address = "192.168.43.138";
+        String address = "192.168.142.230";
 
+        try {
             InetAddress serverAddr = InetAddress.getByName(address);
             SocketAddress sockaddr = new InetSocketAddress(serverAddr, 1234);
             Socket socket = new Socket();
-            socket.connect(sockaddr,1000);
-            socket.setSoTimeout(1000);
+            socket.connect(sockaddr,2000);
+            socket.setSoTimeout(2000);
             PrintStream sendData = new PrintStream(socket.getOutputStream());
             sendData.println(newData);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -42,13 +41,41 @@ public class TCP {
             return "failed Unknown Host";
         } catch (SocketException e) {
             e.printStackTrace();
-            return "failed Socket";
+            return "failed Socket"+address;
         } catch (IOException e) {
             e.printStackTrace();
             return "failed I/O";
         }
         return data;
-        //return null;
-        //return null;
+    }
+
+    public String ping(int a){
+
+        String reply = null;
+        Socket socket = new Socket();
+        String check = "false";
+        String trueAddress=null;
+        String[] address ={"192.168.142.230","192.168.43.138","192.168.100.130","192.168.138.57"};
+        while (check.equals("false")) {
+            try {
+                InetAddress serverAddr = InetAddress.getByName(address[a]);
+                SocketAddress sockaddr = new InetSocketAddress(serverAddr, 1234);
+                socket.connect(sockaddr, 1000);
+                PrintStream sendData = new PrintStream(socket.getOutputStream());
+                sendData.println("ping");
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                reply = bufferedReader.readLine();
+                if (reply.equals("Success")) {
+                    trueAddress = address[a];
+                    check = "true";
+                } else {
+                    check = "false";
+                }
+            } catch (IOException e) {
+                ping(a++);
+            }
+        }
+
+        return trueAddress;
     }
 }

@@ -7,13 +7,19 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -62,7 +68,91 @@ public class list_task_leader extends Fragment {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                            Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
+
+                            PopupMenu pop1 = new PopupMenu(getContext(),view,  Gravity.CENTER);
+                            try {
+                                Field[] fields = pop1.getClass().getDeclaredFields();
+                                for (Field field : fields) {
+                                    if ("mPopup".equals(field.getName())) {
+                                        field.setAccessible(true);
+                                        Object menuPopupHelper = field.get(pop1);
+                                        Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
+                                        Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon", boolean.class);
+                                        setForceIcons.invoke(menuPopupHelper, true);
+                                        break;
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            pop1.getMenuInflater().inflate(R.menu.popup1,pop1.getMenu());
+
+
+                            PopupMenu pop2 = new PopupMenu(getContext(),view,  Gravity.CENTER);
+                            try {
+                                Field[] fields = pop2.getClass().getDeclaredFields();
+                                for (Field field : fields) {
+                                    if ("mPopup".equals(field.getName())) {
+                                        field.setAccessible(true);
+                                        Object menuPopupHelper = field.get(pop2);
+                                        Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
+                                        Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon", boolean.class);
+                                        setForceIcons.invoke(menuPopupHelper, true);
+                                        break;
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            pop2.getMenuInflater().inflate(R.menu.popup,pop2.getMenu());
+                            final String[] p1 = choosen.split("-");
+                            if(p1[5].equals("no")){
+                                Toast.makeText(getContext(),"Not Completed Yet",Toast.LENGTH_SHORT).show();
+                                pop1.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                    @Override
+                                    public boolean onMenuItemClick(MenuItem menuItem) {
+                                        //ini jangan disini
+                                        if(menuItem.getTitle().toString().equals("Remove Worker")){
+                                            Toast.makeText(getContext(), "Remove Worker",Toast.LENGTH_SHORT).show();
+                                            //background background1 = new background(getContext());
+                                            //background1.execute("approve_yes-"+p1[6]);
+
+                                        }else {
+                                            Toast.makeText(getContext(), "Delete Task",Toast.LENGTH_SHORT).show();
+                                            background background1 = new background(getContext());
+                                            background1.execute("Delete_task-"+p1[6]);
+                                        }
+                                        return true;
+                                    }
+                                });
+                                pop1.show();
+
+                            }else {
+                                pop2.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                    @Override
+                                    public boolean onMenuItemClick(MenuItem menuItem) {
+
+                                        if(menuItem.getTitle().toString().equals("Approve")){
+                                            Toast.makeText(getContext(), "Approve",Toast.LENGTH_SHORT).show();
+                                            background background1 = new background(getContext());
+                                            background1.execute("approve_yes-"+p1[6]);
+
+                                        }else if(menuItem.getTitle().toString().equals("Disapprove")) {
+                                            Toast.makeText(getContext(), "Disapprove",Toast.LENGTH_SHORT).show();
+                                            background background1 = new background(getContext());
+                                            background1.execute("approve_no-"+p1[6]);
+                                        }else{
+                                            Toast.makeText(getContext(), "Delete Task",Toast.LENGTH_SHORT).show();
+                                            background background1 = new background(getContext());
+                                            background1.execute("Delete_task-"+p1[6]);
+                                        }
+                                        return true;
+                                    }
+                                });
+                                pop2.show();
+                            }
+
                             //background background1 =new background(getContext());
                             //String[] selected_task = choosen.split("-");
                             //background1.execute("request_apply_task-"+state+"-"+selected_task[0]);

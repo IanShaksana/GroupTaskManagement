@@ -59,7 +59,7 @@ public class Frag_Offer_avaible_task extends Fragment implements dialog_yes_no_a
 
             }
         });
-        background.execute("request_job_task-"+tempo);
+        background.execute("request_job_task2-"+tempo);
         return view;
     }
 

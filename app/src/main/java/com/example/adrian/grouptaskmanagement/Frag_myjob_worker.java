@@ -148,7 +148,11 @@ public class Frag_myjob_worker extends Fragment implements dialog_yes_no_complet
         Toast.makeText(context,wasd,Toast.LENGTH_SHORT).show();
         background background = new background(context);
         background.execute("complete_task-"+IDTASK);
-        getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_worker()).commit();
+        //getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_worker()).commit();
+        current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
+        if (current instanceof Frag_myjob_worker){
+            getFragmentManager().beginTransaction().detach(current).attach(current).commit();
+        }
     }
 
 }
