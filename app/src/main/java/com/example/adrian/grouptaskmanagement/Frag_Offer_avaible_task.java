@@ -25,7 +25,7 @@ public class Frag_Offer_avaible_task extends Fragment implements dialog_yes_no_a
     String unprocessed_task;
     ListView listView;
     String state;
-    String selected_task_real;
+    String ID_Task, ID_Job;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Avaible Task");
@@ -48,7 +48,8 @@ public class Frag_Offer_avaible_task extends Fragment implements dialog_yes_no_a
                             String choosen = String.valueOf(adapterView.getItemAtPosition(i));
                             Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
                             String[] selected_task = choosen.split("-");
-                            selected_task_real = selected_task[0];
+                            ID_Task = selected_task[6];
+                            ID_Job = selected_task[4];
                             opendialog_yes_no();
                             //background background1 =new background(getContext());
                             //String[] selected_task = choosen.split("-");
@@ -74,7 +75,7 @@ public class Frag_Offer_avaible_task extends Fragment implements dialog_yes_no_a
     public void apply_apply_task(String wasd) {
         if (wasd.equals("Apply")){
             background background1 =new background(getContext());
-            background1.execute("request_apply_task-"+state+"-"+selected_task_real);
+            background1.execute("request_apply_task-"+state+"-"+ID_Task+"-"+ID_Job);
             getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_List()).addToBackStack(null).commit();
         }
     }

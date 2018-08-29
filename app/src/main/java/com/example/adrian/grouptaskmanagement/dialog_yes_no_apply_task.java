@@ -20,7 +20,7 @@ public class dialog_yes_no_apply_task extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_yes_no_apply_task,null);
-        builder.setView(view).setTitle("Warning").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setView(view).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
