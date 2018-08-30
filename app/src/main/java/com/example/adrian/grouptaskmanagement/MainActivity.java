@@ -35,10 +35,12 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = new Frag_Offer();
                     clearBackStack();
                     break;
+                    /*
                 case R.id.nav_Create:
                     selectedFragment = new Frag_Create();
                     clearBackStack();
                     break;
+                    */
                 case R.id.nav_List:
                     selectedFragment = new Frag_List();
                     clearBackStack();
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     clearBackStack();
                     break;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentBottom,selectedFragment).commit();
+            getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,selectedFragment).commit();
             return true;
         }
     };
@@ -60,5 +62,10 @@ public class MainActivity extends AppCompatActivity {
             FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
             manager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.ani1, R.anim.ani2);
     }
 }

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class Frag_List extends Fragment {
     View view;
     Context context;
     Activity activity;
+    ImageView create,task,group;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,26 +42,51 @@ public class Frag_List extends Fragment {
         context=activity.getApplicationContext();
         view = inflater.inflate(R.layout.myjob,container, false);
 
-                String[] split = {"User as Worker","User as Leader"};
+        create = (ImageView) view.findViewById(R.id.Create_Job);
+        task = (ImageView) view.findViewById(R.id.My_Task);
+        group = (ImageView) view.findViewById(R.id.My_Job);
 
-                ListAdapter adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,split);
-                listView = (SwipeMenuListView) view.findViewById(R.id.myjob_viw);
-                listView.setAdapter(adapter);
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_Create()).addToBackStack(null).commit();
+            }
+        });
 
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                        //Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
-                        if (choosen.equals("User as Worker")){
-                            getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_worker()).addToBackStack(null).commit();
-                        }else if (choosen.equals("User as Leader")){
-                            getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_leader()).addToBackStack(null).commit();
-                        }
+        task.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_myjob_worker()).addToBackStack(null).commit();
+            }
+        });
 
-                    }
-                });
+        group.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_myjob_leader()).addToBackStack(null).commit();
+            }
+        });
 
+
+        /*
+        String[] split = {"User as Worker","User as Leader"};
+        ListAdapter adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,split);
+        listView = (SwipeMenuListView) view.findViewById(R.id.myjob_viw);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String choosen = String.valueOf(adapterView.getItemAtPosition(i));
+            //Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
+                if (choosen.equals("User as Worker")){
+                    getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_worker()).addToBackStack(null).commit();
+                }else if (choosen.equals("User as Leader")){
+                    getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_leader()).addToBackStack(null).commit();
+                }
+            }
+        });
+        */
         return view;
     }
 

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.adrian.grouptaskmanagement.MainActivity">
+    tools:context="com.example.adrian.grouptaskmanagement.MainActivity"
+    android:background="@drawable/wood">
 
     <FrameLayout
         android:id="@+id/fragmentBottom"

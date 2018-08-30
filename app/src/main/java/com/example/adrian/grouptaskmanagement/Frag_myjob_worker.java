@@ -33,13 +33,13 @@ public class Frag_myjob_worker extends Fragment implements dialog_yes_no_complet
     ListView listView;
     String state;
     Context context;
-    String IDTASK;
+    String IDTASK,IDJOB;
     Fragment current;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         context=getContext();
         getActivity().setTitle("As Worker");
-        final View view = inflater.inflate(R.layout.myjob,container, false);
+        final View view = inflater.inflate(R.layout.myjob2,container, false);
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State",MODE_PRIVATE);
         state = preferences.getString("Login_State","");
         background request_offer = new background(getContext());
@@ -104,6 +104,7 @@ public class Frag_myjob_worker extends Fragment implements dialog_yes_no_complet
                             Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
                             String[] splitIDTASK = choosen.split("-");
                             IDTASK = splitIDTASK [2];
+                            IDJOB = splitIDTASK[1];
                             opendialog_yes_no();
                             //getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_Offer_avaible_task()).addToBackStack(null).commit();
                         }
@@ -135,7 +136,7 @@ public class Frag_myjob_worker extends Fragment implements dialog_yes_no_complet
     public void apply_abandoned(String wasd) {
         Toast.makeText(context,wasd,Toast.LENGTH_SHORT).show();
         background background = new background(context);
-        background.execute("abandon_task-"+IDTASK);
+        background.execute("abandon_task-"+IDTASK+"-"+IDJOB+"-"+state);
         current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
         if (current instanceof Frag_myjob_worker){
             getFragmentManager().beginTransaction().detach(current).attach(current).commit();

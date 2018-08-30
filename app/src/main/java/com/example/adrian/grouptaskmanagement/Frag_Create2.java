@@ -112,7 +112,7 @@ public class Frag_Create2 extends Fragment implements DatePickerDialog.OnDateSet
                     public void onUpdate(String obj) {
                         Toast.makeText(getContext(),"Create Task Success",Toast.LENGTH_SHORT).show();
                         clearBackStack();
-                        getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new list_task_leader(),getTag()).addToBackStack(null).commit();
+                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new list_task_leader(),getTag()).addToBackStack(null).commit();
 
                     }
                 });

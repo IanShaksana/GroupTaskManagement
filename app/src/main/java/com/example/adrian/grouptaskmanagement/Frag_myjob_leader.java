@@ -27,7 +27,7 @@ public class Frag_myjob_leader extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         getActivity().setTitle("As Leader");
-        final View view = inflater.inflate(R.layout.myjob,container, false);
+        final View view = inflater.inflate(R.layout.myjob2,container, false);
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State",MODE_PRIVATE);
         state = preferences.getString("Login_State","");
         background request_offer = new background(getContext());
@@ -45,7 +45,7 @@ public class Frag_myjob_leader extends Fragment {
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             String choosen = String.valueOf(adapterView.getItemAtPosition(i));
                             Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
-                            getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new list_task_leader(),choosen).addToBackStack(null).commit();
+                            getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new list_task_leader(),choosen).addToBackStack(null).commit();
                         }
                     });
 

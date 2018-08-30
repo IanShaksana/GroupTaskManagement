@@ -10,12 +10,12 @@
         android:id="@+id/nav_Offer"
         android:icon="@drawable/offer"
         android:title="Offer"/>
-
+<!--
     <item
         android:id="@+id/nav_Create"
         android:icon="@drawable/create"
         android:title="Create"/>
-
+-->
     <item
         android:id="@+id/nav_List"
         android:icon="@drawable/list"
