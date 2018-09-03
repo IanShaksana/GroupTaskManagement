@@ -27,7 +27,7 @@ public class background extends AsyncTask <String,Void,String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        TCP tcp = new TCP();
+        TCP tcp = new TCP(currentAct);
         return tcp.setupCon(strings[0]);
     }
 

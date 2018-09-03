@@ -38,7 +38,7 @@ public class list_task_leader extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Avaible Task");
         final View view = inflater.inflate(R.layout.list_task_leader,container, false);
-        String tempo = getTag();
+        String ID_job= getTag();
         //clearBackStack();
 
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State",MODE_PRIVATE);
@@ -106,6 +106,7 @@ public class list_task_leader extends Fragment {
                                 e.printStackTrace();
                             }
                             pop2.getMenuInflater().inflate(R.menu.popup,pop2.getMenu());
+
                             final String[] p1 = choosen.split("-");
                             if(p1[5].equals("no")){
                                 Toast.makeText(getContext(),"Not Completed Yet",Toast.LENGTH_SHORT).show();
@@ -141,6 +142,12 @@ public class list_task_leader extends Fragment {
                                         }else if(menuItem.getTitle().toString().equals("Disapprove")) {
                                             Toast.makeText(getContext(), "Disapprove",Toast.LENGTH_SHORT).show();
                                             background background1 = new background(getContext());
+                                            background1.getListener(new background.OnUpdateListener() {
+                                                @Override
+                                                public void onUpdate(String obj) {
+                                                    update();
+                                                }
+                                            });
                                             background1.execute("approve_no-"+p1[6]);
                                         }else{
                                             Toast.makeText(getContext(), "Delete Task",Toast.LENGTH_SHORT).show();
@@ -163,7 +170,7 @@ public class list_task_leader extends Fragment {
 
             }
         });
-        background.execute("request_job_task-"+tempo);
+        background.execute("request_job_task-"+ID_job);
 
         return view;
 
@@ -173,6 +180,13 @@ public class list_task_leader extends Fragment {
         if (manager.getBackStackEntryCount() > 0) {
             FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
             manager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+    }
+
+    private void update(){
+        Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
+        if (current instanceof list_task_leader){
+            getFragmentManager().beginTransaction().detach(current).attach(current).commit();
         }
     }
 }

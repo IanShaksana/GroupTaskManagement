@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border"
+    android:padding="15dp">
+
+
+    <TextView
+        android:id="@+id/worker_name"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Worker's name"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/worker_name_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="###"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        app:layout_constraintLeft_toRightOf="@+id/worker_name" />
+
+    <TextView
+        android:id="@+id/Task_Worker"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Task"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/worker_name" />
+
+    <TextView
+        android:id="@+id/Task_name"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="###"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/worker_name"
+        app:layout_constraintLeft_toRightOf="@+id/Task_Worker" />
+
+
+</android.support.constraint.ConstraintLayout>

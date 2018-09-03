@@ -36,6 +36,7 @@ public class Frag_myjob_leader extends Fragment {
             public void onUpdate(String obj) {
 
                 String[] split = obj.split("-");
+                //String[] split = obj.split("-");
 
                 ListAdapter adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,split);
                 listView = (ListView) view.findViewById(R.id.myjob_viw);
@@ -44,8 +45,10 @@ public class Frag_myjob_leader extends Fragment {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                            Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
-                            getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new list_task_leader(),choosen).addToBackStack(null).commit();
+                            String[] choosensplit=choosen.split(",");
+                            Toast.makeText(getContext(),choosensplit[1],Toast.LENGTH_SHORT).show();
+                            //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new list_task_leader(),choosen).addToBackStack(null).commit();
+                            getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_job_management(),choosensplit[1]).addToBackStack(null).commit();
                         }
                     });
 

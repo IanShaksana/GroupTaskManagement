@@ -42,7 +42,8 @@ public class Frag_Offer extends Fragment {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                            getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_Offer_avaible_task(),choosen).addToBackStack(null).commit();
+                            String[] choosensplit=choosen.split(",");
+                            getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_Offer_avaible_task(),choosensplit[1]).addToBackStack(null).commit();
                         }
                     });
             }
