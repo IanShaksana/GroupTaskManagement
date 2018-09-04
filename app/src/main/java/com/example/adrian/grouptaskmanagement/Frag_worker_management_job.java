@@ -9,9 +9,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 /**
  * Created by Adrian on 5/18/2018.
@@ -41,6 +43,12 @@ public class Frag_worker_management_job extends Fragment {
                 ListAdapter adapter = new advancedcustomadapter_list_worker(getContext(), processed_task);
                 listView = (ListView) view.findViewById(R.id.list_worker);
                 listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    }
+                });
             }
         });
         background.execute("request_worker-"+ID_Job);

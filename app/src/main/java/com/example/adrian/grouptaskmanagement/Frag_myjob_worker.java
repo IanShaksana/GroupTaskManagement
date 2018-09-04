@@ -48,55 +48,9 @@ public class Frag_myjob_worker extends Fragment implements dialog_yes_no_complet
             public void onUpdate(String obj) {
 
                 String[] split = obj.split("-list-");
-                //ListAdapter adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,split);
                 ListAdapter adapter1 = new advancedcustomadapter_as_worker(getContext(),split);
-
-                //listView = (SwipeMenuListView) view.findViewById(R.id.myjob_viw);
                 listView = (ListView) view.findViewById(R.id.myjob_viw);
-                //listView.setAdapter(adapter1);
                 listView.setAdapter(adapter1);
-                /*
-
-                    SwipeMenuCreator creator = new SwipeMenuCreator() {
-                        @Override
-                        public void create(SwipeMenu menu) {
-                            SwipeMenuItem opMenuItem = new SwipeMenuItem(context);
-                            opMenuItem.setBackground(new ColorDrawable(Color.rgb(0, 255, 0  )));
-                            opMenuItem.setTitle("Complete");
-                            opMenuItem.setTitleSize(10);
-                            opMenuItem.setWidth(90);
-                            opMenuItem.setTitleColor(Color.WHITE);
-                            menu.addMenuItem(opMenuItem);
-
-                            SwipeMenuItem deleItem = new SwipeMenuItem(context);
-                            deleItem.setBackground(new ColorDrawable(Color.rgb(255, 0, 0  )));
-                            deleItem.setTitle("Abandon");
-                            deleItem.setTitleSize(10);
-                            deleItem.setWidth(90);
-                            deleItem.setTitleColor(Color.WHITE);
-                            menu.addMenuItem(deleItem);
-                        }
-                    };
-                    listView.setMenuCreator(creator);
-                    listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                            switch (index){
-                                case 0:
-                                    String choosen = String.valueOf(menu.getMenuItem(position));
-                                    Toast.makeText(context,choosen,Toast.LENGTH_SHORT).show();
-                                    //opendialog_yes_no_complete();
-                                    break;
-                                case 1:
-                                    Toast.makeText(context,position+""+index,Toast.LENGTH_SHORT).show();
-                                    opendialog_yes_no();
-                                    break;
-                            }
-                            return false;
-                        }
-                    });
-                    */
-
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -109,13 +63,10 @@ public class Frag_myjob_worker extends Fragment implements dialog_yes_no_complet
                             //getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_Offer_avaible_task()).addToBackStack(null).commit();
                         }
                     });
-
             }
         });
         request_offer.execute("request_myjob_worker-"+state);
-
         return view;
-
     }
 
     private void opendialog_yes_no() {

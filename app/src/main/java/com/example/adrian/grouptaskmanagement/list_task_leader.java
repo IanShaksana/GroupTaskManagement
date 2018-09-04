@@ -68,7 +68,7 @@ public class list_task_leader extends Fragment {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                            //Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
 
                             PopupMenu pop1 = new PopupMenu(getContext(),view,  Gravity.CENTER);
                             try {
@@ -137,7 +137,7 @@ public class list_task_leader extends Fragment {
                                         if(menuItem.getTitle().toString().equals("Approve")){
                                             Toast.makeText(getContext(), "Approve",Toast.LENGTH_SHORT).show();
                                             background background1 = new background(getContext());
-                                            background1.execute("approve_yes-"+p1[6]);
+                                            background1.execute("approve_yes-"+p1[7]+"-"+p1[6]);
 
                                         }else if(menuItem.getTitle().toString().equals("Disapprove")) {
                                             Toast.makeText(getContext(), "Disapprove",Toast.LENGTH_SHORT).show();

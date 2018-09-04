@@ -49,7 +49,7 @@ public class TCP {
             case "43":
                 address = "192.168.43.138";
                 break;
-            case "142":
+            case "136":
                 address = "192.168.142.230";
                 break;
         }

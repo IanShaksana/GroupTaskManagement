@@ -55,6 +55,8 @@ public class Frag_worker_management extends Fragment {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        final String choosen = String.valueOf(adapterView.getItemAtPosition(i));
+                        Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
                         PopupMenu pop = new PopupMenu(getContext(),view,  Gravity.CENTER);
                         try {
                             Field[] fields = pop.getClass().getDeclaredFields();
@@ -79,9 +81,11 @@ public class Frag_worker_management extends Fragment {
                                 switch (menuItem.getTitle().toString()){
                                     case "Assign":
                                         Toast.makeText(getContext(), "Assign",Toast.LENGTH_SHORT).show();
+                                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new leader_assign(),ID_Job+"-"+choosen).addToBackStack(null).commit();
                                         break;
                                     case "Re Assign":
                                         Toast.makeText(getContext(), "Re Assign",Toast.LENGTH_SHORT).show();
+                                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new leader_reassign(),ID_Job+"-"+choosen).addToBackStack(null).commit();
                                         break;
                                     case "Remove Worker":
                                         Toast.makeText(getContext(), "Remove Worker",Toast.LENGTH_SHORT).show();
