@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,13 +28,13 @@ import java.lang.reflect.Method;
  * Created by Adrian on 5/18/2018.
  */
 
-public class Frag_worker_management extends Fragment {
+public class Frag_worker_management extends Fragment implements dialog_worker_invite.dialogListener_worker {
     ListView listView;
     View view;
     Context context;
     Activity activity;
     String ID_Job;
-    ImageView finish,task,worker;
+    FloatingActionButton FAB;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,7 +44,15 @@ public class Frag_worker_management extends Fragment {
         context=activity.getApplicationContext();
         view = inflater.inflate(R.layout.worker_management2,container, false);
 
-        background background = new background(getContext());
+        FAB = (FloatingActionButton) view.findViewById(R.id.FAB);
+        FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                opendialog_worker();
+            }
+        });
+
+        final background background = new background(getContext());
         background.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
@@ -89,6 +98,14 @@ public class Frag_worker_management extends Fragment {
                                         break;
                                     case "Remove Worker":
                                         Toast.makeText(getContext(), "Remove Worker",Toast.LENGTH_SHORT).show();
+                                        background background1 =new background(getContext());
+                                        background1.getListener(new background.OnUpdateListener() {
+                                            @Override
+                                            public void onUpdate(String obj) {
+                                                update();
+                                            }
+                                        });
+                                        background1.execute("remove_worker-"+choosen+"-"+ID_Job);
                                         break;
                                 }/*
                                 if(menuItem.getTitle().toString().equals("Assign")){
@@ -112,5 +129,31 @@ public class Frag_worker_management extends Fragment {
         background.execute("request_worker-"+ID_Job);
 
         return view;
+    }
+    private void update(){
+        Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
+        if (current instanceof Frag_worker_management){
+            getFragmentManager().beginTransaction().detach(current).attach(current).commit();
+        }
+    }
+
+    private void opendialog_worker() {
+        dialog_worker_invite dialogfragment = new dialog_worker_invite();
+        dialogfragment.setTargetFragment(this,0);
+        dialogfragment.show(getFragmentManager(),"exa");
+
+    }
+
+    @Override
+    public void apply_worker(String wasd) {
+        //Toast.makeText(getContext(),"halo",Toast.LENGTH_SHORT).show();
+        background background =new background(getContext());
+        background.getListener(new background.OnUpdateListener() {
+            @Override
+            public void onUpdate(String obj) {
+                update();
+            }
+        });
+        background.execute("invite_worker-"+wasd+"-"+ID_Job);
     }
 }

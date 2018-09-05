@@ -75,8 +75,22 @@ public class Frag_Offer_avaible_task extends Fragment implements dialog_yes_no_a
     public void apply_apply_task(String wasd) {
         if (wasd.equals("Apply")){
             background background1 =new background(getContext());
-            background1.execute("request_apply_task-"+state+"-"+ID_Task+"-"+ID_Job);
-            getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_List()).addToBackStack(null).commit();
+            background1.getListener(new background.OnUpdateListener() {
+                @Override
+                public void onUpdate(String obj) {
+                    update();
+                }
+            });
+            //background1.execute("request_apply_task-"+state+"-"+ID_Task+"-"+ID_Job);
+            background1.execute("apply_req-"+state+"-"+ID_Task+"-"+ID_Job);
+            //getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_List()).addToBackStack(null).commit();
+        }
+    }
+
+    private void update(){
+        Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
+        if (current instanceof Frag_Offer_avaible_task){
+            getFragmentManager().beginTransaction().detach(current).attach(current).commit();
         }
     }
 }

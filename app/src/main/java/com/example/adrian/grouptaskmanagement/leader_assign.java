@@ -68,48 +68,8 @@ public class leader_assign extends Fragment {
                                     update();
                                 }
                             });
+                            //tambahi dialog aja
                             background1.execute("request_apply_task-"+Tagsplit[1]+"-"+choosensplit[6]+"-"+Tagsplit[0]);
-
-                            /*
-                            PopupMenu pop1 = new PopupMenu(getContext(),view,  Gravity.CENTER);
-                            try {
-                                Field[] fields = pop1.getClass().getDeclaredFields();
-                                for (Field field : fields) {
-                                    if ("mPopup".equals(field.getName())) {
-                                        field.setAccessible(true);
-                                        Object menuPopupHelper = field.get(pop1);
-                                        Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
-                                        Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon", boolean.class);
-                                        setForceIcons.invoke(menuPopupHelper, true);
-                                        break;
-                                    }
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            pop1.getMenuInflater().inflate(R.menu.popup1,pop1.getMenu());
-
-
-                            PopupMenu pop2 = new PopupMenu(getContext(),view,  Gravity.CENTER);
-                            try {
-                                Field[] fields = pop2.getClass().getDeclaredFields();
-                                for (Field field : fields) {
-                                    if ("mPopup".equals(field.getName())) {
-                                        field.setAccessible(true);
-                                        Object menuPopupHelper = field.get(pop2);
-                                        Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
-                                        Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon", boolean.class);
-                                        setForceIcons.invoke(menuPopupHelper, true);
-                                        break;
-                                    }
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            pop2.getMenuInflater().inflate(R.menu.popup,pop2.getMenu());
-
-                            final String[] p1 = choosen.split("-");
-                            */
                         }
                     });
                 }

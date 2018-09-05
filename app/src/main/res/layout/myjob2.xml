@@ -6,7 +6,9 @@
     <ListView
         android:id="@+id/myjob_viw"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:dividerHeight="5dp">
 
     </ListView>
 </android.support.constraint.ConstraintLayout>

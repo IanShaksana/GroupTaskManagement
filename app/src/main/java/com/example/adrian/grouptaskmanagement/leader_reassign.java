@@ -49,6 +49,22 @@ public class leader_reassign extends Fragment {
                 ListAdapter adapter1 = new advancedcustomadapter_as_worker(getContext(),split);
                 listView = (ListView) view.findViewById(R.id.list_reassign_task_leader);
                 listView.setAdapter(adapter1);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        String choosen = String.valueOf(adapterView.getItemAtPosition(i));
+                        Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
+                        String[] choosensplit = choosen.split("-");
+                        background background1 = new background(getContext());
+                        background1.getListener(new background.OnUpdateListener() {
+                            @Override
+                            public void onUpdate(String obj) {
+                                update();
+                            }
+                        });
+                        background1.execute("abandon_task-"+choosensplit[2]);
+                    }
+                });
             }
         });
         background.execute("request_myjob_worker-"+Tagsplit[1]);
@@ -58,7 +74,7 @@ public class leader_reassign extends Fragment {
 
     private void update(){
         Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
-        if (current instanceof list_task_leader){
+        if (current instanceof leader_reassign){
             getFragmentManager().beginTransaction().detach(current).attach(current).commit();
         }
     }
