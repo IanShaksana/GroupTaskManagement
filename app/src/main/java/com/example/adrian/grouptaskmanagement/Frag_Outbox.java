@@ -25,7 +25,7 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by Adrian on 5/18/2018.
  */
 
-public class Frag_Inbox extends Fragment{
+public class Frag_Outbox extends Fragment{
     @Nullable
     View view;
     String state,unprocessed_msg;
@@ -237,14 +237,14 @@ public class Frag_Inbox extends Fragment{
                 });
             }
         });
-        background.execute("get_message_in-"+state);
+        background.execute("get_message_out-"+state);
         return view;
         //return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     private void update(){
         Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
-        if (current instanceof Frag_Inbox){
+        if (current instanceof Frag_Outbox){
             getFragmentManager().beginTransaction().detach(current).attach(current).commit();
         }
     }

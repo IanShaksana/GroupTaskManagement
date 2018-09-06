@@ -9,7 +9,7 @@
     >
 
     <ImageView
-        android:id="@+id/Finish_Job"
+        android:id="@+id/confirm"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginBottom="101dp"
@@ -34,7 +34,7 @@
         android:textSize="15dp" />
 -->
     <ImageView
-        android:id="@+id/View_Worker"
+        android:id="@+id/inbox"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
@@ -43,7 +43,7 @@
         android:layout_marginTop="124dp"
         android:background="@drawable/border"
         android:padding="40dp"
-        android:src="@drawable/group"
+        android:src="@drawable/ic_arrow_downward_black_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <!--
@@ -59,7 +59,7 @@
             android:textSize="15dp" />
         -->
     <ImageView
-        android:id="@+id/View_Task"
+        android:id="@+id/outbox"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_alignParentEnd="true"
@@ -68,7 +68,7 @@
         android:layout_marginTop="124dp"
         android:background="@drawable/border"
         android:padding="40dp"
-        android:src="@drawable/xxxhdpi"
+        android:src="@drawable/ic_arrow_upward_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <!--

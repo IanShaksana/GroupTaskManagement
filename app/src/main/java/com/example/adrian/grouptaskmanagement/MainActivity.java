@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     clearBackStack();
                     break;
                 case R.id.nav_Inbox:
-                    selectedFragment = new Frag_Inbox();
+                    selectedFragment = new Frag_Message_menu();
                     clearBackStack();
                     break;
             }

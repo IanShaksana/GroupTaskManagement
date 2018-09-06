@@ -154,6 +154,7 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                 update();
             }
         });
-        background.execute("invite_worker-"+wasd+"-"+ID_Job);
+        //background.execute("invite_worker-"+wasd+"-"+ID_Job);
+        background.execute("msg_invite_worker-"+wasd+"-"+ID_Job);
     }
 }

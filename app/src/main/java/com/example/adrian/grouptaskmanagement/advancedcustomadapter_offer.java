@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by Adrian on 5/19/2018.
@@ -61,7 +59,7 @@ public class advancedcustomadapter_offer extends ArrayAdapter<String> {
 
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View cusView = inflater.inflate(R.layout.apply_task,parent,false);
+        View cusView = inflater.inflate(R.layout.detail_task,parent,false);
 
 
         String singletask = getItem(position);

@@ -69,7 +69,11 @@ public class leader_assign extends Fragment {
                                 }
                             });
                             //tambahi dialog aja
-                            background1.execute("request_apply_task-"+Tagsplit[1]+"-"+choosensplit[6]+"-"+Tagsplit[0]);
+                            String ID_Task = choosensplit[6];
+                            String ID_User = Tagsplit[1];
+                            String ID_Job = Tagsplit[0];
+                            //background1.execute("request_apply_task-"+Tagsplit[1]+"-"+choosensplit[6]+"-"+Tagsplit[0]);
+                            background1.execute("msg_assign-"+ID_User+"-"+ID_Task+"-"+ID_Job);
                         }
                     });
                 }
