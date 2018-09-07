@@ -19,7 +19,7 @@ public class listviewtest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.testlistview);
 
-        String[] task = {"sing", "swim", "eat", "chore","sing", "swim", "eat", "chore","sing", "swim", "eat", "chore","sing", "swim", "eat", "chore"};
+        String[] task = {"sing", "swim", "eat", "chore", "sing", "swim", "eat", "chore", "sing", "swim", "eat", "chore", "sing", "swim", "eat", "chore"};
         //ListAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,task);
         ListAdapter adapter = new advancedcustomadapter_offer(this, task);
 
@@ -30,7 +30,7 @@ public class listviewtest extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                Toast.makeText(listviewtest.this,choosen,Toast.LENGTH_SHORT).show();
+                Toast.makeText(listviewtest.this, choosen, Toast.LENGTH_SHORT).show();
             }
         });
 

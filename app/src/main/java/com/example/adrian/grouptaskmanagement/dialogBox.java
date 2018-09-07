@@ -18,19 +18,19 @@ import android.widget.Toast;
  */
 
 
-
 public class dialogBox extends AppCompatActivity implements dialogfragment.dialogListener {
     TextView lulz;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog);
         Button button = (Button) findViewById(R.id.dial);
-        lulz =(TextView) findViewById(R.id.thisis);
+        lulz = (TextView) findViewById(R.id.thisis);
         lulz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(dialogBox.this,"clicked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(dialogBox.this, "clicked", Toast.LENGTH_SHORT).show();
                 opendialog();
             }
         });
@@ -45,7 +45,7 @@ public class dialogBox extends AppCompatActivity implements dialogfragment.dialo
 
     private void opendialog() {
         dialogfragment dialogfragment = new dialogfragment();
-        dialogfragment.show(getSupportFragmentManager(),"exa");
+        dialogfragment.show(getSupportFragmentManager(), "exa");
     }
 
     @Override

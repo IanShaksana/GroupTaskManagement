@@ -17,13 +17,14 @@ import android.widget.EditText;
 public class dialog_worker_invite extends AppCompatDialogFragment {
 
     private dialogListener_worker listener;
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //return super.onCreateDialog(savedInstanceState);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_worker_slot,null);
-        final EditText editText = (EditText) view.findViewById(R.id.dialog_input_worker) ;
+        View view = inflater.inflate(R.layout.dialog_worker_slot, null);
+        final EditText editText = (EditText) view.findViewById(R.id.dialog_input_worker);
         //editText.setRawInputType(Configuration.KEYBOARD_12KEY);
         builder.setView(view).setTitle("Invite Worker").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -33,7 +34,7 @@ public class dialog_worker_invite extends AppCompatDialogFragment {
         }).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                String dialog =editText.getText().toString();
+                String dialog = editText.getText().toString();
                 listener.apply_worker(dialog);
             }
         });
@@ -43,9 +44,10 @@ public class dialog_worker_invite extends AppCompatDialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        listener = (dialogListener_worker)getTargetFragment();
+        listener = (dialogListener_worker) getTargetFragment();
     }
-    public interface dialogListener_worker{
+
+    public interface dialogListener_worker {
         void apply_worker(String wasd);
     }
 

@@ -12,41 +12,40 @@ import android.widget.TextView;
 
 /**
  * Created by Adrian on 5/19/2018.
-
-
-public class advancedcustomadapter_offer extends ArrayAdapter<String> {
-    public advancedcustomadapter_offer(@NonNull Context context, String[] resource) {
-        super(context,R.layout.advancelistview ,resource);
-    }
-
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View cusView = inflater.inflate(R.layout.advancelistview,parent,false);
-
-        String singletask = getItem(position);
-        TextView textView = (TextView) cusView.findViewById(R.id.inputtext);
-        ImageView imageView = (ImageView) cusView.findViewById(R.id.imageView);
-
-        textView.setText(singletask);
-        imageView.setImageResource(R.drawable.image);
-
-        return cusView;
-
-
-    }
-}
+ * <p>
+ * <p>
+ * public class advancedcustomadapter_offer extends ArrayAdapter<String> {
+ * public advancedcustomadapter_offer(@NonNull Context context, String[] resource) {
+ * super(context,R.layout.advancelistview ,resource);
+ * }
+ *
+ * @NonNull
+ * @Override public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+ * LayoutInflater inflater = LayoutInflater.from(getContext());
+ * View cusView = inflater.inflate(R.layout.advancelistview,parent,false);
+ * <p>
+ * String singletask = getItem(position);
+ * TextView textView = (TextView) cusView.findViewById(R.id.inputtext);
+ * ImageView imageView = (ImageView) cusView.findViewById(R.id.imageView);
+ * <p>
+ * textView.setText(singletask);
+ * imageView.setImageResource(R.drawable.image);
+ * <p>
+ * return cusView;
+ * <p>
+ * <p>
+ * }
+ * }
  */
 
 public class advancedcustomadapter_inbox extends ArrayAdapter<String> {
     public advancedcustomadapter_inbox(@NonNull Context context, String[] resource) {
-        super(context,R.layout.list ,resource);
+        super(context, R.layout.list, resource);
     }
 
 
     TextView Sender;
-    TextView Recepient ;
+    TextView Recepient;
     TextView Message;
 
 
@@ -56,7 +55,7 @@ public class advancedcustomadapter_inbox extends ArrayAdapter<String> {
 
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View cusView = inflater.inflate(R.layout.inbox_detail,parent,false);
+        View cusView = inflater.inflate(R.layout.inbox_detail, parent, false);
 
 //ian,kez,kez-apply-test1|153603447984
         String bundle_msg = getItem(position);
@@ -69,10 +68,9 @@ public class advancedcustomadapter_inbox extends ArrayAdapter<String> {
         Message = (TextView) cusView.findViewById(R.id.msg_name);
 
 
-
         Sender.setText(splitted_msg[0]);
         //description.setText(splitted_task[1]);
-        Message.setText(body_msg[0]+" want to "+body_msg[1]+" "+body_msg[2]);
+        Message.setText(body_msg[0] + " want to " + body_msg[1] + " " + body_msg[2]);
 
         return cusView;
 

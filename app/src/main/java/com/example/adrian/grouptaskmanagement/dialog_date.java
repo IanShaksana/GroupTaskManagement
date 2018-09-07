@@ -22,7 +22,7 @@ import java.util.Calendar;
  */
 
 
-public class dialog_date extends AppCompatDialogFragment  {
+public class dialog_date extends AppCompatDialogFragment {
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker

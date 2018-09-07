@@ -34,26 +34,26 @@ public class leader_reassign extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Job");
-        activity=getActivity();
-        context=activity.getApplicationContext();
-        view = inflater.inflate(R.layout.list_reassign_task_leader,container, false);
-        String Tag= getTag();
-        String[] Tagsplit= Tag.split("-");
-        Toast.makeText(getContext(),Tag,Toast.LENGTH_SHORT).show();
+        activity = getActivity();
+        context = activity.getApplicationContext();
+        view = inflater.inflate(R.layout.list_reassign_task_leader, container, false);
+        String Tag = getTag();
+        String[] Tagsplit = Tag.split("-");
+        Toast.makeText(getContext(), Tag, Toast.LENGTH_SHORT).show();
 
         final background background = new background(getContext());
         background.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
                 String[] split = obj.split("-list-");
-                ListAdapter adapter1 = new advancedcustomadapter_as_worker(getContext(),split);
+                ListAdapter adapter1 = new advancedcustomadapter_as_worker2(getContext(), split);
                 listView = (ListView) view.findViewById(R.id.list_reassign_task_leader);
                 listView.setAdapter(adapter1);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                        Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
                         String[] choosensplit = choosen.split("-");
                         background background1 = new background(getContext());
                         background1.getListener(new background.OnUpdateListener() {
@@ -62,19 +62,19 @@ public class leader_reassign extends Fragment {
                                 update();
                             }
                         });
-                        background1.execute("abandon_task-"+choosensplit[2]);
+                        background1.execute("abandon_task-" + choosensplit[2]);
                     }
                 });
             }
         });
-        background.execute("request_myjob_worker-"+Tagsplit[1]);
+        background.execute("request_worker_task-" + Tagsplit[1]);
 
         return view;
     }
 
-    private void update(){
+    private void update() {
         Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
-        if (current instanceof leader_reassign){
+        if (current instanceof leader_reassign) {
             getFragmentManager().beginTransaction().detach(current).attach(current).commit();
         }
     }

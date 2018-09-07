@@ -25,15 +25,16 @@ public class Frag_worker_management_job extends Fragment {
     Context context;
     Activity activity;
     String ID_Job;
-    ImageView finish,task,worker;
+    ImageView finish, task, worker;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Job");
-        activity=getActivity();
-        ID_Job= getTag();
-        context=activity.getApplicationContext();
-        view = inflater.inflate(R.layout.worker_management2,container, false);
+        activity = getActivity();
+        ID_Job = getTag();
+        context = activity.getApplicationContext();
+        view = inflater.inflate(R.layout.worker_management2, container, false);
 
         background background = new background(getContext());
         background.getListener(new background.OnUpdateListener() {
@@ -51,7 +52,7 @@ public class Frag_worker_management_job extends Fragment {
                 });
             }
         });
-        background.execute("request_worker-"+ID_Job);
+        background.execute("request_worker-" + ID_Job);
 
         return view;
     }

@@ -20,9 +20,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class Frag_Status_W extends Fragment {
     @Nullable
     String state;
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Home");
-        View view = inflater.inflate(R.layout.home,container, false);
+        View view = inflater.inflate(R.layout.home, container, false);
 
         final TextView username = (TextView) view.findViewById(R.id.username);
 
@@ -49,7 +50,7 @@ public class Frag_Status_W extends Fragment {
                 Exp_nex.setText("~");
             }
         });
-        background_home.execute("request_home-"+state);
+        background_home.execute("request_home-" + state);
 
         return view;
         //return super.onCreateView(inflater, container, savedInstanceState);

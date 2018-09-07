@@ -28,21 +28,23 @@ import static android.content.Context.WIFI_SERVICE;
 
 public class TCP {
     Context currAct;
-    public TCP(Context context){
-        currAct =context;
+
+    public TCP(Context context) {
+        currAct = context;
     }
-    public String setupCon (String newData)  {
+
+    public String setupCon(String newData) {
 
         String data;
         String address = "";
 
 
         String ipAddress = getIPAddress(true);
-        String[] splitIP =ipAddress.split("\\.");
+        String[] splitIP = ipAddress.split("\\.");
 
         //Toast.makeText(currAct,ipAddress,Toast.LENGTH_SHORT).show();
 
-        switch (splitIP[2]){
+        switch (splitIP[2]) {
             case "31":
                 address = "192.168.31.180";
                 break;
@@ -58,14 +60,14 @@ public class TCP {
             InetAddress serverAddr = InetAddress.getByName(address);
             SocketAddress sockaddr = new InetSocketAddress(serverAddr, 1234);
             Socket socket = new Socket();
-            socket.connect(sockaddr,2000);
+            socket.connect(sockaddr, 2000);
             socket.setSoTimeout(2000);
             PrintStream sendData = new PrintStream(socket.getOutputStream());
             sendData.println(newData);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             data = bufferedReader.readLine();
 
-        }catch (SocketTimeoutException e){
+        } catch (SocketTimeoutException e) {
             e.printStackTrace();
             return "failed Timeout";
         } catch (UnknownHostException e) {
@@ -73,7 +75,7 @@ public class TCP {
             return "failed Unknown Host";
         } catch (SocketException e) {
             e.printStackTrace();
-            return "failed Socket"+address;
+            return "failed Socket" + address;
         } catch (IOException e) {
             e.printStackTrace();
             return "failed I/O";
@@ -81,13 +83,13 @@ public class TCP {
         return data;
     }
 
-    public String ping(int a){
+    public String ping(int a) {
 
         String reply = null;
         Socket socket = new Socket();
         String check = "false";
-        String trueAddress=null;
-        String[] address ={"192.168.142.230","192.168.43.138","192.168.100.130","192.168.138.57"};
+        String trueAddress = null;
+        String[] address = {"192.168.142.230", "192.168.43.138", "192.168.100.130", "192.168.138.57"};
         while (check.equals("false")) {
             try {
                 InetAddress serverAddr = InetAddress.getByName(address[a]);
@@ -111,7 +113,7 @@ public class TCP {
         return trueAddress;
     }
 
-    public  String getIPAddress(boolean useIPv4) {
+    public String getIPAddress(boolean useIPv4) {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
             for (NetworkInterface intf : interfaces) {
@@ -120,7 +122,7 @@ public class TCP {
                     if (!addr.isLoopbackAddress()) {
                         String sAddr = addr.getHostAddress();
                         //boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
-                        boolean isIPv4 = sAddr.indexOf(':')<0;
+                        boolean isIPv4 = sAddr.indexOf(':') < 0;
 
                         if (useIPv4) {
                             if (isIPv4)
@@ -128,13 +130,14 @@ public class TCP {
                         } else {
                             if (!isIPv4) {
                                 int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
-                                return delim<0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
+                                return delim < 0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
                             }
                         }
                     }
                 }
             }
-        } catch (Exception ex) { } // for now eat exceptions
+        } catch (Exception ex) {
+        } // for now eat exceptions
         return "";
     }
 }

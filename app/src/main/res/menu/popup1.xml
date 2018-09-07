@@ -7,9 +7,4 @@
         android:title="Delete Task"
         android:icon="@drawable/ic_clear_black_24dp"/>
 
-    <item
-        android:id="@+id/Remove_W"
-        android:title="Remove Worker"
-        android:icon="@drawable/ic_clear_black_24dp"/>
-
 </menu>

@@ -21,9 +21,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class Frag_Home extends Fragment {
     @Nullable
     String state;
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Home");
-        View view = inflater.inflate(R.layout.home,container, false);
+        View view = inflater.inflate(R.layout.home, container, false);
 
         final TextView username = (TextView) view.findViewById(R.id.username);
 
@@ -34,8 +35,8 @@ public class Frag_Home extends Fragment {
         final TextView Exp_cur = (TextView) view.findViewById(R.id.exp_cur);
         final TextView Exp_nex = (TextView) view.findViewById(R.id.exp_nex);
 
-        final SharedPreferences preferences = this.getActivity().getSharedPreferences("State",MODE_PRIVATE);
-        state = preferences.getString("Login_State","");
+        final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
+        state = preferences.getString("Login_State", "");
 
 
         background background_home = new background(getContext());
@@ -51,12 +52,12 @@ public class Frag_Home extends Fragment {
                 Exp_nex.setText("~");
             }
         });
-        background_home.execute("request_home-"+state);
+        background_home.execute("request_home-" + state);
         Button button = (Button) view.findViewById(R.id.btn_board);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_Board()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_Board()).addToBackStack(null).commit();
 
             }
         });

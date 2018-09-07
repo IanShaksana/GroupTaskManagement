@@ -35,14 +35,15 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
     Activity activity;
     String ID_Job;
     FloatingActionButton FAB;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Job");
-        activity=getActivity();
-        ID_Job =getTag();
-        context=activity.getApplicationContext();
-        view = inflater.inflate(R.layout.worker_management2,container, false);
+        activity = getActivity();
+        ID_Job = getTag();
+        context = activity.getApplicationContext();
+        view = inflater.inflate(R.layout.worker_management2, container, false);
 
         FAB = (FloatingActionButton) view.findViewById(R.id.FAB);
         FAB.setOnClickListener(new View.OnClickListener() {
@@ -65,8 +66,8 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         final String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                        Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
-                        PopupMenu pop = new PopupMenu(getContext(),view,  Gravity.CENTER);
+                        Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
+                        PopupMenu pop = new PopupMenu(getContext(), view, Gravity.CENTER);
                         try {
                             Field[] fields = pop.getClass().getDeclaredFields();
                             for (Field field : fields) {
@@ -82,30 +83,30 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        pop.getMenuInflater().inflate(R.menu.popupworker,pop.getMenu());
+                        pop.getMenuInflater().inflate(R.menu.popupworker, pop.getMenu());
 
                         pop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem menuItem) {
-                                switch (menuItem.getTitle().toString()){
+                                switch (menuItem.getTitle().toString()) {
                                     case "Assign":
-                                        Toast.makeText(getContext(), "Assign",Toast.LENGTH_SHORT).show();
-                                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new leader_assign(),ID_Job+"-"+choosen).addToBackStack(null).commit();
+                                        Toast.makeText(getContext(), "Assign", Toast.LENGTH_SHORT).show();
+                                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new leader_assign(), ID_Job + "-" + choosen).addToBackStack(null).commit();
                                         break;
                                     case "Re Assign":
-                                        Toast.makeText(getContext(), "Re Assign",Toast.LENGTH_SHORT).show();
-                                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new leader_reassign(),ID_Job+"-"+choosen).addToBackStack(null).commit();
+                                        Toast.makeText(getContext(), "Re Assign", Toast.LENGTH_SHORT).show();
+                                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new leader_reassign(), ID_Job + "-" + choosen).addToBackStack(null).commit();
                                         break;
                                     case "Remove Worker":
-                                        Toast.makeText(getContext(), "Remove Worker",Toast.LENGTH_SHORT).show();
-                                        background background1 =new background(getContext());
+                                        Toast.makeText(getContext(), "Remove Worker", Toast.LENGTH_SHORT).show();
+                                        background background1 = new background(getContext());
                                         background1.getListener(new background.OnUpdateListener() {
                                             @Override
                                             public void onUpdate(String obj) {
                                                 update();
                                             }
                                         });
-                                        background1.execute("remove_worker-"+choosen+"-"+ID_Job);
+                                        background1.execute("remove_worker-" + choosen + "-" + ID_Job);
                                         break;
                                 }/*
                                 if(menuItem.getTitle().toString().equals("Assign")){
@@ -126,28 +127,29 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                 });
             }
         });
-        background.execute("request_worker-"+ID_Job);
+        background.execute("request_worker-" + ID_Job);
 
         return view;
     }
-    private void update(){
+
+    private void update() {
         Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
-        if (current instanceof Frag_worker_management){
+        if (current instanceof Frag_worker_management) {
             getFragmentManager().beginTransaction().detach(current).attach(current).commit();
         }
     }
 
     private void opendialog_worker() {
         dialog_worker_invite dialogfragment = new dialog_worker_invite();
-        dialogfragment.setTargetFragment(this,0);
-        dialogfragment.show(getFragmentManager(),"exa");
+        dialogfragment.setTargetFragment(this, 0);
+        dialogfragment.show(getFragmentManager(), "exa");
 
     }
 
     @Override
     public void apply_worker(String wasd) {
         //Toast.makeText(getContext(),"halo",Toast.LENGTH_SHORT).show();
-        background background =new background(getContext());
+        background background = new background(getContext());
         background.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
@@ -155,6 +157,6 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
             }
         });
         //background.execute("invite_worker-"+wasd+"-"+ID_Job);
-        background.execute("msg_invite_worker-"+wasd+"-"+ID_Job);
+        background.execute("msg_invite_worker-" + wasd + "-" + ID_Job);
     }
 }

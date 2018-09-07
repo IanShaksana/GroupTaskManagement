@@ -25,22 +25,23 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by Adrian on 5/18/2018.
  */
 
-public class Frag_Confirmation extends Fragment{
+public class Frag_Confirmation extends Fragment {
     @Nullable
     View view;
-    String state,unprocessed_msg;
+    String state, unprocessed_msg;
     ListView listView;
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Inbox");
-        final SharedPreferences preferences = this.getActivity().getSharedPreferences("State",MODE_PRIVATE);
-        state = preferences.getString("Login_State","");
-        view = inflater.inflate(R.layout.inbox,container, false);
+        final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
+        state = preferences.getString("Login_State", "");
+        view = inflater.inflate(R.layout.inbox, container, false);
 
         final background background = new background(getContext());
         background.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
-                unprocessed_msg =obj;
+                unprocessed_msg = obj;
                 String[] processed_msg = unprocessed_msg.split("-msg-");
                 ListAdapter adapter = new advancedcustomadapter_inbox(getContext(), processed_msg);
                 listView = (ListView) view.findViewById(R.id.list_message);
@@ -49,7 +50,7 @@ public class Frag_Confirmation extends Fragment{
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         final String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                        Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
 
                         String[] choosensplit1 = choosen.split(",");
                         final String ID_User_W = choosensplit1[0];
@@ -57,7 +58,7 @@ public class Frag_Confirmation extends Fragment{
                         String[] choosensplit2 = choosen.split("-");
                         final String ID_Task_W = choosensplit2[2];
 
-                        PopupMenu pop1 = new PopupMenu(getContext(),view,  Gravity.CENTER);
+                        PopupMenu pop1 = new PopupMenu(getContext(), view, Gravity.CENTER);
                         try {
                             Field[] fields = pop1.getClass().getDeclaredFields();
                             for (Field field : fields) {
@@ -73,19 +74,19 @@ public class Frag_Confirmation extends Fragment{
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        pop1.getMenuInflater().inflate(R.menu.popupreply1,pop1.getMenu());
+                        pop1.getMenuInflater().inflate(R.menu.popupreply1, pop1.getMenu());
                     }
                 });
             }
         });
-        background.execute("get_message_conf-"+state);
+        background.execute("get_message_conf-" + state);
         return view;
         //return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    private void update(){
+    private void update() {
         Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
-        if (current instanceof Frag_Confirmation){
+        if (current instanceof Frag_Confirmation) {
             getFragmentManager().beginTransaction().detach(current).attach(current).commit();
         }
     }

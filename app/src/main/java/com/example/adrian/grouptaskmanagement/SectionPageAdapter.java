@@ -17,7 +17,7 @@ public class SectionPageAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentlist = new ArrayList<>();
     private final List<String> mFragmentTitlelist = new ArrayList<>();
 
-    public void addFragment (Fragment fragment, String title){
+    public void addFragment(Fragment fragment, String title) {
         mFragmentlist.add(fragment);
         mFragmentTitlelist.add(title);
     }

@@ -28,24 +28,24 @@ public class Frag_Offer extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Job Offer");
-        context=getContext();
-        final View view = inflater.inflate(R.layout.offer_tab_avaible,container, false);
+        context = getContext();
+        final View view = inflater.inflate(R.layout.offer_tab_avaible, container, false);
         background request_offer = new background(getContext());
         request_offer.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
                 String[] split = obj.split("-");
-                ListAdapter adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,split);
+                ListAdapter adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, split);
                 listView = (ListView) view.findViewById(R.id.avaible_task);
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                            String[] choosensplit=choosen.split(",");
-                            getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_Offer_avaible_task(),choosensplit[1]).addToBackStack(null).commit();
-                        }
-                    });
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        String choosen = String.valueOf(adapterView.getItemAtPosition(i));
+                        String[] choosensplit = choosen.split(",");
+                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_Offer_avaible_task(), choosensplit[1]).addToBackStack(null).commit();
+                    }
+                });
             }
         });
         request_offer.execute("request_job_offer");

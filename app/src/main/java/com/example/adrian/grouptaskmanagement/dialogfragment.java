@@ -17,13 +17,14 @@ import android.widget.EditText;
 public class dialogfragment extends AppCompatDialogFragment {
 
     private dialogListener listener;
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //return super.onCreateDialog(savedInstanceState);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialogbox,null);
-        final EditText editText = (EditText) view.findViewById(R.id.insertdialog) ;
+        View view = inflater.inflate(R.layout.dialogbox, null);
+        final EditText editText = (EditText) view.findViewById(R.id.insertdialog);
         editText.setHint("insert something");
         builder.setView(view).setTitle("oh lala").setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -33,7 +34,7 @@ public class dialogfragment extends AppCompatDialogFragment {
         }).setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                String dialog =editText.getText().toString();
+                String dialog = editText.getText().toString();
                 listener.apply(dialog);
             }
         });
@@ -45,7 +46,8 @@ public class dialogfragment extends AppCompatDialogFragment {
         super.onAttach(context);
         listener = (dialogListener) context;
     }
-    public interface dialogListener{
+
+    public interface dialogListener {
         void apply(String wasd);
     }
 

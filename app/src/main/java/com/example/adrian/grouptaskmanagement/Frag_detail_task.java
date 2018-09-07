@@ -20,8 +20,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class Frag_detail_task extends Fragment {
     @Nullable
     String state;
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.detail_task,container, false);
+        View view = inflater.inflate(R.layout.detail_task, container, false);
         String ID_Task = getTag();
 
         final TextView name = (TextView) view.findViewById(R.id.task_name_view);
@@ -48,7 +49,7 @@ public class Frag_detail_task extends Fragment {
                 date2.setText(splitted_time2[1]);
             }
         });
-        background_home.execute("request_detail_task-"+ID_Task);
+        background_home.execute("request_detail_task-" + ID_Task);
 
         return view;
         //return super.onCreateView(inflater, container, savedInstanceState);

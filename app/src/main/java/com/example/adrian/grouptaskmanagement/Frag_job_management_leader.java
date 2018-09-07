@@ -18,24 +18,25 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
  * Created by Adrian on 5/18/2018.
  */
 
-public class Frag_job_management extends Fragment {
+public class Frag_job_management_leader extends Fragment {
     SwipeMenuListView listView;
     View view;
     Context context;
     Activity activity;
-    String ID_Job,ID_Job2;
-    ImageView finish,task,worker;
+    String ID_Job, ID_Job2;
+    ImageView finish, task, worker;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Job");
-        activity=getActivity();
+        activity = getActivity();
         ID_Job = getTag();
         ID_Job2 = ID_Job;
-        context=activity.getApplicationContext();
-        view = inflater.inflate(R.layout.job_management,container, false);
+        context = activity.getApplicationContext();
+        view = inflater.inflate(R.layout.job_management_leader, container, false);
 
-        Toast.makeText(getContext(),ID_Job2,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), ID_Job2, Toast.LENGTH_SHORT).show();
 
         finish = (ImageView) view.findViewById(R.id.Finish_Job);
         task = (ImageView) view.findViewById(R.id.View_Task);
@@ -44,21 +45,21 @@ public class Frag_job_management extends Fragment {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_Create()).addToBackStack(null).commit();
+                //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_Create_Job()).addToBackStack(null).commit();
             }
         });
 
         task.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new list_task_leader(),ID_Job).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new list_task_leader(), ID_Job).addToBackStack(null).commit();
             }
         });
 
         worker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_worker_management(),ID_Job2).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_worker_management(), ID_Job2).addToBackStack(null).commit();
             }
         });
 
@@ -75,7 +76,7 @@ public class Frag_job_management extends Fragment {
                 String choosen = String.valueOf(adapterView.getItemAtPosition(i));
             //Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
                 if (choosen.equals("User as Worker")){
-                    getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_worker()).addToBackStack(null).commit();
+                    getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_worker_old()).addToBackStack(null).commit();
                 }else if (choosen.equals("User as Leader")){
                     getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_leader()).addToBackStack(null).commit();
                 }

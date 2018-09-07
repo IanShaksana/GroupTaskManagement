@@ -25,22 +25,23 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by Adrian on 5/18/2018.
  */
 
-public class Frag_Outbox extends Fragment{
+public class Frag_Outbox extends Fragment {
     @Nullable
     View view;
-    String state,unprocessed_msg;
+    String state, unprocessed_msg;
     ListView listView;
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Inbox");
-        final SharedPreferences preferences = this.getActivity().getSharedPreferences("State",MODE_PRIVATE);
-        state = preferences.getString("Login_State","");
-        view = inflater.inflate(R.layout.inbox,container, false);
+        final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
+        state = preferences.getString("Login_State", "");
+        view = inflater.inflate(R.layout.inbox, container, false);
 
         final background background = new background(getContext());
         background.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
-                unprocessed_msg =obj;
+                unprocessed_msg = obj;
                 String[] processed_msg = unprocessed_msg.split("-msg-");
                 ListAdapter adapter = new advancedcustomadapter_inbox(getContext(), processed_msg);
                 listView = (ListView) view.findViewById(R.id.list_message);
@@ -49,7 +50,9 @@ public class Frag_Outbox extends Fragment{
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         final String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                        Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
+
+                        /*
 
                         String[] choosensplit1 = choosen.split(",");
                         final String ID_User_W = choosensplit1[0];
@@ -232,19 +235,19 @@ public class Frag_Outbox extends Fragment{
                                 });
                                 pop3.show();
                                 break;
-                        }
+                        }*/
                     }
                 });
             }
         });
-        background.execute("get_message_out-"+state);
+        background.execute("get_message_out-" + state);
         return view;
         //return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    private void update(){
+    private void update() {
         Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
-        if (current instanceof Frag_Outbox){
+        if (current instanceof Frag_Outbox) {
             getFragmentManager().beginTransaction().detach(current).attach(current).commit();
         }
     }

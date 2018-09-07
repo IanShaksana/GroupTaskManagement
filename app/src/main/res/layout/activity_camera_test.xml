@@ -10,19 +10,21 @@
 
 
     <ImageView
+        android:id="@+id/IMG"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:background="@drawable/border"
-        android:id="@+id/IMG"/>
+        android:background="@drawable/border" />
+
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/takepicture"
-        android:text="Camera"/>
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Camera" />
+
+    <Button
         android:id="@+id/upload"
-        android:text="Upload"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload" />
 
 </LinearLayout>

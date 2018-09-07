@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class advancedcustomadapter_as_leader extends ArrayAdapter<String> {
     public advancedcustomadapter_as_leader(@NonNull Context context, String[] resource) {
-        super(context,R.layout.list_task_leader ,resource);
+        super(context, R.layout.list_task_leader, resource);
     }
 
 
@@ -24,9 +24,9 @@ public class advancedcustomadapter_as_leader extends ArrayAdapter<String> {
     TextView jobID;
     TextView taskID;
     TextView name;
-    TextView description ;
+    TextView description;
     TextView difficulty;
-    TextView type ;
+    TextView type;
     TextView date;
     TextView date2;
     TextView worker;
@@ -39,7 +39,7 @@ public class advancedcustomadapter_as_leader extends ArrayAdapter<String> {
 
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View cusView = inflater.inflate(R.layout.mytask_leader,parent,false);
+        View cusView = inflater.inflate(R.layout.mytask_leader, parent, false);
 
 
         String singletask = getItem(position);
@@ -65,8 +65,8 @@ public class advancedcustomadapter_as_leader extends ArrayAdapter<String> {
         type.setText(splitted_task[2]);
         //jobID.setText(splitted_task[4]);
         completion.setText(splitted_task[5]);
-        if(splitted_task[7].equals("null")){
-            splitted_task[7]="None";
+        if (splitted_task[7].equals("null")) {
+            splitted_task[7] = "None";
         }
         worker.setText(splitted_task[7]);
         //jobname.setText(splitted_task[5]);

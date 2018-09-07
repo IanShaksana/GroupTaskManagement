@@ -12,41 +12,40 @@ import android.widget.TextView;
 
 /**
  * Created by Adrian on 5/19/2018.
-
-
-public class advancedcustomadapter_offer extends ArrayAdapter<String> {
-    public advancedcustomadapter_offer(@NonNull Context context, String[] resource) {
-        super(context,R.layout.advancelistview ,resource);
-    }
-
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View cusView = inflater.inflate(R.layout.advancelistview,parent,false);
-
-        String singletask = getItem(position);
-        TextView textView = (TextView) cusView.findViewById(R.id.inputtext);
-        ImageView imageView = (ImageView) cusView.findViewById(R.id.imageView);
-
-        textView.setText(singletask);
-        imageView.setImageResource(R.drawable.image);
-
-        return cusView;
-
-
-    }
-}
+ * <p>
+ * <p>
+ * public class advancedcustomadapter_offer extends ArrayAdapter<String> {
+ * public advancedcustomadapter_offer(@NonNull Context context, String[] resource) {
+ * super(context,R.layout.advancelistview ,resource);
+ * }
+ *
+ * @NonNull
+ * @Override public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+ * LayoutInflater inflater = LayoutInflater.from(getContext());
+ * View cusView = inflater.inflate(R.layout.advancelistview,parent,false);
+ * <p>
+ * String singletask = getItem(position);
+ * TextView textView = (TextView) cusView.findViewById(R.id.inputtext);
+ * ImageView imageView = (ImageView) cusView.findViewById(R.id.imageView);
+ * <p>
+ * textView.setText(singletask);
+ * imageView.setImageResource(R.drawable.image);
+ * <p>
+ * return cusView;
+ * <p>
+ * <p>
+ * }
+ * }
  */
 
 public class advancedcustomadapter_list_worker extends ArrayAdapter<String> {
     public advancedcustomadapter_list_worker(@NonNull Context context, String[] resource) {
-        super(context,R.layout.list ,resource);
+        super(context, R.layout.list, resource);
     }
 
 
     TextView Worker_name;
-    TextView Worker_task ;
+    TextView Worker_task;
     TextView date;
     TextView date2;
 
@@ -56,7 +55,7 @@ public class advancedcustomadapter_list_worker extends ArrayAdapter<String> {
 
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View cusView = inflater.inflate(R.layout.worker_detail,parent,false);
+        View cusView = inflater.inflate(R.layout.worker_detail, parent, false);
 
 
         String singletask = getItem(position);

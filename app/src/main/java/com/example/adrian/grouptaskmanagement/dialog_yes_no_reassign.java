@@ -15,11 +15,12 @@ import android.view.View;
 
 public class dialog_yes_no_reassign extends AppCompatDialogFragment {
     private dialog_yes_no_reassign.dialogListener_yes_no_abandon listener;
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_yes_no_abandon,null);
+        View view = inflater.inflate(R.layout.dialog_yes_no_abandon, null);
         builder.setView(view).setTitle("Warning").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -37,9 +38,10 @@ public class dialog_yes_no_reassign extends AppCompatDialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        listener = (dialog_yes_no_reassign.dialogListener_yes_no_abandon)getTargetFragment();
+        listener = (dialog_yes_no_reassign.dialogListener_yes_no_abandon) getTargetFragment();
     }
-    public interface dialogListener_yes_no_abandon{
+
+    public interface dialogListener_yes_no_abandon {
         void apply_abandoned(String wasd);
     }
 

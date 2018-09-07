@@ -20,13 +20,14 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_Home()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentBottom, new Frag_Home()).commit();
     }
-    private  BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment = null;
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
                 case R.id.nav_Home:
                     selectedFragment = new Frag_Home();
                     clearBackStack();
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                     /*
                 case R.id.nav_Create:
-                    selectedFragment = new Frag_Create();
+                    selectedFragment = new Frag_Create_Job();
                     clearBackStack();
                     break;
                     */
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     clearBackStack();
                     break;
             }
-            getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,selectedFragment).commit();
+            getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, selectedFragment).commit();
             return true;
         }
     };

@@ -25,22 +25,23 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by Adrian on 5/18/2018.
  */
 
-public class Frag_Inbox extends Fragment{
+public class Frag_Inbox extends Fragment {
     @Nullable
     View view;
-    String state,unprocessed_msg;
+    String state, unprocessed_msg;
     ListView listView;
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Inbox");
-        final SharedPreferences preferences = this.getActivity().getSharedPreferences("State",MODE_PRIVATE);
-        state = preferences.getString("Login_State","");
-        view = inflater.inflate(R.layout.inbox,container, false);
+        final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
+        state = preferences.getString("Login_State", "");
+        view = inflater.inflate(R.layout.inbox, container, false);
 
         final background background = new background(getContext());
         background.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
-                unprocessed_msg =obj;
+                unprocessed_msg = obj;
                 String[] processed_msg = unprocessed_msg.split("-msg-");
                 ListAdapter adapter = new advancedcustomadapter_inbox(getContext(), processed_msg);
                 listView = (ListView) view.findViewById(R.id.list_message);
@@ -49,7 +50,7 @@ public class Frag_Inbox extends Fragment{
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         final String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                        Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
 
                         String[] choosensplit1 = choosen.split(",");
                         final String ID_User_W = choosensplit1[0];
@@ -57,7 +58,7 @@ public class Frag_Inbox extends Fragment{
                         String[] choosensplit2 = choosen.split("-");
                         final String ID_Task_W = choosensplit2[2];
 
-                        PopupMenu pop1 = new PopupMenu(getContext(),view,  Gravity.CENTER);
+                        PopupMenu pop1 = new PopupMenu(getContext(), view, Gravity.CENTER);
                         try {
                             Field[] fields = pop1.getClass().getDeclaredFields();
                             for (Field field : fields) {
@@ -73,9 +74,9 @@ public class Frag_Inbox extends Fragment{
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        pop1.getMenuInflater().inflate(R.menu.popupreply1,pop1.getMenu());
+                        pop1.getMenuInflater().inflate(R.menu.popupreply1, pop1.getMenu());
 
-                        PopupMenu pop2 = new PopupMenu(getContext(),view,  Gravity.CENTER);
+                        PopupMenu pop2 = new PopupMenu(getContext(), view, Gravity.CENTER);
                         try {
                             Field[] fields = pop2.getClass().getDeclaredFields();
                             for (Field field : fields) {
@@ -91,9 +92,9 @@ public class Frag_Inbox extends Fragment{
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        pop2.getMenuInflater().inflate(R.menu.popupreply2,pop2.getMenu());
+                        pop2.getMenuInflater().inflate(R.menu.popupreply2, pop2.getMenu());
 
-                        PopupMenu pop3 = new PopupMenu(getContext(),view,  Gravity.CENTER);
+                        PopupMenu pop3 = new PopupMenu(getContext(), view, Gravity.CENTER);
                         try {
                             Field[] fields = pop3.getClass().getDeclaredFields();
                             for (Field field : fields) {
@@ -109,22 +110,22 @@ public class Frag_Inbox extends Fragment{
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        pop3.getMenuInflater().inflate(R.menu.popupreply3,pop3.getMenu());
+                        pop3.getMenuInflater().inflate(R.menu.popupreply3, pop3.getMenu());
 
                         final String[] p1 = choosen.split("-");
-                        switch (p1[1]){
+                        switch (p1[1]) {
                             case "apply":
                                 pop1.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                                     @Override
                                     public boolean onMenuItemClick(MenuItem menuItem) {
-                                        switch (menuItem.getTitle().toString()){
+                                        switch (menuItem.getTitle().toString()) {
                                             case "View Worker":
-                                                Toast.makeText(getContext(), "View Worker",Toast.LENGTH_SHORT).show();
-                                                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_Status_W(),ID_User_W).addToBackStack(null).commit();
+                                                Toast.makeText(getContext(), "View Worker", Toast.LENGTH_SHORT).show();
+                                                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_Status_W(), ID_User_W).addToBackStack(null).commit();
                                                 //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new leader_assign(),ID_Job+"-"+choosen).addToBackStack(null).commit();
                                                 break;
                                             case "Accept":
-                                                Toast.makeText(getContext(), "Accept",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), "Accept", Toast.LENGTH_SHORT).show();
                                                 background background2 = new background(getContext());
                                                 background2.getListener(new background.OnUpdateListener() {
                                                     @Override
@@ -132,10 +133,10 @@ public class Frag_Inbox extends Fragment{
                                                         update();
                                                     }
                                                 });
-                                                background2.execute("reply_message-apply_yes-"+ID_Task_W+"-"+ID_User_W+"-"+choosen);
+                                                background2.execute("reply_message-apply_yes-" + ID_Task_W + "-" + ID_User_W + "-" + choosen);
                                                 break;
                                             case "Reject":
-                                                Toast.makeText(getContext(), "Reject",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), "Reject", Toast.LENGTH_SHORT).show();
                                                 background background3 = new background(getContext());
                                                 background3.getListener(new background.OnUpdateListener() {
                                                     @Override
@@ -143,7 +144,7 @@ public class Frag_Inbox extends Fragment{
                                                         update();
                                                     }
                                                 });
-                                                background3.execute("reply_message-apply_reject-"+ID_Task_W+"-"+ID_User_W+"-"+choosen);
+                                                background3.execute("reply_message-apply_reject-" + ID_Task_W + "-" + ID_User_W + "-" + choosen);
                                                 break;
                                         }
                                         return true;
@@ -156,13 +157,13 @@ public class Frag_Inbox extends Fragment{
                                 pop2.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                                     @Override
                                     public boolean onMenuItemClick(MenuItem menuItem) {
-                                        switch (menuItem.getTitle().toString()){
+                                        switch (menuItem.getTitle().toString()) {
                                             case "View Task":
-                                                Toast.makeText(getContext(), "View Task",Toast.LENGTH_SHORT).show();
-                                                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_detail_task(),ID_Task_W).addToBackStack(null).commit();
+                                                Toast.makeText(getContext(), "View Task", Toast.LENGTH_SHORT).show();
+                                                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_detail_task(), ID_Task_W).addToBackStack(null).commit();
                                                 break;
                                             case "Accept Task":
-                                                Toast.makeText(getContext(), "Accept Task",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), "Accept Task", Toast.LENGTH_SHORT).show();
                                                 background background1 = new background(getContext());
                                                 background1.getListener(new background.OnUpdateListener() {
                                                     @Override
@@ -170,11 +171,11 @@ public class Frag_Inbox extends Fragment{
                                                         update();
                                                     }
                                                 });
-                                                background1.execute("reply_message-assign_yes-"+ID_Task_W+"-"+ID_User_W2+"-"+choosen);
+                                                background1.execute("reply_message-assign_yes-" + ID_Task_W + "-" + ID_User_W2 + "-" + choosen);
                                                 //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new leader_reassign(),ID_Job+"-"+choosen).addToBackStack(null).commit();
                                                 break;
                                             case "Reject Task":
-                                                Toast.makeText(getContext(), "Reject Task",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), "Reject Task", Toast.LENGTH_SHORT).show();
                                                 background background2 = new background(getContext());
                                                 background2.getListener(new background.OnUpdateListener() {
                                                     @Override
@@ -182,7 +183,7 @@ public class Frag_Inbox extends Fragment{
                                                         update();
                                                     }
                                                 });
-                                                background2.execute("reply_message-assign_reject-"+ID_Task_W+"-"+ID_User_W2+"-"+choosen);
+                                                background2.execute("reply_message-assign_reject-" + ID_Task_W + "-" + ID_User_W2 + "-" + choosen);
                                                 break;
                                         }
                                         return true;
@@ -195,17 +196,17 @@ public class Frag_Inbox extends Fragment{
                                 pop3.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                                     @Override
                                     public boolean onMenuItemClick(MenuItem menuItem) {
-                                        switch (menuItem.getTitle().toString()){
+                                        switch (menuItem.getTitle().toString()) {
                                             case "View Job":
-                                                Toast.makeText(getContext(), "View Job",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), "View Job", Toast.LENGTH_SHORT).show();
                                                 //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new leader_assign(),ID_Job+"-"+choosen).addToBackStack(null).commit();
                                                 break;
                                             case "View Task":
-                                                Toast.makeText(getContext(), "View Task",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), "View Task", Toast.LENGTH_SHORT).show();
                                                 //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new leader_reassign(),ID_Job+"-"+choosen).addToBackStack(null).commit();
                                                 break;
                                             case "Accept Job":
-                                                Toast.makeText(getContext(), "Accept job",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), "Accept job", Toast.LENGTH_SHORT).show();
                                                 background background1 = new background(getContext());
                                                 background1.getListener(new background.OnUpdateListener() {
                                                     @Override
@@ -213,10 +214,10 @@ public class Frag_Inbox extends Fragment{
                                                         update();
                                                     }
                                                 });
-                                                background1.execute("reply_message-invite_yes-"+ID_Task_W+"-"+ID_User_W2+"-"+choosen);
+                                                background1.execute("reply_message-invite_yes-" + ID_Task_W + "-" + ID_User_W2 + "-" + choosen);
                                                 break;
                                             case "Reject Job":
-                                                Toast.makeText(getContext(), "Accept job",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), "Accept job", Toast.LENGTH_SHORT).show();
                                                 background background2 = new background(getContext());
                                                 background2.getListener(new background.OnUpdateListener() {
                                                     @Override
@@ -224,7 +225,7 @@ public class Frag_Inbox extends Fragment{
                                                         update();
                                                     }
                                                 });
-                                                background2.execute("reply_message-invite_reject-"+ID_Task_W+"-"+ID_User_W2+"-"+choosen);
+                                                background2.execute("reply_message-invite_reject-" + ID_Task_W + "-" + ID_User_W2 + "-" + choosen);
                                                 break;
                                         }
                                         return true;
@@ -237,14 +238,14 @@ public class Frag_Inbox extends Fragment{
                 });
             }
         });
-        background.execute("get_message_in-"+state);
+        background.execute("get_message_in-" + state);
         return view;
         //return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    private void update(){
+    private void update() {
         Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
-        if (current instanceof Frag_Inbox){
+        if (current instanceof Frag_Inbox) {
             getFragmentManager().beginTransaction().detach(current).attach(current).commit();
         }
     }

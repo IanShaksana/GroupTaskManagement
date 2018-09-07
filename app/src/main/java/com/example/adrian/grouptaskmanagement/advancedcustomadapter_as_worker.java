@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class advancedcustomadapter_as_worker extends ArrayAdapter<String> {
     public advancedcustomadapter_as_worker(@NonNull Context context, String[] resource) {
-        super(context,R.layout.list, resource);
+        super(context, R.layout.list, resource);
     }
 
 
@@ -24,9 +24,9 @@ public class advancedcustomadapter_as_worker extends ArrayAdapter<String> {
     TextView jobID;
     TextView taskID;
     TextView name;
-    TextView description ;
+    TextView description;
     TextView difficulty;
-    TextView type ;
+    TextView type;
     TextView date;
     TextView date2;
     TextView completion;
@@ -37,9 +37,8 @@ public class advancedcustomadapter_as_worker extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
 
-
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View cusView = inflater.inflate(R.layout.mytask_worker,parent,false);
+        View cusView = inflater.inflate(R.layout.mytask_worker, parent, false);
 
 
         String singletask = getItem(position);
@@ -48,8 +47,8 @@ public class advancedcustomadapter_as_worker extends ArrayAdapter<String> {
         String[] splitted_time2 = splitted_time[1].split(" ");
 
         jobname = (TextView) cusView.findViewById(R.id.worker_job_name);
-        jobID=(TextView) cusView.findViewById(R.id.job_ID);
-        taskID=(TextView) cusView.findViewById(R.id.task_ID);
+        jobID = (TextView) cusView.findViewById(R.id.job_ID);
+        taskID = (TextView) cusView.findViewById(R.id.task_ID);
         name = (TextView) cusView.findViewById(R.id.task_name_view);
         description = (TextView) cusView.findViewById(R.id.desc_input_view);
         difficulty = (TextView) cusView.findViewById(R.id.diff_input_view);
@@ -58,16 +57,16 @@ public class advancedcustomadapter_as_worker extends ArrayAdapter<String> {
         date2 = (TextView) cusView.findViewById(R.id.date_time_input_view);
         completion = (TextView) cusView.findViewById(R.id.completed_view);
 
-        jobname.setText(splitted_task[0]);
-        jobID.setText(splitted_task[1]);
-        taskID.setText(splitted_task[2]);
-        name.setText(splitted_task[3]);
-        description.setText(splitted_task[4]);
-        difficulty.setText(splitted_task[5]);
-        type.setText(splitted_task[6]);
+        //jobname.setText(splitted_task[0]);
+        jobID.setText(splitted_task[4]);
+        taskID.setText(splitted_task[6]);
+        name.setText(splitted_task[0]);
+        description.setText(splitted_task[1]);
+        difficulty.setText(splitted_task[3]);
+        type.setText(splitted_task[2]);
         date.setText(splitted_time2[0]);
         date2.setText(splitted_time2[1]);
-        completion.setText(splitted_task[7]);
+        completion.setText(splitted_task[5]);
 
         return cusView;
 

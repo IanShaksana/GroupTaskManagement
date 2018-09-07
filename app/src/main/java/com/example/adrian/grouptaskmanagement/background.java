@@ -8,7 +8,7 @@ import android.widget.Toast;
  * Created by Adrian on 5/21/2018.
  */
 
-public class background extends AsyncTask <String,Void,String> {
+public class background extends AsyncTask<String, Void, String> {
     Context currentAct;
 
     public background(Context currentAct) {
@@ -34,10 +34,10 @@ public class background extends AsyncTask <String,Void,String> {
     @Override
     protected void onPostExecute(String s) {
 
-        if(listener !=null && !s.contains("failed")){
+        if (listener != null && !s.contains("failed")) {
             listener.onUpdate(s);
-        }else {
-            Toast.makeText(currentAct,s+" from background",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(currentAct, s + " from background", Toast.LENGTH_SHORT).show();
         }
     }
 }

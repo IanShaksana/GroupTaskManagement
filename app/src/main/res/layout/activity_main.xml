@@ -4,23 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.adrian.grouptaskmanagement.MainActivity"
-    android:background="@drawable/wood">
+    android:background="@drawable/wood"
+    tools:context="com.example.adrian.grouptaskmanagement.MainActivity">
 
     <FrameLayout
         android:id="@+id/fragmentBottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomNav">
-    </FrameLayout>
+        android:layout_above="@+id/bottomNav"></FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom"
-        android:background="@drawable/bottom">
+        android:background="@drawable/bottom"
+        app:menu="@menu/bottom">
 
     </android.support.design.widget.BottomNavigationView>
 

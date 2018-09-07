@@ -26,8 +26,8 @@ import java.net.UnknownHostException;
  */
 
 public class TCPC {
-    public String setupCon (Bitmap newData){
-        String data=null;
+    public String setupCon(Bitmap newData) {
+        String data = null;
         try {
             //String address = "192.168.142.230";
             String address = "192.168.43.138";
@@ -35,15 +35,15 @@ public class TCPC {
             InetAddress serverAddr = InetAddress.getByName(address);
             SocketAddress sockaddr = new InetSocketAddress(serverAddr, 1234);
             Socket socket = new Socket();
-            socket.connect(sockaddr,0);
+            socket.connect(sockaddr, 0);
             //socket.setSoTimeout(1000);
 
             OutputStream outputStream = socket.getOutputStream();
-            FileInputStream fis = new FileInputStream(new File("C:\\Users\\Adrian\\Pictures\\"+/*filename+*/".jpg"));
-            DataOutputStream dos  = new DataOutputStream(outputStream);
-            BufferedOutputStream dos1  = new BufferedOutputStream(outputStream);
+            FileInputStream fis = new FileInputStream(new File("C:\\Users\\Adrian\\Pictures\\" +/*filename+*/".jpg"));
+            DataOutputStream dos = new DataOutputStream(outputStream);
+            BufferedOutputStream dos1 = new BufferedOutputStream(outputStream);
             int io;
-            while((io=fis.read())> -1){
+            while ((io = fis.read()) > -1) {
                 dos1.write(io);
             }
             fis.close();
@@ -63,7 +63,7 @@ public class TCPC {
             data = bufferedReader.readLine();
             */
 
-        }catch (SocketTimeoutException e){
+        } catch (SocketTimeoutException e) {
             e.printStackTrace();
             return "failed Timeout";
         } catch (UnknownHostException e) {
