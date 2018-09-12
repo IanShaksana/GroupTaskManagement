@@ -57,6 +57,7 @@ public class Frag_Inbox extends Fragment {
                         final String ID_User_W2 = choosensplit1[1];
                         String[] choosensplit2 = choosen.split("-");
                         final String ID_Task_W = choosensplit2[2];
+                        final String Custom_ID_Job = choosensplit2[3];
 
                         PopupMenu pop1 = new PopupMenu(getContext(), view, Gravity.CENTER);
                         try {
@@ -111,6 +112,24 @@ public class Frag_Inbox extends Fragment {
                             e.printStackTrace();
                         }
                         pop3.getMenuInflater().inflate(R.menu.popupreply3, pop3.getMenu());
+
+                        PopupMenu pop4 = new PopupMenu(getContext(), view, Gravity.CENTER);
+                        try {
+                            Field[] fields = pop4.getClass().getDeclaredFields();
+                            for (Field field : fields) {
+                                if ("mPopup".equals(field.getName())) {
+                                    field.setAccessible(true);
+                                    Object menuPopupHelper = field.get(pop4);
+                                    Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
+                                    Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon", boolean.class);
+                                    setForceIcons.invoke(menuPopupHelper, true);
+                                    break;
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        pop4.getMenuInflater().inflate(R.menu.popupreply4, pop4.getMenu());
 
                         final String[] p1 = choosen.split("-");
                         switch (p1[1]) {
@@ -232,6 +251,39 @@ public class Frag_Inbox extends Fragment {
                                     }
                                 });
                                 pop3.show();
+                                break;
+                            case "vote":
+                                pop4.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                    @Override
+                                    public boolean onMenuItemClick(MenuItem menuItem) {
+                                        switch (menuItem.getTitle().toString()) {
+                                            case "Up Vote":
+                                                Toast.makeText(getContext(), "Up Vote", Toast.LENGTH_SHORT).show();
+                                                background background1 = new background(getContext());
+                                                background1.getListener(new background.OnUpdateListener() {
+                                                    @Override
+                                                    public void onUpdate(String obj) {
+                                                        update();
+                                                    }
+                                                });
+                                                background1.execute("reply_message-UpVote-" + Custom_ID_Job+"-"+ID_User_W2);
+                                                break;
+                                            case "Down Vote":
+                                                Toast.makeText(getContext(), "Down Vote", Toast.LENGTH_SHORT).show();
+                                                background background2 = new background(getContext());
+                                                background2.getListener(new background.OnUpdateListener() {
+                                                    @Override
+                                                    public void onUpdate(String obj) {
+                                                        update();
+                                                    }
+                                                });
+                                                background2.execute("reply_message-DownVote-" + Custom_ID_Job+"-"+ID_User_W2);
+                                                break;
+                                        }
+                                        return true;
+                                    }
+                                });
+                                pop4.show();
                                 break;
                         }
                     }

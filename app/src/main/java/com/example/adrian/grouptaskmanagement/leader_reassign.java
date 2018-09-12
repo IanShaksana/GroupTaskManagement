@@ -67,7 +67,7 @@ public class leader_reassign extends Fragment {
                 });
             }
         });
-        background.execute("request_worker_task-" + Tagsplit[1]);
+        background.execute("request_worker_task-" + Tagsplit[1] + "-" +Tagsplit[0]);
 
         return view;
     }

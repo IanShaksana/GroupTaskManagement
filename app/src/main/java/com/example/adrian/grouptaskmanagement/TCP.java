@@ -56,6 +56,7 @@ public class TCP {
                 break;
         }
 
+        //address = "112.215.173.42";
         try {
             InetAddress serverAddr = InetAddress.getByName(address);
             SocketAddress sockaddr = new InetSocketAddress(serverAddr, 1234);

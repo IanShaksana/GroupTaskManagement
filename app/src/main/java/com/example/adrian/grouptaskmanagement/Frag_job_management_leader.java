@@ -45,7 +45,9 @@ public class Frag_job_management_leader extends Fragment {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new Frag_Create_Job()).addToBackStack(null).commit();
+                background background1 = new background(getContext());
+                background1.execute("finish_job-"+ID_Job);
+                getFragmentManager().popBackStack();
             }
         });
 
@@ -63,28 +65,12 @@ public class Frag_job_management_leader extends Fragment {
             }
         });
 
-
-        /*
-        String[] split = {"User as Worker","User as Leader"};
-        ListAdapter adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,split);
-        listView = (SwipeMenuListView) view.findViewById(R.id.myjob_viw);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-            //Toast.makeText(getContext(),choosen,Toast.LENGTH_SHORT).show();
-                if (choosen.equals("User as Worker")){
-                    getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_worker_old()).addToBackStack(null).commit();
-                }else if (choosen.equals("User as Leader")){
-                    getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_leader()).addToBackStack(null).commit();
-                }
-            }
-        });
-        */
         return view;
     }
-
-
+    private void update() {
+        Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);//getActivity().getFragmentManager().findFragmentById(R.id.fragmentBottom);
+        if (current instanceof Frag_Offer_avaible_task) {
+            getFragmentManager().beginTransaction().detach(current).attach(current).commit();
+        }
+    }
 }

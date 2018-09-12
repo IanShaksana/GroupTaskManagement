@@ -49,7 +49,7 @@ public class Frag_Home extends Fragment {
                 Agi.setText(split[3]);
                 Intel.setText(split[4]);
                 Exp_cur.setText(split[1]);
-                Exp_nex.setText("~");
+                Exp_nex.setText(split[5]);
             }
         });
         background_home.execute("request_home-" + state);

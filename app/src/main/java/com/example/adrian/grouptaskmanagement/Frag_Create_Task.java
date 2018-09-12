@@ -51,6 +51,8 @@ public class Frag_Create_Task extends Fragment implements DatePickerDialog.OnDat
         taskdate = (TextView) view.findViewById(R.id.date_input_task2);
         tasktime = (TextView) view.findViewById(R.id.date_time_input_task2);
 
+
+
         taskdiff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,6 +165,8 @@ public class Frag_Create_Task extends Fragment implements DatePickerDialog.OnDat
     }
 
     private void update() {
+        taskname.setText("");
+        taskdesc.setText("");
         Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);
         if (current instanceof Frag_Create_Task) {
             getFragmentManager().beginTransaction().detach(current).attach(current).commit();

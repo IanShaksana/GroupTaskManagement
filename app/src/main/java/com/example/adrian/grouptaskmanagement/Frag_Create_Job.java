@@ -52,6 +52,8 @@ public class Frag_Create_Job extends Fragment implements dialog_worker_slot.dial
         time = (TextView) view.findViewById(R.id.date_time_input_job);
         JobName = (EditText) view.findViewById(R.id.job_name);
 
+
+
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
 
@@ -84,8 +86,9 @@ public class Frag_Create_Job extends Fragment implements dialog_worker_slot.dial
                     @Override
                     public void onUpdate(String obj) {
                         Toast.makeText(getContext(), "Create Job Success", Toast.LENGTH_SHORT).show();
+                        update();
                         //getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_Offer()).commit();
-                        Toast.makeText(getContext(), obj, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), obj, Toast.LENGTH_SHORT).show();
                     }
                 });
                 background.execute(send);
@@ -93,6 +96,15 @@ public class Frag_Create_Job extends Fragment implements dialog_worker_slot.dial
         });
         return view;
 
+    }
+
+    private void update() {
+        desc.setText("");
+        JobName.setText("");
+        Fragment current = getFragmentManager().findFragmentById(R.id.fragmentBottom);
+        if (current instanceof Frag_Create_Job) {
+            getFragmentManager().beginTransaction().detach(current).attach(current).commit();
+        }
     }
 
     private void opendialog_worker() {
