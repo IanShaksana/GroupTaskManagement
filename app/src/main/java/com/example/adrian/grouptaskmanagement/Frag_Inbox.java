@@ -55,9 +55,9 @@ public class Frag_Inbox extends Fragment {
                         String[] choosensplit1 = choosen.split(",");
                         final String ID_User_W = choosensplit1[0];
                         final String ID_User_W2 = choosensplit1[1];
-                        String[] choosensplit2 = choosen.split("-");
+                        final String[] choosensplit2 = choosen.split("-");
                         final String ID_Task_W = choosensplit2[2];
-                        final String Custom_ID_Job = choosensplit2[3];
+
 
                         PopupMenu pop1 = new PopupMenu(getContext(), view, Gravity.CENTER);
                         try {
@@ -256,6 +256,7 @@ public class Frag_Inbox extends Fragment {
                                 pop4.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                                     @Override
                                     public boolean onMenuItemClick(MenuItem menuItem) {
+                                        final String Custom_ID_Job = choosensplit2[3];
                                         switch (menuItem.getTitle().toString()) {
                                             case "Up Vote":
                                                 Toast.makeText(getContext(), "Up Vote", Toast.LENGTH_SHORT).show();

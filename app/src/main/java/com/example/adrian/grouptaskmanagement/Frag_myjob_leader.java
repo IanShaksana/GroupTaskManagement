@@ -45,10 +45,22 @@ public class Frag_myjob_leader extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                        String[] choosensplit = choosen.split(",");
+                        final String[] choosensplit = choosen.split(",");
+
+                        //background, select
+                        background background1 = new background(getContext());
+                        background1.getListener(new background.OnUpdateListener() {
+                            @Override
+                            public void onUpdate(String obj) {
+                                if(obj.equals("finished")){
+                                    getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_job_management_leader_AFTR(), choosensplit[1]).addToBackStack(null).commit();
+                                }else {
+                                    getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_job_management_leader(), choosensplit[1]).addToBackStack(null).commit();
+                                }
+                            }
+                        });
+                        background1.execute("cek_finished-"+choosensplit[1]);
                         Toast.makeText(getContext(), choosensplit[1], Toast.LENGTH_SHORT).show();
-                        //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new list_task_leader(),choosen).addToBackStack(null).commit();
-                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_job_management_leader(), choosensplit[1]).addToBackStack(null).commit();
                     }
                 });
 

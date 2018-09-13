@@ -18,7 +18,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
  * Created by Adrian on 5/18/2018.
  */
 
-public class Frag_job_management_leader extends Fragment {
+public class Frag_job_management_leader_AFTR extends Fragment {
     SwipeMenuListView listView;
     View view;
     Context context;
@@ -34,37 +34,19 @@ public class Frag_job_management_leader extends Fragment {
         ID_Job = getTag();
         ID_Job2 = ID_Job;
         context = activity.getApplicationContext();
-        view = inflater.inflate(R.layout.job_management_leader, container, false);
+        view = inflater.inflate(R.layout.job_management_leader_aftr, container, false);
 
         Toast.makeText(getContext(), ID_Job2, Toast.LENGTH_SHORT).show();
+        cash_in = (ImageView) view.findViewById(R.id.Cash_in);
 
-        finish = (ImageView) view.findViewById(R.id.Finish_Job);
-        task = (ImageView) view.findViewById(R.id.View_Task);
-        worker = (ImageView) view.findViewById(R.id.View_Worker);
-
-        finish.setOnClickListener(new View.OnClickListener() {
+        cash_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 background background1 = new background(getContext());
-                background1.execute("finish_job-"+ID_Job);
+                background1.execute("cashIn-"+ID_Job);
                 getFragmentManager().popBackStack();
             }
         });
-
-        task.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new list_task_leader(), ID_Job).addToBackStack(null).commit();
-            }
-        });
-
-        worker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_worker_management(), ID_Job2).addToBackStack(null).commit();
-            }
-        });
-
 
 
         return view;
