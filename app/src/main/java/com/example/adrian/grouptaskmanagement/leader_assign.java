@@ -24,21 +24,27 @@ import java.lang.reflect.Method;
  * Created by Adrian on 9/4/2018.
  */
 
-public class leader_assign extends Fragment {
+public class leader_assign extends Fragment implements  dialog_yes_no_assign.dialogListener_yes_no_assign {
 
     View view;
     Context context;
     Activity activity;
     String unprocessed_task;
+    String choosen;
     ListView listView;
+    String Tag;
+    String ID_Task;
+    String ID_User;
+    String ID_Job;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Job");
         activity = getActivity();
         context = activity.getApplicationContext();
         view = inflater.inflate(R.layout.list_assign_task_leader, container, false);
-        String Tag = getTag();
-        final String[] Tagsplit = Tag.split("-");
+        Tag = getTag();
+        String[] Tagsplit = Tag.split("-");
+
 
         final background background = new background(getContext());
         background.getListener(new background.OnUpdateListener() {
@@ -55,25 +61,9 @@ public class leader_assign extends Fragment {
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            String choosen = String.valueOf(adapterView.getItemAtPosition(i));
+                            choosen = String.valueOf(adapterView.getItemAtPosition(i));
                             Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
-                            String[] choosensplit = choosen.split("-");
-
-
-                            background background1 = new background(getContext());
-                            background1.getListener(new background.OnUpdateListener() {
-                                @Override
-                                public void onUpdate(String obj) {
-                                    Toast.makeText(getContext(), "hai", Toast.LENGTH_SHORT).show();
-                                    update();
-                                }
-                            });
-                            //tambahi dialog aja
-                            String ID_Task = choosensplit[6];
-                            String ID_User = Tagsplit[1];
-                            String ID_Job = Tagsplit[0];
-                            //background1.execute("request_apply_task-"+Tagsplit[1]+"-"+choosensplit[6]+"-"+Tagsplit[0]);
-                            background1.execute("msg_assign-" + ID_User + "-" + ID_Task + "-" + ID_Job);
+                            opendialog();
                         }
                     });
                 }
@@ -89,5 +79,33 @@ public class leader_assign extends Fragment {
         if (current instanceof leader_assign) {
             getFragmentManager().beginTransaction().detach(current).attach(current).commit();
         }
+    }
+
+    private void opendialog() {
+        dialog_yes_no_assign dialogfragment = new dialog_yes_no_assign();
+        dialogfragment.setTargetFragment(this, 0);
+        dialogfragment.show(getFragmentManager(), "exa");
+
+    }
+
+    @Override
+    public void apply_assign(String wasd) {
+        String[] choosensplit = choosen.split("-");
+        String[] Tagsplit = Tag.split("-");
+        background background1 = new background(getContext());
+        background1.getListener(new background.OnUpdateListener() {
+            @Override
+            public void onUpdate(String obj) {
+                Toast.makeText(getContext(), "hai", Toast.LENGTH_SHORT).show();
+                update();
+            }
+        });
+        //tambahi dialog aja
+        ID_Task = choosensplit[6];
+        ID_User = Tagsplit[1];
+        ID_Job = Tagsplit[0];
+        //background1.execute("request_apply_task-"+Tagsplit[1]+"-"+choosensplit[6]+"-"+Tagsplit[0]);
+        background1.execute("msg_assign-" + ID_User + "-" + ID_Task + "-" + ID_Job);
+
     }
 }

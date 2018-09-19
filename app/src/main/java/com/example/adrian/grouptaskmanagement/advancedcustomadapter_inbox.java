@@ -57,7 +57,9 @@ public class advancedcustomadapter_inbox extends ArrayAdapter<String> {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View cusView = inflater.inflate(R.layout.inbox_detail, parent, false);
 
-//ian,kez,kez-apply-test1|153603447984
+        //ian,kez,kez-apply-test1|153603447984
+        //ian,ren,ren-invite-demolalala
+
         String bundle_msg = getItem(position);
         String[] splitted_msg = bundle_msg.split(",");
         String[] body_msg = splitted_msg[2].split("-");
@@ -67,10 +69,22 @@ public class advancedcustomadapter_inbox extends ArrayAdapter<String> {
         //Recepient = (TextView) cusView.findViewById(R.id.desc_input_view);
         Message = (TextView) cusView.findViewById(R.id.msg_name);
 
-
         Sender.setText(splitted_msg[0]);
-        //description.setText(splitted_task[1]);
-        Message.setText(body_msg[0] + " want to " + body_msg[1] + " " + body_msg[2]);
+        switch (body_msg[1]){
+            case "apply":
+                Message.setText(body_msg[0] + " wants to " + body_msg[1] + " " + body_msg[2]);
+                break;
+            case "invite":
+                Message.setText(splitted_msg[0] + " wants to invite you to " + body_msg[2]);
+                break;
+            case "assign":
+                Message.setText(splitted_msg[0] + " wants to assign you to " + body_msg[2]);
+                break;
+            case "vote":
+                Message.setText("vote for "+body_msg[2]+" (Job : "+body_msg[3]+" )");
+                break;
+        }
+
 
         return cusView;
 

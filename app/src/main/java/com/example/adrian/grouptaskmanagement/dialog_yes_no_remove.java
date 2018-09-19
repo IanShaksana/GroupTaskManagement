@@ -13,8 +13,8 @@ import android.view.View;
  * Created by Adrian on 6/8/2018.
  */
 
-public class dialog_yes_no_assign extends AppCompatDialogFragment {
-    private dialog_yes_no_assign.dialogListener_yes_no_assign listener;
+public class dialog_yes_no_remove extends AppCompatDialogFragment {
+    private dialog_yes_no_remove.dialogListener_yes_no_remove listener;
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -29,7 +29,7 @@ public class dialog_yes_no_assign extends AppCompatDialogFragment {
         }).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                listener.apply_assign("yes");
+                listener.apply_remove("yes");
             }
         });
         return builder.create();
@@ -38,11 +38,11 @@ public class dialog_yes_no_assign extends AppCompatDialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        listener = (dialog_yes_no_assign.dialogListener_yes_no_assign) getTargetFragment();
+        listener = (dialog_yes_no_remove.dialogListener_yes_no_remove) getTargetFragment();
     }
 
-    public interface dialogListener_yes_no_assign {
-        void apply_assign(String wasd);
+    public interface dialogListener_yes_no_remove {
+        void apply_remove(String wasd);
     }
 
 }

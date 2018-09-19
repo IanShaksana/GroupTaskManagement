@@ -81,6 +81,7 @@ public class Frag_Create_Job extends Fragment implements dialog_worker_slot.dial
             @Override
             public void onClick(View view) {
                 background background = new background(getContext());
+                //worker minimal
                 String send = "create_job-" + JobName.getText().toString() + "-" + desc.getText().toString() + "-" + state + "-" + "," + current_date + "," + current_time;
                 background.getListener(new background.OnUpdateListener() {
                     @Override

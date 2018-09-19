@@ -14,13 +14,13 @@ import android.view.View;
  */
 
 public class dialog_yes_no_reassign extends AppCompatDialogFragment {
-    private dialog_yes_no_reassign.dialogListener_yes_no_abandon listener;
+    private dialog_yes_no_reassign.dialogListener_yes_no_reassign listener;
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_yes_no_abandon, null);
+        View view = inflater.inflate(R.layout.dialog_reassign, null);
         builder.setView(view).setTitle("Warning").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -29,7 +29,7 @@ public class dialog_yes_no_reassign extends AppCompatDialogFragment {
         }).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                listener.apply_abandoned("Abandoned");
+                listener.apply_reassign("yes");
             }
         });
         return builder.create();
@@ -38,11 +38,11 @@ public class dialog_yes_no_reassign extends AppCompatDialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        listener = (dialog_yes_no_reassign.dialogListener_yes_no_abandon) getTargetFragment();
+        listener = (dialog_yes_no_reassign.dialogListener_yes_no_reassign) getTargetFragment();
     }
 
-    public interface dialogListener_yes_no_abandon {
-        void apply_abandoned(String wasd);
+    public interface dialogListener_yes_no_reassign {
+        void apply_reassign(String wasd);
     }
 
 }

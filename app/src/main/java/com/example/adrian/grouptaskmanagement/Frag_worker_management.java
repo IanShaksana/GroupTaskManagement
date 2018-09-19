@@ -28,12 +28,12 @@ import java.lang.reflect.Method;
  * Created by Adrian on 5/18/2018.
  */
 
-public class Frag_worker_management extends Fragment implements dialog_worker_invite.dialogListener_worker {
+public class Frag_worker_management extends Fragment implements dialog_worker_invite.dialogListener_worker, dialog_yes_no_remove.dialogListener_yes_no_remove {
     ListView listView;
     View view;
     Context context;
     Activity activity;
-    String ID_Job;
+    String ID_Job,choosen;
     FloatingActionButton FAB;
 
     @Nullable
@@ -65,7 +65,7 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        final String choosen = String.valueOf(adapterView.getItemAtPosition(i));
+                        choosen = String.valueOf(adapterView.getItemAtPosition(i));
                         Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
                         PopupMenu pop = new PopupMenu(getContext(), view, Gravity.CENTER);
                         try {
@@ -99,14 +99,7 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                                         break;
                                     case "Remove Worker":
                                         Toast.makeText(getContext(), "Remove Worker", Toast.LENGTH_SHORT).show();
-                                        background background1 = new background(getContext());
-                                        background1.getListener(new background.OnUpdateListener() {
-                                            @Override
-                                            public void onUpdate(String obj) {
-                                                update();
-                                            }
-                                        });
-                                        background1.execute("remove_worker-" + choosen + "-" + ID_Job);
+                                        opendialog_remove();
                                         break;
                                 }/*
                                 if(menuItem.getTitle().toString().equals("Assign")){
@@ -146,6 +139,13 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
 
     }
 
+    private void opendialog_remove() {
+        dialog_yes_no_remove dialogfragment = new dialog_yes_no_remove();
+        dialogfragment.setTargetFragment(this, 0);
+        dialogfragment.show(getFragmentManager(), "exa");
+
+    }
+
     @Override
     public void apply_worker(String wasd) {
         //Toast.makeText(getContext(),"halo",Toast.LENGTH_SHORT).show();
@@ -158,5 +158,18 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
         });
         //background.execute("invite_worker-"+wasd+"-"+ID_Job);
         background.execute("msg_invite_worker-" + wasd + "-" + ID_Job);
+    }
+
+
+    @Override
+    public void apply_remove(String wasd) {
+        background background1 = new background(getContext());
+        background1.getListener(new background.OnUpdateListener() {
+            @Override
+            public void onUpdate(String obj) {
+                update();
+            }
+        });
+        background1.execute("remove_worker-" + choosen + "-" + ID_Job);
     }
 }

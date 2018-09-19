@@ -24,20 +24,22 @@ import java.lang.reflect.Method;
  * Created by Adrian on 9/4/2018.
  */
 
-public class leader_reassign extends Fragment {
+public class leader_reassign extends Fragment implements  dialog_yes_no_reassign.dialogListener_yes_no_reassign {
 
     View view;
     Context context;
     Activity activity;
-    String unprocessed_task;
     ListView listView;
+    String Tag;
+    String choosen;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Job");
         activity = getActivity();
         context = activity.getApplicationContext();
         view = inflater.inflate(R.layout.list_reassign_task_leader, container, false);
-        String Tag = getTag();
+        Tag = getTag();
         String[] Tagsplit = Tag.split("-");
         Toast.makeText(getContext(), Tag, Toast.LENGTH_SHORT).show();
 
@@ -52,17 +54,9 @@ public class leader_reassign extends Fragment {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        String choosen = String.valueOf(adapterView.getItemAtPosition(i));
+                        choosen = String.valueOf(adapterView.getItemAtPosition(i));
                         Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
-                        String[] choosensplit = choosen.split("-");
-                        background background1 = new background(getContext());
-                        background1.getListener(new background.OnUpdateListener() {
-                            @Override
-                            public void onUpdate(String obj) {
-                                update();
-                            }
-                        });
-                        background1.execute("abandon_task-" + choosensplit[2]);
+                        opendialog_worker();
                     }
                 });
             }
@@ -77,5 +71,26 @@ public class leader_reassign extends Fragment {
         if (current instanceof leader_reassign) {
             getFragmentManager().beginTransaction().detach(current).attach(current).commit();
         }
+    }
+
+    private void opendialog_worker() {
+        dialog_yes_no_reassign dialogfragment = new dialog_yes_no_reassign();
+        dialogfragment.setTargetFragment(this, 0);
+        dialogfragment.show(getFragmentManager(), "exa");
+
+    }
+
+    @Override
+    public void apply_reassign(String wasd) {
+        String[] choosensplit = choosen.split("-");
+        background background1 = new background(getContext());
+        background1.getListener(new background.OnUpdateListener() {
+            @Override
+            public void onUpdate(String obj) {
+                update();
+            }
+        });
+        background1.execute("abandon_task-" + choosensplit[2]);
+
     }
 }
