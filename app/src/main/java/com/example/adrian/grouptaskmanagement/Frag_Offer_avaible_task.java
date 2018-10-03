@@ -29,7 +29,7 @@ public class Frag_Offer_avaible_task extends Fragment implements dialog_yes_no_a
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Avaible Task");
-        String tempo = getTag();
+        String idJob = getTag();
         final View view = inflater.inflate(R.layout.offer_tab_avaible_tab_avaibletask, container, false);
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
@@ -60,7 +60,7 @@ public class Frag_Offer_avaible_task extends Fragment implements dialog_yes_no_a
 
             }
         });
-        background.execute("request_job_task2-" + tempo);
+        background.execute("request_job_task2-" + idJob);
         return view;
     }
 

@@ -11,15 +11,25 @@
         android:id="@+id/Finish_Job"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginBottom="121dp"
-        android:layout_marginEnd="130dp"
-        android:layout_marginStart="131dp"
+        android:layout_marginBottom="124dp"
+        android:layout_marginStart="24dp"
         android:background="@drawable/border"
         android:padding="40dp"
         android:src="@drawable/ic_assignment_turned_in_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/Offer_Not"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="124dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/border"
+        android:padding="40dp"
+        android:src="@drawable/playpause"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
     <!--
         <TextView
             android:id="@+id/textView"

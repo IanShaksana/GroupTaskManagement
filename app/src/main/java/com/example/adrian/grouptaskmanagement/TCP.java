@@ -36,7 +36,7 @@ public class TCP {
     public String setupCon(String newData) {
 
         String data;
-        String address = "";
+        String address = "192.168.1.5";
 
 
         String ipAddress = getIPAddress(true);
@@ -53,6 +53,9 @@ public class TCP {
                 break;
             case "136":
                 address = "192.168.142.230";
+                break;
+            case "1":
+                address = "192.168.1.5";
                 break;
         }
 
@@ -76,7 +79,7 @@ public class TCP {
             return "failed Unknown Host";
         } catch (SocketException e) {
             e.printStackTrace();
-            return "failed Socket" + address;
+            return "failed Socket " + address;
         } catch (IOException e) {
             e.printStackTrace();
             return "failed I/O";

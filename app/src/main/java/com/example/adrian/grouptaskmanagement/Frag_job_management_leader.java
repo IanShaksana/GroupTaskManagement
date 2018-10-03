@@ -24,7 +24,7 @@ public class Frag_job_management_leader extends Fragment {
     Context context;
     Activity activity;
     String ID_Job, ID_Job2;
-    ImageView finish, task, worker, cash_in;
+    ImageView finish, task, worker, play;
 
     @Nullable
     @Override
@@ -41,6 +41,8 @@ public class Frag_job_management_leader extends Fragment {
         finish = (ImageView) view.findViewById(R.id.Finish_Job);
         task = (ImageView) view.findViewById(R.id.View_Task);
         worker = (ImageView) view.findViewById(R.id.View_Worker);
+        play = (ImageView) view.findViewById(R.id.Offer_Not);
+
 
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +64,20 @@ public class Frag_job_management_leader extends Fragment {
             @Override
             public void onClick(View view) {
                 getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_worker_management(), ID_Job2).addToBackStack(null).commit();
+            }
+        });
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                background background = new background(getContext());
+                background.getListener(new background.OnUpdateListener() {
+                    @Override
+                    public void onUpdate(String obj) {
+                        Toast.makeText(getContext(), obj, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                background.execute("postornot-"+ID_Job);
             }
         });
 

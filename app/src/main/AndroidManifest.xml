@@ -2,22 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.adrian.grouptaskmanagement">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-
         android:allowBackup="true"
         android:icon="@drawable/image"
         android:label="@string/app_name"
         android:roundIcon="@drawable/image"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.android.fileprovider"
@@ -25,7 +25,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity
@@ -38,28 +38,22 @@
             </intent-filter>
 
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
-
         </activity>
-        <!--
-        <activity
-            android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar">
 
-        </activity>
-        -->
-        <activity android:name=".listviewtest"></activity>
-        <activity android:name=".AlarmActivity"></activity>
-        <activity android:name=".dialogBox"></activity>
+        <activity android:name=".listviewtest" />
+        <activity android:name=".AlarmActivity" />
+        <activity android:name=".dialogBox" />
 
         <receiver
             android:name=".AlarmReceiver"
             android:process=":remote" />
 
-        <activity android:name=".camera_test">
+        <activity android:name=".camera_test"></activity>
+        <activity android:name=".z_firebase" android:screenOrientation="portrait">
 
         </activity>
     </application>

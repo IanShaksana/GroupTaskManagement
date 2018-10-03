@@ -4,7 +4,7 @@
     tools:context="com.example.adrian.grouptaskmanagement.MainActivity">
     <item
         android:id="@+id/View_Worker"
-        android:title="View Worker"
+        android:title="Compare"
         android:icon="@drawable/ic_clear_black_24dp"/>
 
     <item

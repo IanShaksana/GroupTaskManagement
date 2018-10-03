@@ -23,7 +23,7 @@ public class dialog_worker_invite extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_worker_slot, null);
+        View view = inflater.inflate(R.layout.dialog_worker_invite, null);
         final EditText editText = (EditText) view.findViewById(R.id.dialog_input_worker);
         //editText.setRawInputType(Configuration.KEYBOARD_12KEY);
         builder.setView(view).setTitle("Invite Worker").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

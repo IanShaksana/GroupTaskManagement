@@ -138,9 +138,9 @@ public class Frag_Inbox extends Fragment {
                                     @Override
                                     public boolean onMenuItemClick(MenuItem menuItem) {
                                         switch (menuItem.getTitle().toString()) {
-                                            case "View Worker":
+                                            case "Compare":
                                                 Toast.makeText(getContext(), "View Worker", Toast.LENGTH_SHORT).show();
-                                                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_Status_W(), ID_User_W).addToBackStack(null).commit();
+                                                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_Status_W(), ID_User_W+"-"+ID_Task_W).addToBackStack(null).commit();
                                                 //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new leader_assign(),ID_Job+"-"+choosen).addToBackStack(null).commit();
                                                 break;
                                             case "Accept":
