@@ -51,13 +51,4 @@ public class Frag_Offer extends Fragment {
         request_offer.execute("request_job_offer");
         return view;
     }
-    /*
-    public void setupViewPager(ViewPager viewPager){
-        SectionPageAdapter adapter = new SectionPageAdapter(getChildFragmentManager());
-        adapter.addFragment(new offer_tab_avaible(),"Avaible");
-        adapter.addFragment(new offer_tab_pending(),"Pending");
-        viewPager.setAdapter(adapter);
-    }
-    */
-
 }
