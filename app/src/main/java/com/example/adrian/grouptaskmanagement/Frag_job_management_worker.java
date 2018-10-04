@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -22,7 +21,6 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class Frag_job_management_worker extends Fragment {
-    SwipeMenuListView listView;
     View view;
     Context context;
     Activity activity;

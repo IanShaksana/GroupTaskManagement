@@ -19,8 +19,6 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import com.baoyz.swipemenulistview.SwipeMenuListView;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 

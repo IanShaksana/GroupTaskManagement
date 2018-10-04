@@ -11,14 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.baoyz.swipemenulistview.SwipeMenuListView;
-
 /**
  * Created by Adrian on 5/18/2018.
  */
 
 public class Frag_List extends Fragment {
-    SwipeMenuListView listView;
     View view;
     Context context;
     Activity activity;

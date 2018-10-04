@@ -12,14 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 /**
  * Created by Adrian on 5/18/2018.
  */
 
 public class Frag_job_management_leader extends Fragment {
-    SwipeMenuListView listView;
     View view;
     Context context;
     Activity activity;

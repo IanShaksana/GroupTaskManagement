@@ -31,12 +31,6 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
 
         <activity
@@ -55,6 +49,18 @@
         <activity android:name=".camera_test"></activity>
         <activity android:name=".z_firebase" android:screenOrientation="portrait">
 
+        </activity>
+
+        <activity android:name=".z_new_recycler" android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".z_recycler" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
