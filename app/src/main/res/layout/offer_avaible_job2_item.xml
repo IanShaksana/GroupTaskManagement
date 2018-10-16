@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    app:cardBackgroundColor="@android:color/transparent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:background="@drawable/border">
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:layout_toStartOf="@+id/priority"
+            android:text="desc"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/title"
+            />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:layout_toStartOf="@+id/priority"
+            android:text="Time "
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/desc"
+            />
+
+        <TextView
+            android:id="@+id/time1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="Time "
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_below="@+id/desc"
+            android:layout_toRightOf="@id/time"
+            />
+
+        <TextView
+            android:id="@+id/slot"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:layout_toStartOf="@+id/priority"
+            android:text="Slot "
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/time"
+            />
+        <TextView
+            android:id="@+id/slot1"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="#"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_below="@+id/time"
+            android:layout_toRightOf="@id/slot"
+
+            />
+
+        <TextView
+            android:id="@+id/slash"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="/"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_below="@+id/time"
+            android:layout_toRightOf="@id/slot1"
+
+            />
+
+        <TextView
+            android:id="@+id/slot2"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:text="# "
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_below="@+id/time"
+            android:layout_toRightOf="@id/slash"
+            />
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

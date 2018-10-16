@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     clearBackStack();
                     break;
                 case R.id.nav_Offer:
-                    selectedFragment = new Frag_Offer();
+                    selectedFragment = new Frag_Offer2();
                     clearBackStack();
                     break;
                     /*

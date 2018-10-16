@@ -119,10 +119,13 @@ public class Frag_Create_Task2 extends Fragment implements DatePickerDialog.OnDa
 
     private void saveNote(String obj) {
         String title = taskname.getText().toString();
-        String description = taskdesc.getText().toString();
-        String priority = getTag();
+        String desc = taskdesc.getText().toString();
+        String diff = taskdiff.getText().toString();
+        String type = tasktype.getText().toString();
+        String time = current_date;
+        String time2 = current_time;
 
-        if (title.trim().isEmpty() || description.trim().isEmpty()) {
+        if (title.trim().isEmpty() || desc.trim().isEmpty()) {
             Toast.makeText(getContext(), "Please insert a title and description", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -132,9 +135,8 @@ public class Frag_Create_Task2 extends Fragment implements DatePickerDialog.OnDa
         notebookRef.add(new z_recycler_note(title, description, priority));*/
 
         DocumentReference notebookRef1 = FirebaseFirestore.getInstance()
-                .document("List_Job/"+priority+"/"+"List_Task/"+obj);
-        notebookRef1.set(new com.example.adrian.grouptaskmanagement.z_recycler_note(title, description, priority));
-
+                .document("List_Job/"+getTag()+"/"+"List_Task/"+obj);
+        notebookRef1.set(new com.example.adrian.grouptaskmanagement.Frag_Offer_recycler_task(title, desc, diff,type,time,time2,"none"));
         Toast.makeText(getContext(), "Note added", Toast.LENGTH_SHORT).show();
     }
 

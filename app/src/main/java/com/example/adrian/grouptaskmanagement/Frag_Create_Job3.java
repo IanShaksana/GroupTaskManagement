@@ -84,7 +84,8 @@ public class Frag_Create_Job3 extends Fragment implements dialog_worker_slot.dia
             public void onClick(View view) {
                 background background = new background(getContext());
                 //worker minimal
-                String send = "create_job-" + JobName.getText().toString() + "-" + desc.getText().toString() + "-" + state + "-" + "," + current_date + "," + current_time;
+                String send = "create_job-" + JobName.getText().toString() + "-" + desc.getText().toString() + "-" + state + "-" +worker.getText().toString()+ "-" + "," + current_date + "," + current_time;
+                //String send = "create_job-" + JobName.getText().toString() + "-" + desc.getText().toString() + "-" + state + "-" +date.getText().toString()+ "-" +worker.getText().toString();
                 background.getListener(new background.OnUpdateListener() {
                     @Override
                     public void onUpdate(String obj) {
@@ -105,7 +106,10 @@ public class Frag_Create_Job3 extends Fragment implements dialog_worker_slot.dia
     private void saveNote(String obj) {
         String title = JobName.getText().toString();
         String description = desc.getText().toString();
-        String priority = state;
+        String dueDate = date.getText().toString();
+        String workerMax = worker.getText().toString();
+
+        //String priority = state;
 
         if (title.trim().isEmpty() || description.trim().isEmpty()) {
             Toast.makeText(getContext(), "Please insert a title and description", Toast.LENGTH_SHORT).show();
@@ -118,7 +122,7 @@ public class Frag_Create_Job3 extends Fragment implements dialog_worker_slot.dia
 
         DocumentReference notebookRef1 = FirebaseFirestore.getInstance()
                 .document("List_Job/"+obj);
-        notebookRef1.set(new com.example.adrian.grouptaskmanagement.z_recycler_note(title, description, priority));
+        notebookRef1.set(new com.example.adrian.grouptaskmanagement.Frag_Offer_recycler_job(title, description, dueDate,workerMax,"0"));
 
         Toast.makeText(getContext(), "Note added", Toast.LENGTH_SHORT).show();
     }

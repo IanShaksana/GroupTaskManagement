@@ -64,8 +64,8 @@ public class TCP {
             InetAddress serverAddr = InetAddress.getByName(address);
             SocketAddress sockaddr = new InetSocketAddress(serverAddr, 1234);
             Socket socket = new Socket();
-            socket.connect(sockaddr, 2000);
-            socket.setSoTimeout(2000);
+            socket.connect(sockaddr, 5000);
+            socket.setSoTimeout(5000);
             PrintStream sendData = new PrintStream(socket.getOutputStream());
             sendData.println(newData);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
