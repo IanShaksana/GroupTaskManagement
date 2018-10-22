@@ -27,17 +27,14 @@ public class Frag_Home extends Fragment {
         View view = inflater.inflate(R.layout.home, container, false);
 
         final TextView username = (TextView) view.findViewById(R.id.username);
-
         final TextView Str = (TextView) view.findViewById(R.id.str_qty);
         final TextView Agi = (TextView) view.findViewById(R.id.agi_qty);
         final TextView Intel = (TextView) view.findViewById(R.id.intel_qty);
-
         final TextView Exp_cur = (TextView) view.findViewById(R.id.exp_cur);
         final TextView Exp_nex = (TextView) view.findViewById(R.id.exp_nex);
 
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
-
 
         background background_home = new background(getContext());
         background_home.getListener(new background.OnUpdateListener() {
@@ -58,7 +55,6 @@ public class Frag_Home extends Fragment {
             @Override
             public void onClick(View view) {
                 getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_Board()).addToBackStack(null).commit();
-
             }
         });
 
@@ -73,6 +69,5 @@ public class Frag_Home extends Fragment {
             }
         });
         return view;
-        //return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

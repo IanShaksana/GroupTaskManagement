@@ -24,9 +24,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-/**
- * Created by Adrian on 5/18/2018.
- */
+
 
 public class Frag_Offer2 extends Fragment {
     @Nullable
@@ -39,25 +37,6 @@ public class Frag_Offer2 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.offer_tab_avaible2, container, false);
         setup(view);
-        /*background request_offer = new background(getContext());
-        request_offer.getListener(new background.OnUpdateListener() {
-            @Override
-            public void onUpdate(String obj) {
-                String[] split = obj.split("-");
-                ListAdapter adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, split);
-                listView = (ListView) view.findViewById(R.id.avaible_task);
-                listView.setAdapter(adapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                        String[] choosensplit = choosen.split(",");
-                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_Offer_avaible_task(), choosensplit[1]).addToBackStack(null).commit();
-                    }
-                });
-            }
-        });
-        request_offer.execute("request_job_offer");*/
         return view;
     }
 
@@ -71,17 +50,6 @@ public class Frag_Offer2 extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        /*new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                adapter.delitem(viewHolder.getAdapterPosition());
-            }
-        }).attachToRecyclerView(recyclerView);*/
 
         adapter.setOnItem(new Frag_Offer_recycler_adapter.onitemclickListener() {
             @Override

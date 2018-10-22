@@ -22,27 +22,18 @@ import java.util.List;
 
 import static android.content.Context.WIFI_SERVICE;
 
-/**
- * Created by Adrian on 5/21/2018.
- */
 
 public class TCP {
     Context currAct;
-
     public TCP(Context context) {
         currAct = context;
     }
-
     public String setupCon(String newData) {
-
         String data;
         String address = "192.168.1.5";
 
-
         String ipAddress = getIPAddress(true);
         String[] splitIP = ipAddress.split("\\.");
-
-        //Toast.makeText(currAct,ipAddress,Toast.LENGTH_SHORT).show();
 
         switch (splitIP[2]) {
             case "31":
@@ -59,7 +50,6 @@ public class TCP {
                 break;
         }
 
-        //address = "112.215.173.42";
         try {
             InetAddress serverAddr = InetAddress.getByName(address);
             SocketAddress sockaddr = new InetSocketAddress(serverAddr, 1234);
@@ -68,7 +58,8 @@ public class TCP {
             socket.setSoTimeout(5000);
             PrintStream sendData = new PrintStream(socket.getOutputStream());
             sendData.println(newData);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(socket.getInputStream()));
             data = bufferedReader.readLine();
 
         } catch (SocketTimeoutException e) {
