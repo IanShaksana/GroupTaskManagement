@@ -1,5 +1,6 @@
 package com.example.adrian.grouptaskmanagement;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,11 +13,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,18 +35,43 @@ public class a_firebase_image_show_act extends AppCompatActivity {
     private a_firebase_image_adapter adapter;
 
     private ProgressBar mproProgressBar;
+    private a_firebase_image_upload upload;
 
-    private DatabaseReference databaseReference;
-    private List<a_firebase_image_upload> uploads;
+    private ImageView image_name;
+
+    private StorageReference databaseReference;
+    //private List<a_firebase_image_upload> uploads;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_firebase_image_show2);
 
-        ImageView image_name;
+
         image_name = findViewById(R.id.patent);
-        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/grouptaskmanagement-60230.appspot.com/o/uploads%2F1540630813866.jpg?alt=media&token=61aeeddf-1b3d-427c-bf0b-4a3ab3808bfc").into(image_name);
+        mproProgressBar = findViewById(R.id.prog_circle);
+        //Glide.with(this).load("gs://grouptaskmanagement-60230.appspot.com/uploads/1540630813866.jpg").into(image_name);
+        //mproProgressBar.setVisibility(View.INVISIBLE);
+
+        databaseReference = FirebaseStorage.getInstance().getReference();
+        databaseReference.child("uploads/ss-1540623869720.jpg").getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(a_firebase_image_show_act.this).load(uri).into(image_name);
+                        mproProgressBar.setVisibility(View.INVISIBLE);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(a_firebase_image_show_act.this,"complete",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+
         /*
         recyclerView = findViewById(R.id.recyclerimage);
         recyclerView.setHasFixedSize(true);
