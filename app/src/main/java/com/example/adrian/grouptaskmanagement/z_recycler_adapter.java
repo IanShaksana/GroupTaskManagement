@@ -64,13 +64,10 @@ public class z_recycler_adapter extends FirestoreRecyclerAdapter<z_recycler_note
     public interface onitemclickListener{
         void onitemclick(DocumentSnapshot documentSnapshot, int position);
     }
-
     public void setOnItem(onitemclickListener listener){
         this.varlistener = listener;
     }
-
     public void delitem(int position){
         getSnapshots().getSnapshot(position).getReference().delete();
     }
-
 }

@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
@@ -44,6 +45,8 @@ public class a_firebase_image extends AppCompatActivity {
     private StorageReference mStorageRef;
     private DatabaseReference mDataRef;
 
+    private StorageTask mUploadTask;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +65,7 @@ public class a_firebase_image extends AppCompatActivity {
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                openfile();
 
             }
         });
@@ -69,7 +73,19 @@ public class a_firebase_image extends AppCompatActivity {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(mUploadTask!=null && mUploadTask.isInProgress()){
+                    Toast.makeText(a_firebase_image.this,"something uploaded",Toast.LENGTH_SHORT).show();
+                }else {
+                    uploadfile();
+                }
 
+            }
+        });
+
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openimage();
             }
         });
 
@@ -88,7 +104,7 @@ public class a_firebase_image extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             mImageUri = data.getData();
             //Picasso.with(this).load(mImageUri).into(image);
-            Picasso.get().load(mImageUri).into(image);
+            Picasso.with(this).load(mImageUri).into(image);
             image.setImageURI(mImageUri);
         }
     }
@@ -101,8 +117,8 @@ public class a_firebase_image extends AppCompatActivity {
 
     private void uploadfile(){
         if (mImageUri!= null){
-            final StorageReference fileRef = mStorageRef.child(System.currentTimeMillis()+"."+getfileextension(mImageUri));
-            fileRef.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            final StorageReference fileRef = mStorageRef.child(name.getText().toString()+System.currentTimeMillis()+"."+getfileextension(mImageUri));
+            mUploadTask=fileRef.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     //progbar.setProgress(0);
@@ -112,8 +128,8 @@ public class a_firebase_image extends AppCompatActivity {
                         public void run() {
                             progbar.setProgress(0);
                         }
-                    },5000);
-                    Toast.makeText(a_firebase_image.this,"no file",Toast.LENGTH_SHORT).show();
+                    },500);
+                    Toast.makeText(a_firebase_image.this,"complete",Toast.LENGTH_SHORT).show();
                     //
                     a_firebase_image_upload upload = new a_firebase_image_upload(name.getText().toString().trim(),taskSnapshot.getUploadSessionUri().toString());
                     //
@@ -121,8 +137,6 @@ public class a_firebase_image extends AppCompatActivity {
 
                     String uploadid = mDataRef.push().getKey();
                     mDataRef.child(uploadid).setValue(upload1);
-
-
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -141,6 +155,11 @@ public class a_firebase_image extends AppCompatActivity {
             Toast.makeText(this,"no file",Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void openimage(){
+        Intent intent = new Intent(this,a_firebase_image_show_act.class);
+        startActivity(intent);
     }
 
 
