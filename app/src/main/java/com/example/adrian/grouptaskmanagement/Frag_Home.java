@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,21 +33,28 @@ public class Frag_Home extends Fragment {
         final TextView Intel = (TextView) view.findViewById(R.id.intel_qty);
         final TextView Exp_cur = (TextView) view.findViewById(R.id.exp_cur);
         final TextView Exp_nex = (TextView) view.findViewById(R.id.exp_nex);
+        final ProgressBar exp = view.findViewById(R.id.exp_bar);
 
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
+        username.setText(state);
 
         background background_home = new background(getContext());
         background_home.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
                 String[] split = obj.split("-");
-                username.setText(split[0]);
+
                 Str.setText(split[2]);
                 Agi.setText(split[3]);
                 Intel.setText(split[4]);
                 Exp_cur.setText(split[1]);
                 Exp_nex.setText(split[5]);
+
+                int set1 = Integer.parseInt(split[1]);
+                int set2 = Integer.parseInt(split[5]);
+                int set3 = 100* set1/set2;
+                exp.setProgress(set3);
             }
         });
         background_home.execute("request_home-" + state);

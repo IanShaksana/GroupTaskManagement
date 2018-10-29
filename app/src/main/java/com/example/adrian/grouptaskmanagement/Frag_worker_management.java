@@ -89,7 +89,7 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                                 switch (menuItem.getTitle().toString()) {
                                     case "Assign":
                                         Toast.makeText(getContext(), "Assign", Toast.LENGTH_SHORT).show();
-                                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new leader_assign(), ID_Job + "-" + choosen).addToBackStack(null).commit();
+                                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new leader_assign2(), ID_Job + "-" + choosen).addToBackStack(null).commit();
                                         break;
                                     case "Re Assign":
                                         Toast.makeText(getContext(), "Re Assign", Toast.LENGTH_SHORT).show();

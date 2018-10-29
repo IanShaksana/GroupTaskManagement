@@ -136,7 +136,7 @@ public class Frag_Create_Task2 extends Fragment implements DatePickerDialog.OnDa
 
         DocumentReference notebookRef1 = FirebaseFirestore.getInstance()
                 .document("List_Job/"+getTag()+"/"+"List_Task/"+obj);
-        notebookRef1.set(new com.example.adrian.grouptaskmanagement.Frag_Offer_recycler_task(title, desc, diff,type,time,time2,"none"));
+        notebookRef1.set(new com.example.adrian.grouptaskmanagement.Frag_Offer_recycler_task(title, desc, diff,type,time,time2,"none","no"));
         Toast.makeText(getContext(), "Note added", Toast.LENGTH_SHORT).show();
     }
 

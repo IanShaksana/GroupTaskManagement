@@ -83,21 +83,20 @@ public class Frag_Offer_avaible_task2 extends Fragment implements dialog_yes_no_
 
     @Override
     public void apply_apply_task(String wasd) {
+
         if (wasd.equals("Apply")) {
             background background1 = new background(getContext());
             background1.getListener(new background.OnUpdateListener() {
                 @Override
                 public void onUpdate(String obj) {
-                    //ada message
+                    String objsplit[] = obj.split("\\|");
                     CollectionReference notebookRef1 = FirebaseFirestore.getInstance()
-                            .collection("Message/"+obj+"/"+"inbox/");
-                    notebookRef1.add(new Frag_Inbox_recycler(state,state+" want to apply "+ID_Task,"send","apply-task"));
+                            .collection("Message/"+objsplit[0]+"/"+"inbox/");
+                    notebookRef1.add(new Frag_Inbox_recycler(state,state+" want to apply "+ID_Task,"send","apply-task",objsplit[1]+"|"+objsplit[2]));
                     update();
                 }
             });
-            //background1.execute("request_apply_task-"+state+"-"+ID_Task+"-"+ID_Job);
             background1.execute("apply_req-" + state + "-" + ID_Task + "-" + ID_Job);
-            //getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_List()).addToBackStack(null).commit();
         }
     }
 
@@ -125,8 +124,7 @@ public class Frag_Offer_avaible_task2 extends Fragment implements dialog_yes_no_
                 String id = documentSnapshot.getId();
                 ID_Task = id;
                 Toast.makeText(getContext(), "ID_Job: "+ID_Job+" id: "+ID_Task, Toast.LENGTH_SHORT).show();
-                //opendialog_yes_no();
-                //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_Offer_avaible_task(), id).addToBackStack(null).commit();
+                opendialog_yes_no();
             }
         });
     }

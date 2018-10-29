@@ -30,7 +30,7 @@ public class TCP {
     }
     public String setupCon(String newData) {
         String data;
-        String address = "192.168.1.5";
+        String address = "192.168.1.1";
 
         String ipAddress = getIPAddress(true);
         String[] splitIP = ipAddress.split("\\.");
@@ -46,13 +46,13 @@ public class TCP {
                 address = "192.168.142.230";
                 break;
             case "1":
-                address = "192.168.1.5";
+                address = "192.168.1.1";
                 break;
         }
 
         try {
             InetAddress serverAddr = InetAddress.getByName(address);
-            SocketAddress sockaddr = new InetSocketAddress(serverAddr, 1234);
+            SocketAddress sockaddr = new InetSocketAddress(serverAddr, 1235);
             Socket socket = new Socket();
             socket.connect(sockaddr, 5000);
             socket.setSoTimeout(5000);

@@ -22,7 +22,6 @@ public class advancedcustomadapter_as_leader extends ArrayAdapter<String> {
 
     TextView jobname;
     TextView jobID;
-    TextView taskID;
     TextView name;
     TextView description;
     TextView difficulty;

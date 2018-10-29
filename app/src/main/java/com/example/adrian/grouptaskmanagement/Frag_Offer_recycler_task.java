@@ -13,12 +13,13 @@ public class Frag_Offer_recycler_task {
     private String time;
     private String time2;
     private String worker;
+    private String status;
 
     public Frag_Offer_recycler_task() {
     }
 
 
-    public Frag_Offer_recycler_task(String title, String desc, String diff, String type, String time, String time2, String worker) {
+    public Frag_Offer_recycler_task(String title, String desc, String diff, String type, String time, String time2, String worker, String status) {
         this.title = title;
         this.desc = desc;
         this.diff = diff;
@@ -26,6 +27,7 @@ public class Frag_Offer_recycler_task {
         this.time = time;
         this.time2 = time2;
         this.worker = worker;
+        this.status = status;
     }
 
     public String getDiff() {
@@ -48,12 +50,15 @@ public class Frag_Offer_recycler_task {
         return time;
     }
 
-
     public String getTitle() {
         return title;
     }
 
     public String getDesc() {
         return desc;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

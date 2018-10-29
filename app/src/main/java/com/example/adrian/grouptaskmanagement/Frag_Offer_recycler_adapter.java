@@ -29,8 +29,8 @@ public class Frag_Offer_recycler_adapter extends FirestoreRecyclerAdapter<Frag_O
         holder.t1.setText(model.getTitle());
         holder.t2.setText(model.getDesc());
         holder.t3.setText(model.getTime());
-        holder.t4.setText(model.getSlotmax());
-        holder.t5.setText(model.getSlotnow());
+        holder.t5.setText(model.getSlotmax());
+        holder.t4.setText(model.getSlotnow());
     }
 
     @NonNull
