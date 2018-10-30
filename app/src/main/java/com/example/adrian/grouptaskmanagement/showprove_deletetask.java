@@ -23,9 +23,11 @@ public class showprove_deletetask extends Fragment {
     String state, unprocessed_msg;
     ListView listView;
     Button show, del;
+    String IDTASK;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Inbox");
+        IDTASK = getTag();
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
         view = inflater.inflate(R.layout.showprove_deletetask, container, false);
@@ -36,7 +38,7 @@ public class showprove_deletetask extends Fragment {
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new showprove_deletetask_show_prove()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new showprove_deletetask_show_prove(),getTag()).addToBackStack(null).commit();
             }
         });
 
