@@ -54,7 +54,7 @@ public class a_firebase_image_show_act extends AppCompatActivity {
         //mproProgressBar.setVisibility(View.INVISIBLE);
 
         databaseReference = FirebaseStorage.getInstance().getReference();
-        databaseReference.child("uploads/ss-1540623869720.jpg").getDownloadUrl()
+        databaseReference.child("uploads/task1|1538647920853_Prove_1540889798048.jpg").getDownloadUrl()
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {

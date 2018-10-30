@@ -64,7 +64,7 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
                             Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
                             final String[] p1 = choosen.split("-");
                             IDTASK = p1[6];
-                            getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new showprove_deletetask_show_upload()).addToBackStack(null).commit();
+                            getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new showprove_deletetask_show_upload(),IDTASK).addToBackStack(null).commit();
                             //opendialog_yes_no();
                         }
                     });

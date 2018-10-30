@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/border"
+            android:padding="10dp"
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="78dp">
+
+
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Username"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/username"
+                android:padding="10dp"
+                android:text="Status :"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <RelativeLayout
+                android:id="@+id/radarchart1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/status"
+                android:layout_margin="5dp"
+                android:background="@drawable/border"
+                android:padding="20dp">
+
+                <com.github.mikephil.charting.charts.RadarChart
+                    android:id="@+id/radarchart"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_margin="5dp">
+
+                </com.github.mikephil.charting.charts.RadarChart>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/experience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/radarchart1"
+                android:padding="10dp"
+                android:text="Experience"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/exp_cur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/experience"
+                android:padding="10dp"
+                android:text="#"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/slash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/experience"
+                android:layout_toRightOf="@+id/exp_cur"
+                android:padding="10dp"
+                android:text="/"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/exp_nex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/experience"
+                android:layout_toRightOf="@id/slash"
+                android:padding="10dp"
+                android:text="#"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <ProgressBar
+                android:id="@+id/exp_bar"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/exp_cur"
+                android:layout_margin="5dp"
+                android:background="@drawable/round_button"
+                android:padding="10dp"
+                android:textColor="#000000" />
+
+            <Button
+                android:id="@+id/btn_board"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/exp_bar"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/round_button"
+                android:backgroundTint="#FEFBDE"
+                android:text="Board" />
+
+            <Button
+                android:id="@+id/LogOut"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/exp_bar"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/round_button"
+                android:backgroundTint="#FEFBDE"
+                android:text="Log Out" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>
