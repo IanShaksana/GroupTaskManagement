@@ -10,6 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -20,20 +27,42 @@ import static android.content.Context.MODE_PRIVATE;
 public class showprove_deletetask extends Fragment {
     @Nullable
     View view;
-    String state, unprocessed_msg;
+    String state, status;
     ListView listView;
     Button show, del;
-    String IDTASK;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Inbox");
-        IDTASK = getTag();
+        String[] TAGSPLIT = getTag().split("-");
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
         view = inflater.inflate(R.layout.showprove_deletetask, container, false);
 
         show =  view.findViewById(R.id.button1);
         del = view.findViewById(R.id.button2);
+
+        DocumentReference doc1 = db.document("List_Job/"+TAGSPLIT[1]+"/List_Task/"+TAGSPLIT[0]);
+        doc1.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                if(e!=null){
+                    Toast.makeText(getContext(),"something when wrong",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(documentSnapshot.exists()){
+
+                    Frag_Offer_recycler_task note = documentSnapshot.toObject( Frag_Offer_recycler_task.class);
+                    status = note.getStatus();
+                    if(status.equals("approved")){
+                        show.setEnabled(false);
+                        del.setEnabled(false);
+                        Toast.makeText(getContext(),"Task Has been Approved",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
 
         show.setOnClickListener(new View.OnClickListener() {
             @Override

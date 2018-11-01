@@ -18,6 +18,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -32,44 +35,90 @@ public class showprove_deletetask_show_prove extends Fragment {
     View view;
     String state, unprocessed_msg;
     ListView listView;
-    Button in, out, conf;
+    Button app, diss;
     private StorageReference databaseReference;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference ref;
 
     private ProgressBar mproProgressBar;
 
     private ImageView image_name;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle("Inbox");
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
         view = inflater.inflate(R.layout.show_prove_image, container, false);
-        mproProgressBar = view.findViewById(R.id.prog_circle);
+
+        String[] TAGSPLIT = getTag().split("-");
+        final String IDTASK = TAGSPLIT[0];
+        final String IDJOB = TAGSPLIT[1];
+
+        mproProgressBar = view.findViewById(R.id.progbar);
         image_name = view.findViewById(R.id.pickedimage);
+        app = view.findViewById(R.id.APP);
+        diss = view.findViewById(R.id.DISS);
+
+        app.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                background background1 = new background(getContext());
+                background1.getListener(new background.OnUpdateListener() {
+                    @Override
+                    public void onUpdate(String obj) {
+                        DocumentReference doc1 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
+                        doc1.update("status","approved");
+                        getFragmentManager().popBackStack();
+                    }
+                });
+                background1.execute("approve_yes-" + IDTASK + "-" + IDTASK);
+            }
+        });
+
+        diss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                background background1 = new background(getContext());
+                background1.getListener(new background.OnUpdateListener() {
+                    @Override
+                    public void onUpdate(String obj) {
+                        DocumentReference doc1 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
+                        doc1.update("status","no");
+                        update();
+                    }
+                });
+                background1.execute("approve_no-" +IDTASK);
+            }
+        });
 
         background background = new background(getContext());
         background.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
-                Toast.makeText(getContext(),"uploads/"+obj+".jpg",Toast.LENGTH_SHORT).show();
-                String url ="uploads/"+obj+".jpg";
+                if (obj.equals("no prove")){
+                    mproProgressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getContext(),obj,Toast.LENGTH_SHORT).show();
+                    app.setEnabled(false);
+                    diss.setEnabled(false);
+                }else{
+                    Toast.makeText(getContext(),"uploads/"+obj+".jpg",Toast.LENGTH_SHORT).show();
+                    String url ="uploads/"+obj+".jpg";
 
 
-                databaseReference = FirebaseStorage.getInstance().getReference();
-                databaseReference.child(url).getDownloadUrl()
-                        .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Glide.with(getContext()).load(uri).into(image_name);
-                                //mproProgressBar.setVisibility(View.INVISIBLE);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(),"complete",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
+                    databaseReference = FirebaseStorage.getInstance().getReference();
+                    databaseReference.child(url).getDownloadUrl()
+                            .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Glide.with(getContext()).load(uri).into(image_name);
+                                    mproProgressBar.setVisibility(View.INVISIBLE);
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getContext(),"failed loading",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
             }
         });
         background.execute("req_prove-"+getTag());

@@ -30,7 +30,7 @@ public class TCP {
     }
     public String setupCon(String newData) {
         String data;
-        String address = "192.168.1.4";
+        String address = "192.168.1.6";
 
         String ipAddress = getIPAddress(true);
         String[] splitIP = ipAddress.split("\\.");
@@ -46,7 +46,7 @@ public class TCP {
                 address = "192.168.142.230";
                 break;
             case "1":
-                address = "192.168.1.4";
+                address = "192.168.1.6";
                 break;
         }
 

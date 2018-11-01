@@ -24,6 +24,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -41,7 +43,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class showprove_deletetask_show_upload extends Fragment {
     @Nullable
     View view;
-    String state,TAG,IDTASK;
+    String state,TAG,IDTASK,IDJOB;
     private  static final int PICK_IMAGE_REQUEST =1;
     Button in, out;
     private ImageView image;
@@ -51,13 +53,15 @@ public class showprove_deletetask_show_upload extends Fragment {
 
     private StorageReference mStorageRef;
     private DatabaseReference mDataRef;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private StorageTask mUploadTask;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Inbox");
-
-        IDTASK = getTag();
+        String[] TAGSPLIT =getTag().split("-");
+        IDJOB = TAGSPLIT[1];
+        IDTASK = TAGSPLIT[0];
         TAG = IDTASK+"_Prove_"+System.currentTimeMillis();
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
@@ -78,14 +82,15 @@ public class showprove_deletetask_show_upload extends Fragment {
             @Override
             public void onClick(View view) {
                 if(mUploadTask!=null && mUploadTask.isInProgress()){
-                    Toast.makeText(getContext(),"something uploaded",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Uploading",Toast.LENGTH_SHORT).show();
                 }else {
                     uploadfile();
                     background upload_img_nm = new background(getContext());
                     upload_img_nm.getListener(new background.OnUpdateListener() {
                         @Override
                         public void onUpdate(String obj) {
-
+                            DocumentReference doc1 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
+                            doc1.update("status","Waiting for review");
                         }
                     });
                     upload_img_nm.execute("upload_img_nm-"+IDTASK+"-"+TAG);
@@ -146,7 +151,7 @@ public class showprove_deletetask_show_upload extends Fragment {
                     a_firebase_image_upload upload1 = new a_firebase_image_upload(TAG,fileRef.getDownloadUrl().toString());
                     String uploadid = mDataRef.push().getKey();
                     mDataRef.child(uploadid).setValue(upload1);
-
+                    getFragmentManager().popBackStack();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

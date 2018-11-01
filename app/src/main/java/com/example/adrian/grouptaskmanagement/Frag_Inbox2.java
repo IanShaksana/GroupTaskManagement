@@ -77,8 +77,8 @@ public class Frag_Inbox2 extends Fragment {
                 String id = documentSnapshot.getId();
                 final String choosen = note.getMssgCode();
                 String[] mssgCodesplit = choosen.split("-");
-                final String ID_Task =mssgCodesplit[2] ;
-                final String ID_Job ="a" ;
+                final String ID_Task = mssgCodesplit[2];
+                final String ID_Job = mssgCodesplit[2];
                 final String ID_User_Worker =note.getFrom() ;
 
                 String type = note.getType();
@@ -165,7 +165,6 @@ public class Frag_Inbox2 extends Fragment {
                                     case "Compare":
                                         Toast.makeText(getContext(), "View Worker", Toast.LENGTH_SHORT).show();
                                         getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_Status_W(), ID_User_Worker+"-"+ID_Task).addToBackStack(null).commit();
-                                        //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new leader_assign(),ID_Job+"-"+choosen).addToBackStack(null).commit();
                                         break;
                                     case "Accept":
                                         Toast.makeText(getContext(), "Accept", Toast.LENGTH_SHORT).show();
@@ -243,7 +242,7 @@ public class Frag_Inbox2 extends Fragment {
                         pop2.show();
                         break;
 
-                    case "invite":
+                    case "invite-job":
                         pop3.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -262,21 +261,24 @@ public class Frag_Inbox2 extends Fragment {
                                         background1.getListener(new background.OnUpdateListener() {
                                             @Override
                                             public void onUpdate(String obj) {
-                                                update();
+                                                String[] objsplit = obj.split("-");
+                                                DocumentReference doc2 = db.document("List_Job/"+objsplit[0]);
+                                                doc2.update("slotnow",objsplit[1]);
+                                                adapter.delitem(position);
                                             }
                                         });
-                                        //background1.execute("reply_message-invite_yes-" + ID_Task_W + "-" + ID_User_W2 + "-" + choosen);
+                                        background1.execute("reply_message-invite_yes-" + ID_Job + "-"  + "-" + choosen);
                                         break;
                                     case "Reject Job":
-                                        Toast.makeText(getContext(), "Accept job", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), ID_Job, Toast.LENGTH_SHORT).show();
                                         background background2 = new background(getContext());
                                         background2.getListener(new background.OnUpdateListener() {
                                             @Override
                                             public void onUpdate(String obj) {
-                                                update();
+                                                adapter.delitem(position);
                                             }
                                         });
-                                        //background2.execute("reply_message-invite_reject-" + ID_Task_W + "-" + ID_User_W2 + "-" + choosen);
+                                        background2.execute("reply_message-invite_reject-" + ID_Job + "-" + "-" + choosen);
                                         break;
                                 }
                                 return true;

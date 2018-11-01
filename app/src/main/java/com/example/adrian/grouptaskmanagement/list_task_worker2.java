@@ -61,10 +61,14 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                            Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
                             final String[] p1 = choosen.split("-");
                             IDTASK = p1[6];
-                            getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new showprove_deletetask_show_upload(),IDTASK).addToBackStack(null).commit();
+                            String status = p1[5];
+                            if (status.equals("yes")){
+                                Toast.makeText(getContext(), "waiting for review", Toast.LENGTH_SHORT).show();
+                            }else {
+                                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new showprove_deletetask_show_upload(),IDTASK+"-"+ID_job).addToBackStack(null).commit();
+                            }
                             //opendialog_yes_no();
                         }
                     });

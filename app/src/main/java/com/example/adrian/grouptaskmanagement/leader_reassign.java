@@ -17,6 +17,10 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -32,6 +36,7 @@ public class leader_reassign extends Fragment implements  dialog_yes_no_reassign
     ListView listView;
     String Tag;
     String choosen;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,8 +60,13 @@ public class leader_reassign extends Fragment implements  dialog_yes_no_reassign
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                        Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
-                        opendialog_worker();
+                        String[] status = choosen.split("-");
+                        if(status[7].equals("no")){
+                            opendialog_worker();
+                        }else {
+                            Toast.makeText(getContext(),"task has been completed", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 });
             }
@@ -77,20 +87,20 @@ public class leader_reassign extends Fragment implements  dialog_yes_no_reassign
         dialog_yes_no_reassign dialogfragment = new dialog_yes_no_reassign();
         dialogfragment.setTargetFragment(this, 0);
         dialogfragment.show(getFragmentManager(), "exa");
-
     }
 
     @Override
     public void apply_reassign(String wasd) {
-        String[] choosensplit = choosen.split("-");
+        final String[] choosensplit = choosen.split("-");
         background background1 = new background(getContext());
         background1.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
+                DocumentReference doc2 = db.document("List_Job/"+choosensplit[1]+"/List_Task/"+choosensplit[2]);
+                doc2.update("worker","none");
                 update();
             }
         });
         background1.execute("abandon_task-" + choosensplit[2]);
-
     }
 }

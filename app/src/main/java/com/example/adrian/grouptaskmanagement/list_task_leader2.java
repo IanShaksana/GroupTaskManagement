@@ -37,7 +37,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class list_task_leader2 extends Fragment {
     @Nullable
-    String state;
+    String state,IDJOB;
     FloatingActionButton floatingActionButton;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -47,7 +47,7 @@ public class list_task_leader2 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Avaible Task");
         final View view = inflater.inflate(R.layout.list_task_leader2, container, false);
-        String ID_job = getTag();
+        IDJOB = getTag();
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
         floatingActionButton = (FloatingActionButton) view.findViewById(R.id.FAB);
@@ -57,7 +57,7 @@ public class list_task_leader2 extends Fragment {
                 getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_Create_Task2(), getTag()).addToBackStack(null).commit();
             }
         });
-        ref = db.collection("List_Job/"+ID_job+"/List_Task");
+        ref = db.collection("List_Job/"+IDJOB+"/List_Task");
         setup(view);
         return view;
     }
@@ -92,9 +92,10 @@ public class list_task_leader2 extends Fragment {
             @Override
             public void onitemclick(DocumentSnapshot documentSnapshot, int position) {
                 Frag_Offer_recycler_task note = documentSnapshot.toObject(Frag_Offer_recycler_task.class);
-                String id = documentSnapshot.getId();
-                Toast.makeText(getContext(), "ID_Job: "+id+" id: "+id, Toast.LENGTH_SHORT).show();
-                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new showprove_deletetask(),id).addToBackStack(null).commit();
+                String IDTASK = documentSnapshot.getId();
+                String status = note.getStatus();
+                Toast.makeText(getContext(), "ID_Job: "+IDJOB+" id: "+IDTASK, Toast.LENGTH_SHORT).show();
+                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new showprove_deletetask(),IDTASK+"-"+IDJOB+"-"+status).addToBackStack(null).commit();
             }
         });
     }

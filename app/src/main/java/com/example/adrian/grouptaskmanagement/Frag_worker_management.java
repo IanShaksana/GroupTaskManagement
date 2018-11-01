@@ -2,6 +2,7 @@ package com.example.adrian.grouptaskmanagement;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,8 +20,14 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Adrian on 5/18/2018.
@@ -31,8 +38,9 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
     View view;
     Context context;
     Activity activity;
-    String ID_Job,choosen;
+    String ID_Job,choosen,state;
     FloatingActionButton FAB;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Nullable
     @Override
@@ -42,6 +50,8 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
         ID_Job = getTag();
         context = activity.getApplicationContext();
         view = inflater.inflate(R.layout.worker_management2, container, false);
+        final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
+        state = preferences.getString("Login_State", "");
 
         FAB = (FloatingActionButton) view.findViewById(R.id.FAB);
         FAB.setOnClickListener(new View.OnClickListener() {
@@ -96,20 +106,10 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                                         getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new leader_reassign(), ID_Job + "-" + choosen).addToBackStack(null).commit();
                                         break;
                                     case "Remove Worker":
-                                        Toast.makeText(getContext(), "Remove Worker", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getContext(), "Remove Worker", Toast.LENGTH_SHORT).show();
                                         opendialog_remove();
                                         break;
-                                }/*
-                                if(menuItem.getTitle().toString().equals("Assign")){
-                                    Toast.makeText(getContext(), "Remove Worker",Toast.LENGTH_SHORT).show();
-                                    //background background1 = new background(getContext());
-                                    //background1.execute("approve_yes-"+p1[6]);
-
-                                }else {
-                                    Toast.makeText(getContext(), "Delete Task",Toast.LENGTH_SHORT).show();
-                                    //background background1 = new background(getContext());
-                                    //background1.execute("Delete_task-"+p1[6]);
-                                }*/
+                                }
                                 return true;
                             }
                         });
@@ -145,17 +145,20 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
     }
 
     @Override
-    public void apply_worker(String wasd) {
-        //Toast.makeText(getContext(),"halo",Toast.LENGTH_SHORT).show();
+    public void apply_worker(final String wasd) {
+        String invitedWorker = wasd;
         background background = new background(getContext());
         background.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
+                CollectionReference notebookRef1 = FirebaseFirestore.getInstance()
+                        .collection("Message/"+wasd+"/"+"inbox/");
+                notebookRef1.add(new Frag_Inbox_recycler(state,state+" want to invite you to this job: "+ID_Job,"send","invite-job",obj));
                 update();
             }
         });
         //background.execute("invite_worker-"+wasd+"-"+ID_Job);
-        background.execute("msg_invite_worker-" + wasd + "-" + ID_Job);
+        background.execute("msg_invite_worker-" + invitedWorker + "-" + ID_Job);
     }
 
 
@@ -165,7 +168,18 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
         background1.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
+                String[] obj1 = obj.split("-LISTJOB-");
+                DocumentReference doc1 = db.document("List_Job/"+ID_Job);
+                doc1.update("slotnow",obj1[0]);
+
+                String[] obj2 = obj1[1].split("-");
+                for (int i = 0;i<obj2.length;i++){
+                    Toast.makeText(getContext(), obj2[i], Toast.LENGTH_SHORT).show();
+                    DocumentReference doc2 = db.document("List_Job/"+ID_Job+"/List_Task/"+obj2[i]);
+                    doc2.update("worker","none");
+                }
                 update();
+
             }
         });
         background1.execute("remove_worker-" + choosen + "-" + ID_Job);
