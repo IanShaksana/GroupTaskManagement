@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,8 +44,9 @@ public class Frag_Home2 extends Fragment {
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle("Home");
+
         View view = inflater.inflate(R.layout.home2, container, false);
+        //Snackbar.make(container,"hai from snackbar",10000).show();
 
         final TextView username = (TextView) view.findViewById(R.id.username);
         final TextView Exp_cur = (TextView) view.findViewById(R.id.exp_cur);

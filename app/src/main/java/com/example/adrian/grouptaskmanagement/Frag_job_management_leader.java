@@ -75,7 +75,7 @@ public class Frag_job_management_leader extends Fragment {
                         Toast.makeText(getContext(), obj, Toast.LENGTH_SHORT).show();
                     }
                 });
-                background.execute("postornot-"+ID_Job);
+                //background.execute("postornot-"+ID_Job);
             }
         });
 

@@ -3,6 +3,7 @@
     package="com.example.adrian.grouptaskmanagement">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 
     <application
@@ -25,11 +26,7 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -46,7 +43,9 @@
             android:name=".AlarmReceiver"
             android:process=":remote" />
 
-        <activity android:name=".camera_test"></activity>
+        <activity android:name=".camera_test">
+
+        </activity>
         <activity android:name=".z_firebase" android:screenOrientation="portrait">
 
         </activity>
@@ -66,6 +65,37 @@
         <activity android:name=".a_firebase_image_show_act" android:screenOrientation="portrait">
 
         </activity>
+
+        <activity android:name=".zz_chat_1" android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".zzz_test_global" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".zz_FirebaseService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
+        <service
+            android:name=".zz_OneSignalService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.onesignal.NotificationExtender" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".MyWakefulReceiver"></receiver>
+
     </application>
 
 </manifest>

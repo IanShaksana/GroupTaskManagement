@@ -1,3 +1,13 @@
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/'}
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.11.0, 0.99.99]'
+    }
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
 apply plugin: 'com.android.application'
 
 android {
@@ -10,6 +20,11 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        manifestPlaceholders = [
+                onesignal_app_id: 'abdf33dc-c4ff-403a-8337-3a417968a1cd',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
     }
     buildTypes {
         release {
@@ -22,6 +37,7 @@ android {
 repositories {
     maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local' }
     maven { url 'https://jitpack.io' }
+    maven { url 'https://maven.google.com' }
 }
 
 dependencies {
@@ -32,24 +48,24 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:support-annotations:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    //implementation 'com.google.firebase:firebase-core:12.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
     implementation 'com.firebaseui:firebase-ui-firestore:4.2.0'
-    implementation 'com.google.firebase:firebase-firestore:17.1.0'
-    implementation 'com.google.firebase:firebase-auth:16.0.3'
+    implementation 'com.google.firebase:firebase-firestore:17.1.2'
+    implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
-    implementation 'com.google.firebase:firebase-database:16.0.2'
-    implementation 'com.google.firebase:firebase-storage:16.0.2'
-    implementation 'com.google.firebase:firebase-core:16.0.1'
-    //implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.google.firebase:firebase-database:16.0.4'
+    implementation 'com.google.firebase:firebase-storage:16.0.4'
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    //implementation 'com.squareup.picasso:picasso:2.6.0-SNAPSHOT'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'android.arch.core:runtime:1.1.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v2.1.6'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.onesignal:OneSignal:[3.9.1, 3.99.99]'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
 
 
 apply plugin: 'com.google.gms.google-services'
