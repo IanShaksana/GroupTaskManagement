@@ -13,7 +13,12 @@
         android:textAlignment="center"/>
     <Button
         android:id="@+id/Show_Time"
-        android:text="Show Time"
+        android:text="Show Time / subsribe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/unsub"
+        android:text="UNSUBSRIBE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
@@ -24,6 +29,20 @@
     <Button
         android:id="@+id/PING"
         android:text="PING"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/topic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="insert topic"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/sendNotif"
+        android:text="SEND NOTIFICATION"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

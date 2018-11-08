@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -26,6 +29,7 @@ public class Frag_job_management_worker extends Fragment {
     Activity activity;
     String ID_Job, state;
     ImageView abandon, task, worker;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Nullable
     @Override
@@ -52,6 +56,16 @@ public class Frag_job_management_worker extends Fragment {
                 background1.getListener(new background.OnUpdateListener() {
                     @Override
                     public void onUpdate(String obj) {
+                        String[] obj1 = obj.split("-LISTJOB-");
+                        DocumentReference doc1 = db.document("List_Job/"+ID_Job);
+                        doc1.update("slotnow",obj1[0]);
+
+                        String[] obj2 = obj1[1].split("-");
+                        for (int i = 0;i<obj2.length;i++){
+                            Toast.makeText(getContext(), obj2[i], Toast.LENGTH_SHORT).show();
+                            DocumentReference doc2 = db.document("List_Job/"+ID_Job+"/List_Task/"+obj2[i]);
+                            doc2.update("worker","none");
+                        }
                         getFragmentManager().popBackStack();
                     }
                 });

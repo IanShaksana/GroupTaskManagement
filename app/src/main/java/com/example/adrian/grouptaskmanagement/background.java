@@ -27,8 +27,14 @@ public class background extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
+        String con = "not_send";
+        int count_try = 0;
         TCP tcp = new TCP(currentAct);
-        return tcp.setupCon(strings[0]);
+        while (con.equals("not_send") && count_try != 5){
+            con = tcp.setupCon(strings[0]);
+            count_try++;
+        }
+        return con;
     }
 
     @Override

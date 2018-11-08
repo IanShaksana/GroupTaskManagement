@@ -7,12 +7,16 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 import com.onesignal.OneSignal;
 
 /**
@@ -20,8 +24,9 @@ import com.onesignal.OneSignal;
  */
 
 public class zzz_test_global extends AppCompatActivity {
-    Button btn1,btn2,btn3;
+    Button btn1,btn2,btn3,btn4,btn5;
     TextView txt1;
+    EditText edx1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +34,10 @@ public class zzz_test_global extends AppCompatActivity {
         btn1 = findViewById(R.id.Show_Time);
         btn2 = findViewById(R.id.Show_IP);
         btn3 = findViewById(R.id.PING);
+        btn4 = findViewById(R.id.sendNotif);
+        btn5 = findViewById(R.id.unsub);
         txt1 = findViewById(R.id.Result);
+        edx1 = findViewById(R.id.topic);
 
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
@@ -41,30 +49,40 @@ public class zzz_test_global extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseMessaging.getInstance().subscribeToTopic("test").addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "subsribed";
-                        if (!task.isSuccessful()) {
-                            msg = "notsubsribed";
+                if(edx1.getText().toString().trim().equals("")){
+                    Toast.makeText(zzz_test_global.this, "no topic", Toast.LENGTH_SHORT).show();
+                }else {
+                    FirebaseMessaging.getInstance().subscribeToTopic(edx1.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            String msg = "subsribed";
+                            if (!task.isSuccessful()) {
+                                msg = "notsubsribed";
+                            }
+                            Toast.makeText(zzz_test_global.this, msg, Toast.LENGTH_SHORT).show();
                         }
-                        Toast.makeText(zzz_test_global.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                background_global b1 = new background_global(zzz_test_global.this);
-                b1.getListener(new background_global.OnUpdateListener() {
-                    @Override
-                    public void onUpdate(String obj) {
-                        btn1.setEnabled(true);
-                        btn2.setEnabled(true);
-                        btn3.setEnabled(true);
-                        txt1.setText(obj);
-                    }
-                });
-                btn1.setEnabled(false);
-                btn2.setEnabled(false);
-                btn3.setEnabled(false);
-                b1.execute("showtime");
+                    });
+                    background_global b1 = new background_global(zzz_test_global.this);
+                    b1.getListener(new background_global.OnUpdateListener() {
+                        @Override
+                        public void onUpdate(String obj) {
+                            btn1.setEnabled(true);
+                            btn2.setEnabled(true);
+                            btn3.setEnabled(true);
+                            btn4.setEnabled(true);
+                            btn5.setEnabled(true);
+                            txt1.setText(obj);
+                        }
+                    });
+                    btn1.setEnabled(false);
+                    btn2.setEnabled(false);
+                    btn3.setEnabled(false);
+                    btn4.setEnabled(false);
+                    btn5.setEnabled(false);
+                    b1.execute("showtime");
+                }
+
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -77,12 +95,16 @@ public class zzz_test_global extends AppCompatActivity {
                         btn1.setEnabled(true);
                         btn2.setEnabled(true);
                         btn3.setEnabled(true);
+                        btn4.setEnabled(true);
+                        btn5.setEnabled(true);
                         txt1.setText(obj);
                     }
                 });
                 btn1.setEnabled(false);
                 btn2.setEnabled(false);
                 btn3.setEnabled(false);
+                btn4.setEnabled(false);
+                btn5.setEnabled(false);
                 b2.execute("showIP");
             }
         });
@@ -96,14 +118,86 @@ public class zzz_test_global extends AppCompatActivity {
                         btn1.setEnabled(true);
                         btn2.setEnabled(true);
                         btn3.setEnabled(true);
+                        btn4.setEnabled(true);
+                        btn5.setEnabled(true);
                         txt1.setText(obj);
                     }
                 });
                 btn1.setEnabled(false);
                 btn2.setEnabled(false);
                 btn3.setEnabled(false);
+                btn4.setEnabled(false);
+                btn5.setEnabled(false);
                 b3.execute("PING");
             }
         });
+
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(edx1.getText().toString().trim().equals("")){
+                    Toast.makeText(zzz_test_global.this,"no topics",Toast.LENGTH_SHORT).show();
+
+                }else {
+                    background_http b4 = new background_http(zzz_test_global.this);
+                    b4.getListener(new background_http.OnUpdateListener() {
+                        @Override
+                        public void onUpdate(String obj) {
+                            btn1.setEnabled(true);
+                            btn2.setEnabled(true);
+                            btn3.setEnabled(true);
+                            btn4.setEnabled(true);
+                            btn5.setEnabled(true);
+                            txt1.setText(obj);
+                        }
+                    });
+                    btn1.setEnabled(false);
+                    btn2.setEnabled(false);
+                    btn3.setEnabled(false);
+                    btn4.setEnabled(false);
+                    btn5.setEnabled(false);
+                    b4.execute(edx1.getText().toString());
+                }
+            }
+        });
+
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(edx1.getText().toString().trim().equals("")){
+                }else {
+                    btn1.setEnabled(false);
+                    btn2.setEnabled(false);
+                    btn3.setEnabled(false);
+                    btn4.setEnabled(false);
+                    btn5.setEnabled(false);
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic(edx1.getText().toString())
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(zzz_test_global.this,"Unsubscribe",Toast.LENGTH_SHORT).show();
+                            btn1.setEnabled(true);
+                            btn2.setEnabled(true);
+                            btn3.setEnabled(true);
+                            btn4.setEnabled(true);
+                            btn5.setEnabled(true);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(zzz_test_global.this,"Failed Unsubscribe",Toast.LENGTH_SHORT).show();
+                            btn1.setEnabled(true);
+                            btn2.setEnabled(true);
+                            btn3.setEnabled(true);
+                            btn4.setEnabled(true);
+                            btn5.setEnabled(true);
+                        }
+                    });
+
+
+                }
+            }
+        });
+
     }
 }

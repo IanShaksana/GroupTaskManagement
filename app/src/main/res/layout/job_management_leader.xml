@@ -19,20 +19,12 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_below="@+id/dot"
-        android:layout_toLeftOf="@+id/dot"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/border"
         android:padding="40dp"
         android:src="@drawable/ic_assignment_turned_in_black_24dp" />
 
-    <ImageView
-        android:id="@+id/Offer_Not"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/dot"
-        android:background="@drawable/border"
-        android:padding="40dp"
-        android:src="@drawable/playpause"
-        android:layout_toRightOf="@+id/dot"/>
+
     <!--
         <TextView
             android:id="@+id/textView"

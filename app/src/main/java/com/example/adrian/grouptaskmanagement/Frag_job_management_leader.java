@@ -39,15 +39,14 @@ public class Frag_job_management_leader extends Fragment {
         finish = (ImageView) view.findViewById(R.id.Finish_Job);
         task = (ImageView) view.findViewById(R.id.View_Task);
         worker = (ImageView) view.findViewById(R.id.View_Worker);
-        play = (ImageView) view.findViewById(R.id.Offer_Not);
-
 
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                background background1 = new background(getContext());
-                background1.execute("finish_job-"+ID_Job);
-                getFragmentManager().popBackStack();
+                Toast.makeText(getContext(), "finish", Toast.LENGTH_SHORT).show();
+                //background background1 = new background(getContext());
+                //background1.execute("finish_job-"+ID_Job);
+                //getFragmentManager().popBackStack();
             }
         });
 
@@ -64,22 +63,6 @@ public class Frag_job_management_leader extends Fragment {
                 getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_worker_management(), ID_Job2).addToBackStack(null).commit();
             }
         });
-
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                background background = new background(getContext());
-                background.getListener(new background.OnUpdateListener() {
-                    @Override
-                    public void onUpdate(String obj) {
-                        Toast.makeText(getContext(), obj, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                //background.execute("postornot-"+ID_Job);
-            }
-        });
-
-
 
         return view;
     }

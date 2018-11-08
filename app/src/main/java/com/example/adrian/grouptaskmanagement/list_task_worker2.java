@@ -16,6 +16,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -30,7 +33,7 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
     String state;
     Context context;
     String ID_job, IDTASK;
-    FloatingActionButton floatingActionButton;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Avaible Task");
@@ -77,7 +80,6 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
             }
         });
         background.execute("request_job_task3-" + ID_job + "-" + state);
-
         return view;
 
     }
@@ -106,6 +108,13 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
     public void apply_abandoned(String wasd) {
         Toast.makeText(context, wasd, Toast.LENGTH_SHORT).show();
         background background = new background(context);
+        background.getListener(new background.OnUpdateListener() {
+            @Override
+            public void onUpdate(String obj) {
+                DocumentReference doc2 = db.document("List_Job/"+ID_job+"/List_Task/"+IDTASK);
+                doc2.update("worker","none");
+            }
+        });
         background.execute("abandon_task-" + IDTASK + "-" + ID_job + "-" + state);
         update();
     }
@@ -115,7 +124,6 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
         Toast.makeText(context, wasd, Toast.LENGTH_SHORT).show();
         background background = new background(context);
         background.execute("complete_task-" + IDTASK);
-        //getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_myjob_worker_old()).commit();
         update();
     }
 }

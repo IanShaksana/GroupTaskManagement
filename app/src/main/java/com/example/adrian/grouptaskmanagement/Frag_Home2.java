@@ -25,6 +25,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 
@@ -61,14 +62,19 @@ public class Frag_Home2 extends Fragment {
         chart.setWebColor(Color.BLACK);
         chart.setWebColorInner(Color.BLACK);
         chart.setWebAlpha(100);
-        chart.animateXY(1400,1400, Easing.EasingOption.EaseInOutQuad, Easing.EasingOption.EaseInOutQuad);
+        //chart.animateXY(1400,1400, Easing.EasingOption.EaseInOutQuad, Easing.EasingOption.EaseInOutQuad);
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setTextColor(Color.BLACK);
+        xAxis.setYOffset(10);
+        xAxis.setXOffset(10);
         xAxis.setTextSize(13f);
 
         YAxis yAxis = chart.getYAxis();
         yAxis.setDrawLabels(false);
+        yAxis.setAxisMaxValue(10);
+        yAxis.setXOffset(10);
+        yAxis.setYOffset(10);
         chart.setDescription("");
 
         Legend l = chart.getLegend();
@@ -101,7 +107,12 @@ public class Frag_Home2 extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_Board()).addToBackStack(null).commit();
+                getFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit)
+                        .replace(R.id.fragmentBottom, new Frag_Board())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -109,6 +120,7 @@ public class Frag_Home2 extends Fragment {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(state);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
                 editor.commit();
