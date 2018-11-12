@@ -32,29 +32,26 @@ public class Frag_myjob_worker extends Fragment {
         request_offer.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
+                if(obj.contains("failed")){
 
-                String[] split = obj.split("-");
-                //String[] split = obj.split("-");
-
-                ListAdapter adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, split);
-                listView = (ListView) view.findViewById(R.id.myjob_viw);
-                listView.setAdapter(adapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        String choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                        String[] choosensplit = choosen.split(",");
-                        Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
-                        //getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1,R.anim.ani2,R.animator.popenter,R.animator.popexit).replace(R.id.fragmentBottom,new list_task_leader(),choosen).addToBackStack(null).commit();
-                        getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_job_management_worker(), choosen).addToBackStack(null).commit();
-                    }
-                });
-
+                }else {
+                    String[] split = obj.split("-");
+                    ListAdapter adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, split);
+                    listView = (ListView) view.findViewById(R.id.myjob_viw);
+                    listView.setAdapter(adapter);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            String choosen = String.valueOf(adapterView.getItemAtPosition(i));
+                            String[] choosensplit = choosen.split(",");
+                            Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
+                            getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_job_management_worker(), choosen).addToBackStack(null).commit();
+                        }
+                    });
+                }
             }
         });
         request_offer.execute("request_myjob_worker-" + state);
-
         return view;
     }
-
 }

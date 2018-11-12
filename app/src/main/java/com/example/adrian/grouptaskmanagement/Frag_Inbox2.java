@@ -79,6 +79,7 @@ public class Frag_Inbox2 extends Fragment {
                 String[] mssgCodesplit = choosen.split("-");
                 final String ID_Task = mssgCodesplit[2];
                 final String ID_Job = mssgCodesplit[2];
+                final String ID_Job_vote = mssgCodesplit[2];
                 final String ID_User_Worker =note.getFrom() ;
 
                 String type = note.getType();
@@ -293,15 +294,15 @@ public class Frag_Inbox2 extends Fragment {
                                 //final String Custom_ID_Job = choosensplit2[3];
                                 switch (menuItem.getTitle().toString()) {
                                     case "Up Vote":
-                                        Toast.makeText(getContext(), "Up Vote", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), state + " Up Vote " + ID_Job_vote, Toast.LENGTH_SHORT).show();
                                         background background1 = new background(getContext());
                                         background1.getListener(new background.OnUpdateListener() {
                                             @Override
                                             public void onUpdate(String obj) {
-                                                update();
+                                                adapter.delitem(position);
                                             }
                                         });
-                                        //background1.execute("reply_message-UpVote-" + Custom_ID_Job+"-"+ID_User_W2);
+                                        background1.execute("reply_message-UpVote-" +ID_Job_vote+"-"+state);
                                         break;
                                     case "Down Vote":
                                         Toast.makeText(getContext(), "Down Vote", Toast.LENGTH_SHORT).show();
@@ -309,6 +310,7 @@ public class Frag_Inbox2 extends Fragment {
                                         background2.getListener(new background.OnUpdateListener() {
                                             @Override
                                             public void onUpdate(String obj) {
+                                                adapter.delitem(position);
                                                 update();
                                             }
                                         });

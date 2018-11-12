@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -40,11 +41,14 @@ public class Frag_Create_Task2 extends Fragment implements DatePickerDialog.OnDa
     String current_time;
     String state;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    ViewGroup container1;
+
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable  ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle(getTag());
         View view = inflater.inflate(R.layout.create_task, container, false);
+        container1 = container;
 
-        Button crt_job_btn = (Button) view.findViewById(R.id.crt_task2);
+        final Button crt_job_btn = (Button) view.findViewById(R.id.crt_task2);
 
         taskname = (EditText) view.findViewById(R.id.task_name2);
         taskdesc = (EditText) view.findViewById(R.id.desc_input_task2);
@@ -106,11 +110,17 @@ public class Frag_Create_Task2 extends Fragment implements DatePickerDialog.OnDa
                 background.getListener(new background.OnUpdateListener() {
                     @Override
                     public void onUpdate(String obj) {
-                        Toast.makeText(getContext(), "Create Task Success", Toast.LENGTH_SHORT).show();
-                        saveNote(obj);
-                        update();
+                        if (obj.equals("failed")){
+                            crt_job_btn.setEnabled(true);
+                        }else {
+                            crt_job_btn.setEnabled(true);
+                            Toast.makeText(getContext(), "Create Task Success", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(container1,"Job Created",1500).show();
+                            update();
+                        }
                     }
                 });
+                crt_job_btn.setEnabled(false);
                 background.execute(send);
             }
         });

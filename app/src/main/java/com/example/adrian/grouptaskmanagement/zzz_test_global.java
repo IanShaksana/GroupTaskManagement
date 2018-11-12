@@ -24,7 +24,7 @@ import com.onesignal.OneSignal;
  */
 
 public class zzz_test_global extends AppCompatActivity {
-    Button btn1,btn2,btn3,btn4,btn5;
+    Button btn1,btn2,btn3,btn4,btn5,btn6,btn7;
     TextView txt1;
     EditText edx1;
     @Override
@@ -36,6 +36,8 @@ public class zzz_test_global extends AppCompatActivity {
         btn3 = findViewById(R.id.PING);
         btn4 = findViewById(R.id.sendNotif);
         btn5 = findViewById(R.id.unsub);
+        btn6 = findViewById(R.id.test);
+        btn7 = findViewById(R.id.test1);
         txt1 = findViewById(R.id.Result);
         edx1 = findViewById(R.id.topic);
 
@@ -196,6 +198,34 @@ public class zzz_test_global extends AppCompatActivity {
 
 
                 }
+            }
+        });
+
+        btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                background_global b3 = new background_global(zzz_test_global.this);
+                b3.getListener(new background_global.OnUpdateListener() {
+                    @Override
+                    public void onUpdate(String obj) {
+                        txt1.setText(obj);
+                    }
+                });
+                b3.execute("ping");
+            }
+        });
+
+        btn7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                background b3 = new background(zzz_test_global.this);
+                b3.getListener(new background.OnUpdateListener() {
+                    @Override
+                    public void onUpdate(String obj) {
+                        txt1.setText(obj);
+                    }
+                });
+                b3.execute("test2");
             }
         });
 

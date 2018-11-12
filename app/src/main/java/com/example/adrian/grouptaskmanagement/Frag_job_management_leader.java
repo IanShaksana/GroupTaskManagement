@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 /**
  * Created by Adrian on 5/18/2018.
@@ -27,11 +30,8 @@ public class Frag_job_management_leader extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle("Job");
-        activity = getActivity();
         ID_Job = getTag();
         ID_Job2 = ID_Job;
-        context = activity.getApplicationContext();
         view = inflater.inflate(R.layout.job_management_leader, container, false);
 
         Toast.makeText(getContext(), ID_Job2, Toast.LENGTH_SHORT).show();
@@ -43,10 +43,28 @@ public class Frag_job_management_leader extends Fragment {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "finish", Toast.LENGTH_SHORT).show();
-                //background background1 = new background(getContext());
-                //background1.execute("finish_job-"+ID_Job);
-                //getFragmentManager().popBackStack();
+
+                background background1 = new background(getContext());
+                background1.getListener(new background.OnUpdateListener() {
+                    @Override
+                    public void onUpdate(String obj) {
+                        Toast.makeText(getContext(), obj, Toast.LENGTH_SHORT).show();
+                        String[] objsplit = obj.split("-");
+                        /*
+                        for (int i =2; i<objsplit.length;i++){
+                            Toast.makeText(getContext(), objsplit[i], Toast.LENGTH_SHORT).show();
+                        }
+                        */
+                        for (int i =2; i<objsplit.length;i++){
+                            CollectionReference notebookRef1 = FirebaseFirestore.getInstance()
+                                    .collection("Message/"+objsplit[i]+"/"+"inbox/");
+                            notebookRef1.add(new Frag_Inbox_recycler("System","Time to vote "+ID_Job,"send","vote",objsplit[i]+"-vote-"+objsplit[0]+"-"+objsplit[1]));
+
+                        }
+                        getFragmentManager().popBackStack();
+                    }
+                });
+                background1.execute("finish_job-"+ID_Job);
             }
         });
 

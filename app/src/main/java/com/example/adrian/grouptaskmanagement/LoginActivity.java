@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onUpdate(String obj) {
                             if (obj.contains("Failed")) {
+                                login.setEnabled(true);
                                 Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
                     });
+                    login.setEnabled(false);
                     loginBackground.execute(sendUsrPass);
                 }
 

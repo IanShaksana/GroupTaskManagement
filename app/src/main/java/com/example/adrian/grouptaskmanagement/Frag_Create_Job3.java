@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,13 +42,15 @@ public class Frag_Create_Job3 extends Fragment implements dialog_worker_slot.dia
     String current_date;
     String current_time;
     String state;
+    ViewGroup container1;
     private z_recycler_adapter adapter;
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable  ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.create_job, container, false);
+        container1 = container;
 
-        Button crt_job_btn = (Button) view.findViewById(R.id.crt_job);
+        final Button crt_job_btn = (Button) view.findViewById(R.id.crt_job);
         desc = (EditText) view.findViewById(R.id.desc_input_job);
         worker = (TextView) view.findViewById(R.id.slot_input_job);
         date = (TextView) view.findViewById(R.id.date_input_job);
@@ -83,19 +86,21 @@ public class Frag_Create_Job3 extends Fragment implements dialog_worker_slot.dia
             @Override
             public void onClick(View view) {
                 background background = new background(getContext());
-                //worker minimal
                 String send = "create_job-" + JobName.getText().toString() + "-" + desc.getText().toString() + "-" + state + "-" +worker.getText().toString()+ "-" + "," + current_date + "," + current_time;
-                //String send = "create_job-" + JobName.getText().toString() + "-" + desc.getText().toString() + "-" + state + "-" +date.getText().toString()+ "-" +worker.getText().toString();
                 background.getListener(new background.OnUpdateListener() {
                     @Override
                     public void onUpdate(String obj) {
-                        Toast.makeText(getContext(), obj, Toast.LENGTH_SHORT).show();
-                        saveNote(obj);
-
-                        update();
-
+                        //saveNote(obj);
+                        if (obj.equals("failed")){
+                            crt_job_btn.setEnabled(true);
+                        }else {
+                            crt_job_btn.setEnabled(true);
+                            Snackbar.make(container1,"Job Created",1500).show();
+                            update();
+                        }
                     }
                 });
+                crt_job_btn.setEnabled(false);
                 background.execute(send);
             }
         });
@@ -109,20 +114,14 @@ public class Frag_Create_Job3 extends Fragment implements dialog_worker_slot.dia
         String dueDate = date.getText().toString();
         String workerMax = worker.getText().toString();
 
-        //String priority = state;
-
         if (title.trim().isEmpty() || description.trim().isEmpty()) {
             Toast.makeText(getContext(), "Please insert a title and description", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        /*CollectionReference notebookRef = FirebaseFirestore.getInstance()
-                .collection("test");
-        notebookRef.add(new z_recycler_note(title, description, priority));*/
-
         DocumentReference notebookRef1 = FirebaseFirestore.getInstance()
                 .document("List_Job/"+obj);
-        notebookRef1.set(new com.example.adrian.grouptaskmanagement.Frag_Offer_recycler_job(title, description, dueDate,workerMax,"0"));
+        notebookRef1.set(new com.example.adrian.grouptaskmanagement.Frag_Offer_recycler_job(title, description, dueDate,workerMax,"0","on",state));
 
         Toast.makeText(getContext(), "Note added", Toast.LENGTH_SHORT).show();
     }
@@ -142,7 +141,6 @@ public class Frag_Create_Job3 extends Fragment implements dialog_worker_slot.dia
         dialogfragment.show(getFragmentManager(), "exa");
 
     }
-
 
     private void opendialog_date() {
         dialog_date dialogfragment = new dialog_date();

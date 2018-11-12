@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 /**
  * Created by Adrian on 5/18/2018.
@@ -23,6 +26,7 @@ public class Frag_job_management_leader_AFTR extends Fragment {
     Activity activity;
     String ID_Job, ID_Job2;
     ImageView finish, task, worker, cash_in;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Nullable
     @Override
@@ -41,6 +45,14 @@ public class Frag_job_management_leader_AFTR extends Fragment {
             @Override
             public void onClick(View view) {
                 background background1 = new background(getContext());
+                background1.getListener(new background.OnUpdateListener() {
+                    @Override
+                    public void onUpdate(String obj) {
+                        DocumentReference choosenDoc = db.document("List_Job/"+ID_Job);
+                        choosenDoc.delete();
+                        getFragmentManager().popBackStack();
+                    }
+                });
                 background1.execute("cashIn-"+ID_Job);
                 getFragmentManager().popBackStack();
             }

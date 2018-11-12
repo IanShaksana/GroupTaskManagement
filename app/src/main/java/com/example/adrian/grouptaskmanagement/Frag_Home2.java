@@ -47,7 +47,7 @@ public class Frag_Home2 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.home2, container, false);
-        //Snackbar.make(container,"hai from snackbar",10000).show();
+        Snackbar.make(container,"hai from snackbar",500).show();
 
         final TextView username = (TextView) view.findViewById(R.id.username);
         final TextView Exp_cur = (TextView) view.findViewById(R.id.exp_cur);
@@ -62,7 +62,6 @@ public class Frag_Home2 extends Fragment {
         chart.setWebColor(Color.BLACK);
         chart.setWebColorInner(Color.BLACK);
         chart.setWebAlpha(100);
-        //chart.animateXY(1400,1400, Easing.EasingOption.EaseInOutQuad, Easing.EasingOption.EaseInOutQuad);
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setTextColor(Color.BLACK);
@@ -89,12 +88,9 @@ public class Frag_Home2 extends Fragment {
             @Override
             public void onUpdate(String obj) {
                 String[] split = obj.split("-");
-
                 Exp_cur.setText(split[1]);
                 Exp_nex.setText(split[5]);
-
                 setdata(Integer.parseInt(split[2]),Integer.parseInt(split[3]),Integer.parseInt(split[4]));
-
                 int set1 = Integer.parseInt(split[1]);
                 int set2 = Integer.parseInt(split[5]);
                 int set3 = 100* set1/set2;
