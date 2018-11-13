@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -22,12 +23,15 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Frag_myjob_worker extends Fragment {
     ListView listView;
+    TextView title;
     String state;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {;
         final View view = inflater.inflate(R.layout.myjob2, container, false);
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
+        title = view.findViewById(R.id.title);
+        title.setText("~ Your Applied Job ~");
         background request_offer = new background(getContext());
         request_offer.getListener(new background.OnUpdateListener() {
             @Override

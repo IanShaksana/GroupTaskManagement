@@ -5,8 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/titlelayout"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/My_Task"
+            android:text="~ Choose task you want to assign ~"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000000"
+            android:shadowColor="#adad85"
+            android:shadowRadius="1.5"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:textSize="15dp" />
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/titlelayout"
         android:id="@+id/list_assign_task_leader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

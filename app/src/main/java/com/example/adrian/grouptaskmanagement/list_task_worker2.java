@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentReference;
@@ -30,6 +31,7 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
 
     String unprocessed_task;
     ListView listView;
+    TextView title;
     String state;
     Context context;
     String ID_job, IDTASK;
@@ -40,6 +42,8 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
         final View view = inflater.inflate(R.layout.myjob2, container, false);
         ID_job = getTag();
         context = getContext();
+        title = view.findViewById(R.id.title);
+        title.setText("~ Task List ~");
         //clearBackStack();
 
         Toast.makeText(getContext(), ID_job, Toast.LENGTH_SHORT).show();

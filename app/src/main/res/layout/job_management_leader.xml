@@ -17,18 +17,18 @@
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_above="@+id/My_Task"
             android:text="Job's name"
             android:layout_centerHorizontal="true"
             android:textColor="#000000"
-            android:textSize="15dp" />
+            android:textSize="20dp" />
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_above="@+id/My_Task"
-            android:text="Job Finished"
+            android:text="Task Finished :"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/textView1"
             android:textColor="#000000"
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_above="@+id/My_Task"
-            android:text="Job's Due Date"
+            android:text="Job's Due Date : "
             android:layout_centerHorizontal="true"
             android:textColor="#000000"
             android:textSize="15dp" />

@@ -46,7 +46,7 @@ public class advancedcustomadapter_as_worker2 extends ArrayAdapter<String> {
         String[] splitted_time = singletask.split(",");
         String[] splitted_time2 = splitted_time[1].split(" ");
 
-        jobname = (TextView) cusView.findViewById(R.id.worker_job_name);
+        //jobname = (TextView) cusView.findViewById(R.id.worker_job_name);
         jobID = (TextView) cusView.findViewById(R.id.job_ID);
         taskID = (TextView) cusView.findViewById(R.id.task_ID);
         name = (TextView) cusView.findViewById(R.id.task_name_view);
@@ -57,7 +57,7 @@ public class advancedcustomadapter_as_worker2 extends ArrayAdapter<String> {
         date2 = (TextView) cusView.findViewById(R.id.date_time_input_view);
         completion = (TextView) cusView.findViewById(R.id.completed_view);
 
-        jobname.setText(splitted_task[0]);
+        //jobname.setText(splitted_task[0]);
         jobID.setText(splitted_task[1]);
         taskID.setText(splitted_task[2]);
         name.setText(splitted_task[3]);
@@ -67,8 +67,6 @@ public class advancedcustomadapter_as_worker2 extends ArrayAdapter<String> {
         date.setText(splitted_time2[0]);
         date2.setText(splitted_time2[1]);
         completion.setText(splitted_task[7]);
-
         return cusView;
-
     }
 }

@@ -52,23 +52,27 @@ public class leader_reassign extends Fragment implements  dialog_yes_no_reassign
         background.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
-                String[] split = obj.split("-list-");
-                ListAdapter adapter1 = new advancedcustomadapter_as_worker2(getContext(), split);
-                listView = (ListView) view.findViewById(R.id.list_reassign_task_leader);
-                listView.setAdapter(adapter1);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                        String[] status = choosen.split("-");
-                        if(status[7].equals("no")){
-                            opendialog_worker();
-                        }else {
-                            Toast.makeText(getContext(),"task has been completed", Toast.LENGTH_SHORT).show();
-                        }
+                if (obj.contains("failed")){
 
-                    }
-                });
+                }else {
+                    String[] split = obj.split("-list-");
+                    ListAdapter adapter1 = new advancedcustomadapter_as_worker2(getContext(), split);
+                    listView = (ListView) view.findViewById(R.id.list_reassign_task_leader);
+                    listView.setAdapter(adapter1);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            choosen = String.valueOf(adapterView.getItemAtPosition(i));
+                            String[] status = choosen.split("-");
+                            if(status[7].equals("no")){
+                                opendialog_worker();
+                            }else {
+                                Toast.makeText(getContext(),"task has been completed", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    });
+                }
             }
         });
         background.execute("request_worker_task-" + Tagsplit[1] + "-" +Tagsplit[0]);
