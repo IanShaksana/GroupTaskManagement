@@ -46,7 +46,7 @@ public class leader_reassign extends Fragment implements  dialog_yes_no_reassign
         view = inflater.inflate(R.layout.list_reassign_task_leader, container, false);
         Tag = getTag();
         String[] Tagsplit = Tag.split("-");
-        Toast.makeText(getContext(), Tag, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), Tag, Toast.LENGTH_SHORT).show();
 
         final background background = new background(getContext());
         background.getListener(new background.OnUpdateListener() {

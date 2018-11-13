@@ -123,7 +123,7 @@ public class Frag_Create_Job3 extends Fragment implements dialog_worker_slot.dia
                 .document("List_Job/"+obj);
         notebookRef1.set(new com.example.adrian.grouptaskmanagement.Frag_Offer_recycler_job(title, description, dueDate,workerMax,"0","on",state));
 
-        Toast.makeText(getContext(), "Note added", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Note added", Toast.LENGTH_SHORT).show();
     }
 
     private void update() {

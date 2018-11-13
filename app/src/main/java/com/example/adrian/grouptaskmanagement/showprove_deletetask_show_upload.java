@@ -84,16 +84,24 @@ public class showprove_deletetask_show_upload extends Fragment {
                 if(mUploadTask!=null && mUploadTask.isInProgress()){
                     Toast.makeText(getContext(),"Uploading",Toast.LENGTH_SHORT).show();
                 }else {
-                    uploadfile();
-                    background upload_img_nm = new background(getContext());
-                    upload_img_nm.getListener(new background.OnUpdateListener() {
-                        @Override
-                        public void onUpdate(String obj) {
-                            DocumentReference doc1 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
-                            doc1.update("status","Waiting for review");
-                        }
-                    });
-                    upload_img_nm.execute("upload_img_nm-"+IDTASK+"-"+TAG);
+                    String extension = uploadfile();
+                    if(extension.equals("nofile")){
+
+                    }else {
+                        background upload_img_nm = new background(getContext());
+                        upload_img_nm.getListener(new background.OnUpdateListener() {
+                            @Override
+                            public void onUpdate(String obj) {
+                                if(obj.contains("failed")){
+                                    update();
+                                }else {
+                                    DocumentReference doc1 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
+                                    doc1.update("status","Waiting for review");
+                                }
+                            }
+                        });
+                        upload_img_nm.execute("upload_img_nm-"+IDTASK+"-"+TAG+"."+extension);
+                    }
                 }
 
             }
@@ -133,7 +141,7 @@ public class showprove_deletetask_show_upload extends Fragment {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    private void uploadfile(){
+    private String uploadfile(){
         if (mImageUri!= null){
             final StorageReference fileRef = mStorageRef.child(TAG+"."+getfileextension(mImageUri));
             mUploadTask=fileRef.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -165,8 +173,10 @@ public class showprove_deletetask_show_upload extends Fragment {
                     progbar.setProgress((int) progress);
                 }
             });
+            return getfileextension(mImageUri);
         }else {
             Toast.makeText(getContext(),"no file",Toast.LENGTH_SHORT).show();
+            return "nofile";
         }
 
     }

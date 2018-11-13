@@ -76,7 +76,7 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             choosen = String.valueOf(adapterView.getItemAtPosition(i));
-                            Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
                             PopupMenu pop = new PopupMenu(getContext(), view, Gravity.CENTER);
                             try {
                                 Field[] fields = pop.getClass().getDeclaredFields();
@@ -100,11 +100,11 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                                 public boolean onMenuItemClick(MenuItem menuItem) {
                                     switch (menuItem.getTitle().toString()) {
                                         case "Assign":
-                                            Toast.makeText(getContext(), "Assign", Toast.LENGTH_SHORT).show();
+                                            //Toast.makeText(getContext(), "Assign", Toast.LENGTH_SHORT).show();
                                             getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new leader_assign2(), ID_Job + "-" + choosen).addToBackStack(null).commit();
                                             break;
                                         case "Re Assign":
-                                            Toast.makeText(getContext(), "Re Assign", Toast.LENGTH_SHORT).show();
+                                            //Toast.makeText(getContext(), "Re Assign", Toast.LENGTH_SHORT).show();
                                             getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new leader_reassign(), ID_Job + "-" + choosen).addToBackStack(null).commit();
                                             break;
                                         case "Remove Worker":
@@ -157,10 +157,15 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
             background.getListener(new background.OnUpdateListener() {
                 @Override
                 public void onUpdate(String obj) {
-                    CollectionReference notebookRef1 = FirebaseFirestore.getInstance()
-                            .collection("Message/"+wasd+"/"+"inbox/");
-                    notebookRef1.add(new Frag_Inbox_recycler(state,state+" want to invite you to this job: "+ID_Job,"send","invite-job",obj));
-                    update();
+                    if (obj.equals("failed")){
+
+                    }else{
+                        CollectionReference notebookRef1 = FirebaseFirestore.getInstance()
+                                .collection("Message/"+wasd+"/"+"inbox/");
+                        notebookRef1.add(new Frag_Inbox_recycler(state,state+" want to invite you to this job: "+ID_Job,"send","invite-job",obj));
+                        update();
+                    }
+
                 }
             });
             //background.execute("invite_worker-"+wasd+"-"+ID_Job);
@@ -182,7 +187,7 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
 
                 String[] obj2 = obj1[1].split("-");
                 for (int i = 0;i<obj2.length;i++){
-                    Toast.makeText(getContext(), obj2[i], Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), obj2[i], Toast.LENGTH_SHORT).show();
                     DocumentReference doc2 = db.document("List_Job/"+ID_Job+"/List_Task/"+obj2[i]);
                     doc2.update("worker","none");
                 }

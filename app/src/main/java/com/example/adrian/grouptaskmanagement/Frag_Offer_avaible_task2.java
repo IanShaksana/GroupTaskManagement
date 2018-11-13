@@ -89,11 +89,16 @@ public class Frag_Offer_avaible_task2 extends Fragment implements dialog_yes_no_
             background1.getListener(new background.OnUpdateListener() {
                 @Override
                 public void onUpdate(String obj) {
-                    String objsplit[] = obj.split("\\|");
-                    CollectionReference notebookRef1 = FirebaseFirestore.getInstance()
-                            .collection("Message/"+objsplit[0]+"/"+"inbox/");
-                    notebookRef1.add(new Frag_Inbox_recycler(state,state+" want to apply "+ID_Task,"send","apply-task",objsplit[1]+"|"+objsplit[2]));
-                    update();
+                    if(obj.equals("failed")){
+
+                    }else{
+                        String objsplit[] = obj.split("\\|");
+                        CollectionReference notebookRef1 = FirebaseFirestore.getInstance()
+                                .collection("Message/"+objsplit[0]+"/"+"inbox/");
+                        notebookRef1.add(new Frag_Inbox_recycler(state,state+" want to apply "+ID_Task,"send","apply-task",objsplit[1]+"|"+objsplit[2]));
+                        update();
+                    }
+
                 }
             });
             background1.execute("apply_req-" + state + "-" + ID_Task + "-" + ID_Job);
@@ -123,7 +128,7 @@ public class Frag_Offer_avaible_task2 extends Fragment implements dialog_yes_no_
                 z_recycler_note note = documentSnapshot.toObject(z_recycler_note.class);
                 String id = documentSnapshot.getId();
                 ID_Task = id;
-                Toast.makeText(getContext(), "ID_Job: "+ID_Job+" id: "+ID_Task, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "ID_Job: "+ID_Job+" id: "+ID_Task, Toast.LENGTH_SHORT).show();
                 opendialog_yes_no();
             }
         });

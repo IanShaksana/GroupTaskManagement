@@ -6,6 +6,97 @@
     android:layout_height="match_parent"
 
     >
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_above="@+id/My_Task"
+            android:text="Job's name"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_above="@+id/My_Task"
+            android:text="Job Finished"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textView1"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_above="@+id/My_Task"
+            android:text="Create Job"
+            android:layout_marginRight="5dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000000"
+            android:layout_below="@+id/textView2"
+            android:layout_toLeftOf="@+id/slash"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/slash"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_above="@+id/My_Task"
+            android:text="/"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000000"
+            android:layout_below="@+id/textView2"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_above="@+id/My_Task"
+            android:text="Create Job"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000000"
+            android:layout_below="@+id/textView2"
+            android:layout_toRightOf="@+id/slash"
+            android:layout_marginLeft="5dp"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp">
+        <TextView
+            android:id="@+id/Job_Due_Date"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_above="@+id/My_Task"
+            android:text="Job's Due Date"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/Job_date"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_above="@+id/My_Task"
+            android:text="###"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/Job_Due_Date"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/dot"
@@ -68,26 +159,6 @@
         android:padding="40dp"
         android:layout_marginEnd="20dp"
         android:src="@drawable/xxxhdpi"/>
-    <!--
-        <TextView
-            android:layout_width="57dp"
-            android:layout_height="20dp"
-            android:layout_alignBottom="@+id/My_Task"
-            android:layout_alignEnd="@+id/My_Task"
-            android:layout_marginBottom="15dp"
-            android:layout_marginEnd="56dp"
-            android:text="My Task"
-            android:textColor="#000000"
-            android:textSize="15dp"
-            android:id="@+id/textView2" />
 
-    -->
-    <!--
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/myjob_viw"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-    </com.baoyz.swipemenulistview.SwipeMenuListView>
-    -->
 
 </RelativeLayout>

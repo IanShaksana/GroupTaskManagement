@@ -2,6 +2,7 @@ package com.example.adrian.grouptaskmanagement;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class Frag_Inbox_adapter extends FirestoreRecyclerAdapter<Frag_Inbox_recy
         return new holder(v);
     }
 
-    class holder extends RecyclerView.ViewHolder{
+    class holder extends RecyclerView.ViewHolder /*implements View.OnCreateContextMenuListener*/{
         TextView t1;
         TextView t2;
 
@@ -45,6 +46,7 @@ public class Frag_Inbox_adapter extends FirestoreRecyclerAdapter<Frag_Inbox_recy
             super(itemView);
             t1 = itemView.findViewById(R.id.sender);
             t2 = itemView.findViewById(R.id.msg_name);
+            /*itemView.setOnCreateContextMenuListener(this);*/
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -55,7 +57,15 @@ public class Frag_Inbox_adapter extends FirestoreRecyclerAdapter<Frag_Inbox_recy
                     }
                 }
             });
-        }
+        }/*
+
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            contextMenu.setHeaderTitle("Select The Action");
+            contextMenu.add(0, view.getId(), 0, "Call");//groupId, itemId, order, title
+            contextMenu.add(0, view.getId(), 0, "SMS");
+
+        }*/
     }
 
     public interface onitemclickListener{

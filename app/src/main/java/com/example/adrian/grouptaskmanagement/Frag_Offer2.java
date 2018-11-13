@@ -41,7 +41,7 @@ public class Frag_Offer2 extends Fragment {
     }
 
     private void setup(View view){
-        Query query = ref.orderBy("title",Query.Direction.ASCENDING);
+        Query query = ref.whereEqualTo("status","on");
         FirestoreRecyclerOptions<Frag_Offer_recycler_job> options = new FirestoreRecyclerOptions.Builder<Frag_Offer_recycler_job>().setQuery(query,Frag_Offer_recycler_job.class).build();
         adapter = new Frag_Offer_recycler_adapter(options);
 
@@ -56,7 +56,7 @@ public class Frag_Offer2 extends Fragment {
             public void onitemclick(DocumentSnapshot documentSnapshot, int position) {
                 z_recycler_note note = documentSnapshot.toObject(z_recycler_note.class);
                 String id = documentSnapshot.getId();
-                Toast.makeText(getContext(), "pos: "+position+" id: "+id, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "pos: "+position+" id: "+id, Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_Offer_avaible_task2(), id).addToBackStack(null).commit();
             }
         });

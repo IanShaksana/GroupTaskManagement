@@ -53,7 +53,7 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
             @Override
             public void onUpdate(String obj) {
                 unprocessed_task = obj;
-                if (obj.equals("No Task")) {
+                if (obj.equals("No Task")||obj.contains("failed")) {
                     Toast.makeText(getContext(), "No Task Avaible", Toast.LENGTH_SHORT).show();
                 } else {
                     String[] processed_task = unprocessed_task.split("-LIST-");
@@ -106,7 +106,7 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
     }
 
     public void apply_abandoned(String wasd) {
-        Toast.makeText(context, wasd, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, wasd, Toast.LENGTH_SHORT).show();
         background background = new background(context);
         background.getListener(new background.OnUpdateListener() {
             @Override

@@ -47,12 +47,13 @@ public class Frag_Home2 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.home2, container, false);
-        Snackbar.make(container,"hai from snackbar",500).show();
+        //Snackbar.make(container,"hai from snackbar",500).show();
 
         final TextView username = (TextView) view.findViewById(R.id.username);
         final TextView Exp_cur = (TextView) view.findViewById(R.id.exp_cur);
         final TextView Exp_nex = (TextView) view.findViewById(R.id.exp_nex);
         final ProgressBar exp = view.findViewById(R.id.exp_bar);
+        final TextView level = view.findViewById(R.id.level);
         chart = view.findViewById(R.id.radarchart);
 
         //chart.setBackgroundColor(Color.rgb(60,65,82));
@@ -87,14 +88,19 @@ public class Frag_Home2 extends Fragment {
         background_home.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
-                String[] split = obj.split("-");
-                Exp_cur.setText(split[1]);
-                Exp_nex.setText(split[5]);
-                setdata(Integer.parseInt(split[2]),Integer.parseInt(split[3]),Integer.parseInt(split[4]));
-                int set1 = Integer.parseInt(split[1]);
-                int set2 = Integer.parseInt(split[5]);
-                int set3 = 100* set1/set2;
-                exp.setProgress(set3);
+                if(obj.contains("failed")){
+
+                }else {
+                    String[] split = obj.split("-");
+                    Exp_cur.setText(split[1]);
+                    Exp_nex.setText(split[5]);
+                    setdata(Integer.parseInt(split[2]), Integer.parseInt(split[3]), Integer.parseInt(split[4]));
+                    int set1 = Integer.parseInt(split[1]);
+                    int set2 = Integer.parseInt(split[5]);
+                    int set3 = 100 * set1 / set2;
+                    exp.setProgress(set3);
+                    level.setText(split[6]);
+                }
             }
         });
         background_home.execute("request_home-" + state);

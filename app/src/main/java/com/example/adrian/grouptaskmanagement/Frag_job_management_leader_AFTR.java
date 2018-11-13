@@ -38,7 +38,7 @@ public class Frag_job_management_leader_AFTR extends Fragment {
         context = activity.getApplicationContext();
         view = inflater.inflate(R.layout.job_management_leader_aftr, container, false);
 
-        Toast.makeText(getContext(), ID_Job2, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), ID_Job2, Toast.LENGTH_SHORT).show();
         cash_in = (ImageView) view.findViewById(R.id.Cash_in);
 
         cash_in.setOnClickListener(new View.OnClickListener() {
@@ -48,13 +48,16 @@ public class Frag_job_management_leader_AFTR extends Fragment {
                 background1.getListener(new background.OnUpdateListener() {
                     @Override
                     public void onUpdate(String obj) {
-                        DocumentReference choosenDoc = db.document("List_Job/"+ID_Job);
-                        choosenDoc.delete();
-                        getFragmentManager().popBackStack();
+                        if(obj.contains("failed")){
+
+                        }else {
+                            DocumentReference choosenDoc = db.document("List_Job/"+ID_Job);
+                            choosenDoc.delete();
+                            getFragmentManager().popBackStack();
+                        }
                     }
                 });
                 background1.execute("cashIn-"+ID_Job);
-                getFragmentManager().popBackStack();
             }
         });
 

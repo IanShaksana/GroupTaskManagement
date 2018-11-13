@@ -58,7 +58,7 @@ public class Frag_myjob_leader extends Fragment {
                                 }
                             });
                             background1.execute("cek_finished-"+choosensplit[1]);
-                            Toast.makeText(getContext(), choosensplit[1], Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(), choosensplit[1], Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

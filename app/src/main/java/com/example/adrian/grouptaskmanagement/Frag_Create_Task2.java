@@ -36,6 +36,7 @@ public class Frag_Create_Task2 extends Fragment implements DatePickerDialog.OnDa
     TextView tasktype;
     TextView taskdate;
     TextView tasktime;
+    TextView jobtime;
 
     String current_date;
     String current_time;
@@ -56,6 +57,21 @@ public class Frag_Create_Task2 extends Fragment implements DatePickerDialog.OnDa
         tasktype = (TextView) view.findViewById(R.id.type_input_task2);
         taskdate = (TextView) view.findViewById(R.id.date_input_task2);
         tasktime = (TextView) view.findViewById(R.id.date_time_input_task2);
+        jobtime = (TextView) view.findViewById(R.id.job_due_date);
+
+        background background = new background(getContext());
+        background.getListener(new background.OnUpdateListener() {
+            @Override
+            public void onUpdate(String obj) {
+                if(obj.contains("failed")){
+
+                }else {
+                    String[] objsplit = obj.split("-list-");
+                    jobtime.setText(objsplit[0]);
+                }
+            }
+        });
+        background.execute("get_job_detail-"+getTag());
 
 
 
@@ -114,8 +130,7 @@ public class Frag_Create_Task2 extends Fragment implements DatePickerDialog.OnDa
                             crt_job_btn.setEnabled(true);
                         }else {
                             crt_job_btn.setEnabled(true);
-                            Toast.makeText(getContext(), "Create Task Success", Toast.LENGTH_SHORT).show();
-                            Snackbar.make(container1,"Job Created",1500).show();
+                            Snackbar.make(container1,"Create Task Success",1500).show();
                             update();
                         }
                     }
@@ -147,7 +162,7 @@ public class Frag_Create_Task2 extends Fragment implements DatePickerDialog.OnDa
         DocumentReference notebookRef1 = FirebaseFirestore.getInstance()
                 .document("List_Job/"+getTag()+"/"+"List_Task/"+obj);
         notebookRef1.set(new com.example.adrian.grouptaskmanagement.Frag_Offer_recycler_task(title, desc, diff,type,time,time2,"none","no"));
-        Toast.makeText(getContext(), "Note added", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Note added", Toast.LENGTH_SHORT).show();
     }
 
 

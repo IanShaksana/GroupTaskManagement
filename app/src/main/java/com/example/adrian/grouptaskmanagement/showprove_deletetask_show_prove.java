@@ -64,9 +64,13 @@ public class showprove_deletetask_show_prove extends Fragment {
                 background1.getListener(new background.OnUpdateListener() {
                     @Override
                     public void onUpdate(String obj) {
-                        DocumentReference doc1 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
-                        doc1.update("status","approved");
-                        getFragmentManager().popBackStack();
+                        if(obj.contains("failed")){
+
+                        }else{
+                            DocumentReference doc1 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
+                            doc1.update("status","approved");
+                            getFragmentManager().popBackStack();
+                        }
                     }
                 });
                 background1.execute("approve_yes-" + IDTASK + "-" + IDTASK);
@@ -80,9 +84,13 @@ public class showprove_deletetask_show_prove extends Fragment {
                 background1.getListener(new background.OnUpdateListener() {
                     @Override
                     public void onUpdate(String obj) {
-                        DocumentReference doc1 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
-                        doc1.update("status","no");
-                        update();
+                        if(obj.contains("failed")){
+
+                        }else {
+                            DocumentReference doc1 = db.document("List_Job/" + IDJOB + "/List_Task/" + IDTASK);
+                            doc1.update("status", "no");
+                            update();
+                        }
                     }
                 });
                 background1.execute("approve_no-" +IDTASK);
@@ -99,8 +107,8 @@ public class showprove_deletetask_show_prove extends Fragment {
                     app.setEnabled(false);
                     diss.setEnabled(false);
                 }else{
-                    Toast.makeText(getContext(),"uploads/"+obj+".jpg",Toast.LENGTH_SHORT).show();
-                    String url ="uploads/"+obj+".jpg";
+                    Toast.makeText(getContext(),"uploads/"+obj,Toast.LENGTH_SHORT).show();
+                    String url ="uploads/"+obj;
 
 
                     databaseReference = FirebaseStorage.getInstance().getReference();
@@ -122,8 +130,6 @@ public class showprove_deletetask_show_prove extends Fragment {
             }
         });
         background.execute("req_prove-"+getTag());
-
-
         return view;
     }
 

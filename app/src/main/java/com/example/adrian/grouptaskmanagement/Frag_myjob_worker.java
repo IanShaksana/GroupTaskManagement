@@ -44,7 +44,7 @@ public class Frag_myjob_worker extends Fragment {
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             String choosen = String.valueOf(adapterView.getItemAtPosition(i));
                             String[] choosensplit = choosen.split(",");
-                            Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(), choosen, Toast.LENGTH_SHORT).show();
                             getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new Frag_job_management_worker(), choosen).addToBackStack(null).commit();
                         }
                     });

@@ -43,7 +43,7 @@ public class Frag_job_management_worker extends Fragment {
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
 
-        Toast.makeText(getContext(), ID_Job, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), ID_Job, Toast.LENGTH_SHORT).show();
 
         abandon = (ImageView) view.findViewById(R.id.exit);
         task = (ImageView) view.findViewById(R.id.View_Task);

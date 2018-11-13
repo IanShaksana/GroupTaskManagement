@@ -94,7 +94,7 @@ public class list_task_leader2 extends Fragment {
                 Frag_Offer_recycler_task note = documentSnapshot.toObject(Frag_Offer_recycler_task.class);
                 String IDTASK = documentSnapshot.getId();
                 String status = note.getStatus();
-                Toast.makeText(getContext(), "ID_Job: "+IDJOB+" id: "+IDTASK, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "ID_Job: "+IDJOB+" id: "+IDTASK, Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new showprove_deletetask(),IDTASK+"-"+IDJOB+"-"+status).addToBackStack(null).commit();
             }
         });

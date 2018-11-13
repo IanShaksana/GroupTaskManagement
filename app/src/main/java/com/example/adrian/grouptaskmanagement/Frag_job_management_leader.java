@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
@@ -26,6 +28,8 @@ public class Frag_job_management_leader extends Fragment {
     Activity activity;
     String ID_Job, ID_Job2;
     ImageView finish, task, worker, play;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    TextView jobname, taskfinished, taskall, jobdate;
 
     @Nullable
     @Override
@@ -33,8 +37,29 @@ public class Frag_job_management_leader extends Fragment {
         ID_Job = getTag();
         ID_Job2 = ID_Job;
         view = inflater.inflate(R.layout.job_management_leader, container, false);
+        jobname = (TextView) view.findViewById(R.id.textView1);
+        taskfinished = (TextView) view.findViewById(R.id.textView3);
+        taskall = (TextView) view.findViewById(R.id.textView4);
+        jobdate = (TextView) view.findViewById(R.id.Job_date);
 
-        Toast.makeText(getContext(), ID_Job2, Toast.LENGTH_SHORT).show();
+        background background = new background(getContext());
+        background.getListener(new background.OnUpdateListener() {
+            @Override
+            public void onUpdate(String obj) {
+                if(obj.contains("failed")){
+
+                }else{
+                    String[] objsplit = obj.split("-list-");
+                    jobname.setText(objsplit[1]);
+                    taskfinished.setText(objsplit[2]);
+                    taskall.setText(objsplit[3]);
+                    jobdate.setText(objsplit[0]);
+                }
+            }
+        });
+        background.execute("get_job_detail-"+ID_Job);
+
+        //Toast.makeText(getContext(), ID_Job2, Toast.LENGTH_SHORT).show();
 
         finish = (ImageView) view.findViewById(R.id.Finish_Job);
         task = (ImageView) view.findViewById(R.id.View_Task);
@@ -48,20 +73,25 @@ public class Frag_job_management_leader extends Fragment {
                 background1.getListener(new background.OnUpdateListener() {
                     @Override
                     public void onUpdate(String obj) {
-                        Toast.makeText(getContext(), obj, Toast.LENGTH_SHORT).show();
-                        String[] objsplit = obj.split("-");
+                        //Toast.makeText(getContext(), obj, Toast.LENGTH_SHORT).show();
+
+                        if(obj.contains("failed")){
+                        }else{
+                            String[] objsplit = obj.split("-");
+                            DocumentReference doc2 = db.document("List_Job/"+ID_Job);
+                            doc2.update("status","off");
+                            for (int i =2; i<objsplit.length;i++){
+                                CollectionReference notebookRef1 = db
+                                        .collection("Message/"+objsplit[i]+"/"+"inbox/");
+                                notebookRef1.add(new Frag_Inbox_recycler("System","Time to vote "+ID_Job,"send","vote",objsplit[i]+"-vote-"+objsplit[0]+"-"+objsplit[1]));
+                            }
+                            getFragmentManager().popBackStack();
+                        }
                         /*
                         for (int i =2; i<objsplit.length;i++){
                             Toast.makeText(getContext(), objsplit[i], Toast.LENGTH_SHORT).show();
                         }
                         */
-                        for (int i =2; i<objsplit.length;i++){
-                            CollectionReference notebookRef1 = FirebaseFirestore.getInstance()
-                                    .collection("Message/"+objsplit[i]+"/"+"inbox/");
-                            notebookRef1.add(new Frag_Inbox_recycler("System","Time to vote "+ID_Job,"send","vote",objsplit[i]+"-vote-"+objsplit[0]+"-"+objsplit[1]));
-
-                        }
-                        getFragmentManager().popBackStack();
                     }
                 });
                 background1.execute("finish_job-"+ID_Job);
