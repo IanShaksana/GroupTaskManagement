@@ -184,15 +184,15 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                 String[] obj1 = obj.split("-LISTJOB-");
                 DocumentReference doc1 = db.document("List_Job/"+ID_Job);
                 doc1.update("slotnow",obj1[0]);
-
-                String[] obj2 = obj1[1].split("-");
-                for (int i = 0;i<obj2.length;i++){
-                    //Toast.makeText(getContext(), obj2[i], Toast.LENGTH_SHORT).show();
-                    DocumentReference doc2 = db.document("List_Job/"+ID_Job+"/List_Task/"+obj2[i]);
-                    doc2.update("worker","none");
+                if(obj1.length>1){
+                    String[] obj2 = obj1[1].split("-");
+                    for (int i = 0;i<obj2.length;i++){
+                        //Toast.makeText(getContext(), obj2[i], Toast.LENGTH_SHORT).show();
+                        DocumentReference doc2 = db.document("List_Job/"+ID_Job+"/List_Task/"+obj2[i]);
+                        doc2.update("worker","none");
+                    }
                 }
                 update();
-
             }
         });
         background1.execute("remove_worker-" + choosen + "-" + ID_Job);

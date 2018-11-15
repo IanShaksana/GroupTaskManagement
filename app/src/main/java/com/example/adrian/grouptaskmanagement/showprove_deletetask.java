@@ -35,7 +35,7 @@ public class showprove_deletetask extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Inbox");
-        String[] TAGSPLIT = getTag().split("-");
+        final String[] TAGSPLIT = getTag().split("-");
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
         view = inflater.inflate(R.layout.showprove_deletetask, container, false);
@@ -43,7 +43,7 @@ public class showprove_deletetask extends Fragment {
         show =  view.findViewById(R.id.button1);
         del = view.findViewById(R.id.button2);
 
-        DocumentReference doc1 = db.document("List_Job/"+TAGSPLIT[1]+"/List_Task/"+TAGSPLIT[0]);
+        final DocumentReference doc1 = db.document("List_Job/"+TAGSPLIT[1]+"/List_Task/"+TAGSPLIT[0]);
         doc1.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
@@ -74,7 +74,22 @@ public class showprove_deletetask extends Fragment {
         del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                update();
+                show.setEnabled(false);
+                del.setEnabled(false);
+                background background1 = new background(getContext());
+                background1.getListener(new background.OnUpdateListener() {
+                    @Override
+                    public void onUpdate(String obj) {
+                        if(obj.contains("failed")){
+                            show.setEnabled(true);
+                            del.setEnabled(true);
+                        }else{
+                            doc1.delete();
+                            getFragmentManager().popBackStack();
+                        }
+                    }
+                });
+                background1.execute("Delete_task-" + TAGSPLIT[0]);
             }
         });
 

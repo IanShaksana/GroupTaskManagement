@@ -45,7 +45,7 @@ public class showprove_deletetask_show_upload extends Fragment {
     View view;
     String state,TAG,IDTASK,IDJOB;
     private  static final int PICK_IMAGE_REQUEST =1;
-    Button in, out;
+    Button in, out,del;
     private ImageView image;
     private ProgressBar progbar;
 
@@ -63,7 +63,6 @@ public class showprove_deletetask_show_upload extends Fragment {
         IDJOB = TAGSPLIT[1];
         IDTASK = TAGSPLIT[0];
         TAG = IDTASK+"_Prove_"+System.currentTimeMillis();
-
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDataRef = FirebaseDatabase.getInstance().getReference("uploads");
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
@@ -81,6 +80,9 @@ public class showprove_deletetask_show_upload extends Fragment {
         out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                del.setEnabled(false);
+                in.setEnabled(false);
+                out.setEnabled(false);
                 if(mUploadTask!=null && mUploadTask.isInProgress()){
                     Toast.makeText(getContext(),"Uploading",Toast.LENGTH_SHORT).show();
                 }else {
@@ -94,7 +96,13 @@ public class showprove_deletetask_show_upload extends Fragment {
                             public void onUpdate(String obj) {
                                 if(obj.contains("failed")){
                                     update();
+                                    del.setEnabled(true);
+                                    in.setEnabled(true);
+                                    out.setEnabled(true);
                                 }else {
+                                    del.setEnabled(true);
+                                    in.setEnabled(true);
+                                    out.setEnabled(true);
                                     DocumentReference doc1 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
                                     doc1.update("status","Waiting for review");
                                 }
@@ -106,6 +114,35 @@ public class showprove_deletetask_show_upload extends Fragment {
 
             }
         });
+        del = view.findViewById(R.id.abandoned1);
+        del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                del.setEnabled(false);
+                in.setEnabled(false);
+                out.setEnabled(false);
+                background background = new background(getContext());
+                background.getListener(new background.OnUpdateListener() {
+                    @Override
+                    public void onUpdate(String obj) {
+                        if(obj.contains("failed")){
+                            del.setEnabled(true);
+                            in.setEnabled(true);
+                            out.setEnabled(true);
+                        }else {
+                            del.setEnabled(true);
+                            in.setEnabled(true);
+                            out.setEnabled(true);
+                            DocumentReference doc2 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
+                            doc2.update("worker","none");
+                            getFragmentManager().popBackStack();
+                        }
+                    }
+                });
+                background.execute("abandon_task-" + IDTASK + "-" + IDJOB + "-" + state);
+            }
+        });
+
         progbar = view.findViewById(R.id.progbar);
         return view;
     }

@@ -34,12 +34,13 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         final Button login = (Button) findViewById(R.id.loginButton);
+        final Button reg = (Button) findViewById(R.id.RegButton);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Intent intent = new Intent()
-                if (username.getText().toString().equals("") || pass.getText().toString().equals("")) {
+                if (username.getText().toString().trim().equals("") || pass.getText().toString().trim().equals("")) {
                     Toast.makeText(LoginActivity.this, "Fill the form", Toast.LENGTH_SHORT).show();
                 } else {
                     final String sendUsrPass = "login-" + username.getText().toString() + "-" + pass.getText().toString();
@@ -47,8 +48,9 @@ public class LoginActivity extends AppCompatActivity {
                     loginBackground.getListener(new background.OnUpdateListener() {
                         @Override
                         public void onUpdate(String obj) {
-                            if (obj.contains("Failed")) {
+                            if (obj.contains("failed")) {
                                 login.setEnabled(true);
+                                reg.setEnabled(true);
                                 Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
@@ -60,16 +62,42 @@ public class LoginActivity extends AppCompatActivity {
                                 LoginActivity.this.startActivityForResult(new Intent(LoginActivity.this, MainActivity.class), LOGIN_REQUEST);
                                 finish();
                             }
-
                         }
                     });
                     login.setEnabled(false);
+                    reg.setEnabled(false);
                     loginBackground.execute(sendUsrPass);
                 }
-
             }
         });
-
+        reg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (username.getText().toString().trim().equals("") || pass.getText().toString().trim().equals("")) {
+                    Toast.makeText(LoginActivity.this, "Fill the form", Toast.LENGTH_SHORT).show();
+                } else {
+                    final String sendUsrPass = "register-" + username.getText().toString() + "-" + pass.getText().toString();
+                    background loginBackground = new background(LoginActivity.this);
+                    loginBackground.getListener(new background.OnUpdateListener() {
+                        @Override
+                        public void onUpdate(String obj) {
+                            if (obj.contains("failed")) {
+                                login.setEnabled(true);
+                                reg.setEnabled(true);
+                                Toast.makeText(LoginActivity.this, "Name already used", Toast.LENGTH_SHORT).show();
+                            } else {
+                                login.setEnabled(true);
+                                reg.setEnabled(true);
+                                Toast.makeText(LoginActivity.this, "Register Success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Try Login Now", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    login.setEnabled(false);
+                    reg.setEnabled(false);
+                    loginBackground.execute(sendUsrPass);
+                }
+            }
+        });
     }
-
 }

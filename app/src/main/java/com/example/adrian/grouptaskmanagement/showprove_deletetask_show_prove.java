@@ -60,13 +60,18 @@ public class showprove_deletetask_show_prove extends Fragment {
         app.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                app.setEnabled(false);
+                diss.setEnabled(false);
                 background background1 = new background(getContext());
                 background1.getListener(new background.OnUpdateListener() {
                     @Override
                     public void onUpdate(String obj) {
                         if(obj.contains("failed")){
-
+                            app.setEnabled(true);
+                            diss.setEnabled(true);
                         }else{
+                            app.setEnabled(true);
+                            diss.setEnabled(true);
                             DocumentReference doc1 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
                             doc1.update("status","approved");
                             getFragmentManager().popBackStack();
@@ -80,13 +85,18 @@ public class showprove_deletetask_show_prove extends Fragment {
         diss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                app.setEnabled(false);
+                diss.setEnabled(false);
                 background background1 = new background(getContext());
                 background1.getListener(new background.OnUpdateListener() {
                     @Override
                     public void onUpdate(String obj) {
                         if(obj.contains("failed")){
-
+                            app.setEnabled(true);
+                            diss.setEnabled(true);
                         }else {
+                            app.setEnabled(true);
+                            diss.setEnabled(true);
                             DocumentReference doc1 = db.document("List_Job/" + IDJOB + "/List_Task/" + IDTASK);
                             doc1.update("status", "no");
                             update();
