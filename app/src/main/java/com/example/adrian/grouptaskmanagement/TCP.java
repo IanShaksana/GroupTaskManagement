@@ -30,33 +30,14 @@ public class TCP {
     }
     public String setupCon(String newData) {
         String data;
-        //String address = "192.168.1.5";
         String address = "203.189.123.200";
-        /*
-        String ipAddress = getIPAddress(true);
-        String[] splitIP = ipAddress.split("\\.");
-
-        switch (splitIP[2]) {
-            case "31":
-                address = "192.168.31.180";
-                break;
-            case "43":
-                address = "192.168.43.138";
-                break;
-            case "136":
-                address = "192.168.142.230";
-                break;
-            case "1":
-                address = "192.168.1.3";
-                break;
-        }*/
 
         try {
             InetAddress serverAddr = InetAddress.getByName(address);
             SocketAddress sockaddr = new InetSocketAddress(serverAddr, 1236);
             Socket socket = new Socket();
-            socket.connect(sockaddr, 5000);
-            socket.setSoTimeout(5000);
+            socket.connect(sockaddr, 10000);
+            socket.setSoTimeout(10000);
             PrintStream sendData = new PrintStream(socket.getOutputStream());
             sendData.println(newData);
             BufferedReader bufferedReader = new BufferedReader(

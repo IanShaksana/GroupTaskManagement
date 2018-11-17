@@ -72,13 +72,15 @@ public class showprove_deletetask_show_prove extends Fragment {
                         }else{
                             app.setEnabled(true);
                             diss.setEnabled(true);
+                            /*
                             DocumentReference doc1 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
                             doc1.update("status","approved");
+                            */
                             getFragmentManager().popBackStack();
                         }
                     }
                 });
-                background1.execute("approve_yes-" + IDTASK + "-" + IDTASK);
+                background1.execute("approve_yes-" + IDJOB + "-" + IDTASK);
             }
         });
 
@@ -96,14 +98,14 @@ public class showprove_deletetask_show_prove extends Fragment {
                             diss.setEnabled(true);
                         }else {
                             app.setEnabled(true);
-                            diss.setEnabled(true);
+                            diss.setEnabled(true);/*
                             DocumentReference doc1 = db.document("List_Job/" + IDJOB + "/List_Task/" + IDTASK);
-                            doc1.update("status", "no");
-                            update();
+                            doc1.update("status", "no");*/
+                            getFragmentManager().popBackStack();
                         }
                     }
                 });
-                background1.execute("approve_no-" +IDTASK);
+                background1.execute("approve_no-" + IDJOB + "-" + IDTASK);
             }
         });
 

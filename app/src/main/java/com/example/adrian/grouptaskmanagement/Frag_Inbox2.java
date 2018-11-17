@@ -48,6 +48,7 @@ public class Frag_Inbox2 extends Fragment {
     String ID_Task;
     String choosen;
     String ID_User_Worker;
+    String docID;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
@@ -81,7 +82,7 @@ public class Frag_Inbox2 extends Fragment {
             @Override
             public void onitemclick(final DocumentSnapshot documentSnapshot, final int position) {
                 final Frag_Inbox_recycler note = documentSnapshot.toObject(Frag_Inbox_recycler.class);
-                String id = documentSnapshot.getId();
+                docID = documentSnapshot.getId();
                 choosen = note.getMssgCode();
                 String[] mssgCodesplit = choosen.split("-");
                 ID_Task = mssgCodesplit[2];
@@ -94,62 +95,9 @@ public class Frag_Inbox2 extends Fragment {
                 String type = note.getType();
                 //Toast.makeText(getContext(), "type: "+type+" id: "+id, Toast.LENGTH_SHORT).show();
 
-                PopupMenu pop2 = new PopupMenu(getContext(), view1, Gravity.CENTER);
-                try {
-                    Field[] fields = pop2.getClass().getDeclaredFields();
-                    for (Field field : fields) {
-                        if ("mPopup".equals(field.getName())) {
-                            field.setAccessible(true);
-                            Object menuPopupHelper = field.get(pop2);
-                            Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
-                            Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon", boolean.class);
-                            setForceIcons.invoke(menuPopupHelper, true);
-                            break;
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                pop2.getMenuInflater().inflate(R.menu.popupreply2, pop2.getMenu());
-
-                PopupMenu pop3 = new PopupMenu(getContext(), view1, Gravity.CENTER);
-                try {
-                    Field[] fields = pop3.getClass().getDeclaredFields();
-                    for (Field field : fields) {
-                        if ("mPopup".equals(field.getName())) {
-                            field.setAccessible(true);
-                            Object menuPopupHelper = field.get(pop3);
-                            Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
-                            Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon", boolean.class);
-                            setForceIcons.invoke(menuPopupHelper, true);
-                            break;
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                pop3.getMenuInflater().inflate(R.menu.popupreply3, pop3.getMenu());
-
-                PopupMenu pop4 = new PopupMenu(getContext(), view1, Gravity.CENTER);
-                try {
-                    Field[] fields = pop4.getClass().getDeclaredFields();
-                    for (Field field : fields) {
-                        if ("mPopup".equals(field.getName())) {
-                            field.setAccessible(true);
-                            Object menuPopupHelper = field.get(pop4);
-                            Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
-                            Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon", boolean.class);
-                            setForceIcons.invoke(menuPopupHelper, true);
-                            break;
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                pop4.getMenuInflater().inflate(R.menu.popupreply4, pop4.getMenu());
 
                 switch (type) {
-                    case "apply-task":
+                    case "applyTask":
                         String[] optApply = {"Compare", "Accept", "Reject"};
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
                         builder1.setTitle("Options");
@@ -170,18 +118,19 @@ public class Frag_Inbox2 extends Fragment {
                                             public void onUpdate(String obj) {
                                                 if (obj.contains("failed")){
 
-                                                }else{
+                                                }else{/*
                                                     String[] objsplit =obj.split("-");
                                                     DocumentReference doc1 = db.document("List_Job/"+objsplit[1]);
                                                     DocumentReference doc2 = db.document("List_Job/"+objsplit[1]+"/List_Task/"+ID_Task);
                                                     doc1.update("slotnow",objsplit[2]);
                                                     doc2.update("worker",ID_User_Worker);
-                                                    adapter.delitem(position);
+                                                    adapter.delitem(position);*/
+                                                    Toast.makeText(getContext(), "complete", Toast.LENGTH_SHORT).show();
                                                 }
 
                                             }
                                         });
-                                        background2.execute("reply_message-apply_yes-" + ID_Task + "-" + ID_User_Worker + "-" + choosen);
+                                        background2.execute("reply_message-apply_yes-" + ID_Task + "-" + ID_User_Worker + "-" + choosen + "-" +docID);
                                         break;
                                     case 2:
                                         //Toast.makeText(getContext(), "Reject", Toast.LENGTH_SHORT).show();
@@ -192,22 +141,23 @@ public class Frag_Inbox2 extends Fragment {
                                                 if (obj.contains("failed")){
 
                                                 }else{
-                                                    adapter.delitem(position);
+                                                    //adapter.delitem(position);
+                                                    Toast.makeText(getContext(), "complete", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
-                                        background3.execute("reply_message-apply_reject-" + ID_Task + "-" + ID_User_Worker + "-" + choosen);
+                                        background3.execute("reply_message-apply_reject-" + ID_Task + "-" + ID_User_Worker + "-" + choosen + "-" +docID);
                                         break;
                                 }
                             }
                         });
                         builder1.show();
                         break;
-                    case "assign-task":
+                    case "assignTask":
                         String[] optAssg = {"View Task", "Accept Task", "Reject Task"};
 
                         AlertDialog.Builder builder2 = new AlertDialog.Builder(getContext());
-                        builder2.setTitle("Pick a color");
+                        builder2.setTitle("Options");
                         builder2.setItems(optAssg, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -225,15 +175,16 @@ public class Frag_Inbox2 extends Fragment {
                                             public void onUpdate(String obj) {
                                                 if (obj.contains("failed")){
 
-                                                }else {
+                                                }else {/*
                                                     String[] objsplit = obj.split("-");
                                                     DocumentReference doc2 = db.document("List_Job/"+objsplit[0]+"/List_Task/"+ID_Task);
                                                     doc2.update("worker",objsplit[1]);
-                                                    adapter.delitem(position);
+                                                    adapter.delitem(position);*/
+                                                    Toast.makeText(getContext(), "complete", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
-                                        background1.execute("reply_message-assign_yes-" + ID_Task + "-" +  "-" + choosen);
+                                        background1.execute("reply_message-assign_yes-" + ID_Task + "-" +  "-" + choosen+"-"+docID);
                                         break;
                                     case 2:
                                         //Toast.makeText(getContext(), "Reject Task", Toast.LENGTH_SHORT).show();
@@ -244,12 +195,12 @@ public class Frag_Inbox2 extends Fragment {
                                                 if (obj.contains("failed")){
 
                                                 }else {
-                                                    adapter.delitem(position);
-                                                    update();
+                                                    //adapter.delitem(position);
+                                                    Toast.makeText(getContext(), "complete", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
-                                        background2.execute("reply_message-assign_reject-" + ID_Task + "-"  + "-" + choosen);
+                                        background2.execute("reply_message-assign_reject-" + ID_Task + "-"  + "-" + choosen+"-"+docID);
                                         break;
                                 }
                             }
@@ -257,15 +208,14 @@ public class Frag_Inbox2 extends Fragment {
                         builder2.show();
                         break;
 
-                    case "invite-job":
-                        String[] optInvt = {"View Job", "View Task", "Accept Job", "Accept Task"};
+                    case "inviteJob":
+                        String[] optInvt = {"View Job", "View Task", "Accept Job", "Reject Job"};
 
                         AlertDialog.Builder builder3 = new AlertDialog.Builder(getContext());
-                        builder3.setTitle("Pick a color");
+                        builder3.setTitle("Options");
                         builder3.setItems(optInvt, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // the user clicked on colors[which]
                                 switch (which) {
                                     case 0:
                                         Toast.makeText(getContext(), "View Job", Toast.LENGTH_SHORT).show();
@@ -283,15 +233,16 @@ public class Frag_Inbox2 extends Fragment {
                                             public void onUpdate(String obj) {
                                                 if(obj.contains("failed")){
 
-                                                }else {
+                                                }else {/*
                                                     String[] objsplit = obj.split("-");
                                                     DocumentReference doc2 = db.document("List_Job/"+objsplit[0]);
                                                     doc2.update("slotnow",objsplit[1]);
-                                                    adapter.delitem(position);
+                                                    adapter.delitem(position);*/
+                                                    Toast.makeText(getContext(), "complete", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
-                                        background1.execute("reply_message-invite_yes-" + ID_Job + "-"  + "-" + choosen);
+                                        background1.execute("reply_message-invite_yes-" + ID_Job + "-"  + "-" + choosen + "-" +docID);
                                         break;
                                     case 3:
                                         Toast.makeText(getContext(), ID_Job, Toast.LENGTH_SHORT).show();
@@ -302,11 +253,12 @@ public class Frag_Inbox2 extends Fragment {
                                                 if(obj.contains("failed")){
 
                                                 }else {;
-                                                    adapter.delitem(position);
+                                                    //adapter.delitem(position);
+                                                    Toast.makeText(getContext(), "complete", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
-                                        background2.execute("reply_message-invite_reject-" + ID_Job + "-" + "-" + choosen);
+                                        background2.execute("reply_message-invite_reject-" + ID_Job + "-" + "-" + choosen + "-" +docID);
                                         break;
                                 }
                             }
@@ -317,7 +269,7 @@ public class Frag_Inbox2 extends Fragment {
                         String[] optVote = {"Up Vote", "Down Vote"};
 
                         AlertDialog.Builder builder4 = new AlertDialog.Builder(getContext());
-                        builder4.setTitle("Pick a color");
+                        builder4.setTitle("Options");
                         builder4.setItems(optVote, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -332,11 +284,12 @@ public class Frag_Inbox2 extends Fragment {
                                                 if(obj.contains("failed")){
 
                                                 }else{
-                                                    adapter.delitem(position);
+                                                    //adapter.delitem(position);
+                                                    Toast.makeText(getContext(), "complete", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
-                                        background1.execute("reply_message-UpVote-" +ID_Job_vote+"-"+state);
+                                        background1.execute("reply_message-UpVote-" +ID_Job_vote+"-"+state+ "-" +docID);
                                         break;
                                     case 1:
                                         //Toast.makeText(getContext(), "Down Vote", Toast.LENGTH_SHORT).show();
@@ -347,11 +300,12 @@ public class Frag_Inbox2 extends Fragment {
                                                 if(obj.contains("failed")){
 
                                                 }else{
-                                                    adapter.delitem(position);
+                                                    //adapter.delitem(position);
+                                                    Toast.makeText(getContext(), "complete", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
-                                        background2.execute("reply_message-DownVote-" + ID_Job_vote+"-"+state);
+                                        background2.execute("reply_message-DownVote-" + ID_Job_vote+"-"+state+ "-" +docID);
                                         break;
                                 }
                             }

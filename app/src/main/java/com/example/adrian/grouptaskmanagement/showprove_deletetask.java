@@ -34,7 +34,6 @@ public class showprove_deletetask extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle("Inbox");
         final String[] TAGSPLIT = getTag().split("-");
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
@@ -89,7 +88,7 @@ public class showprove_deletetask extends Fragment {
                         }
                     }
                 });
-                background1.execute("Delete_task-" + TAGSPLIT[0]);
+                background1.execute("Delete_task-" + TAGSPLIT[0] +"-"+TAGSPLIT[1]);
             }
         });
 

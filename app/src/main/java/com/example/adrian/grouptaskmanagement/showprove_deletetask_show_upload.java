@@ -77,6 +77,7 @@ public class showprove_deletetask_show_upload extends Fragment {
             }
         });
         out = view.findViewById(R.id.upload);
+
         out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,7 +96,6 @@ public class showprove_deletetask_show_upload extends Fragment {
                             @Override
                             public void onUpdate(String obj) {
                                 if(obj.contains("failed")){
-                                    update();
                                     del.setEnabled(true);
                                     in.setEnabled(true);
                                     out.setEnabled(true);
@@ -103,8 +103,7 @@ public class showprove_deletetask_show_upload extends Fragment {
                                     del.setEnabled(true);
                                     in.setEnabled(true);
                                     out.setEnabled(true);
-                                    DocumentReference doc1 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
-                                    doc1.update("status","Waiting for review");
+                                    getFragmentManager().popBackStack();
                                 }
                             }
                         });
@@ -114,6 +113,7 @@ public class showprove_deletetask_show_upload extends Fragment {
 
             }
         });
+
         del = view.findViewById(R.id.abandoned1);
         del.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,8 +133,9 @@ public class showprove_deletetask_show_upload extends Fragment {
                             del.setEnabled(true);
                             in.setEnabled(true);
                             out.setEnabled(true);
+                            /*
                             DocumentReference doc2 = db.document("List_Job/"+IDJOB+"/List_Task/"+IDTASK);
-                            doc2.update("worker","none");
+                            doc2.update("worker","none");*/
                             getFragmentManager().popBackStack();
                         }
                     }
@@ -192,11 +193,11 @@ public class showprove_deletetask_show_upload extends Fragment {
                             progbar.setProgress(0);
                         }
                     },500);
-                    Toast.makeText(getContext(),"complete",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(),"complete",Toast.LENGTH_SHORT).show();
                     a_firebase_image_upload upload1 = new a_firebase_image_upload(TAG,fileRef.getDownloadUrl().toString());
                     String uploadid = mDataRef.push().getKey();
                     mDataRef.child(uploadid).setValue(upload1);
-                    getFragmentManager().popBackStack();
+
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

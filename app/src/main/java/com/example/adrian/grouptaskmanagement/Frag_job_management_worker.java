@@ -34,7 +34,6 @@ public class Frag_job_management_worker extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle("Job");
         activity = getActivity();
         ID_Job = getTag();
         //ID_Job2 = ID_Job;
@@ -56,17 +55,21 @@ public class Frag_job_management_worker extends Fragment {
                 background1.getListener(new background.OnUpdateListener() {
                     @Override
                     public void onUpdate(String obj) {
-                        String[] obj1 = obj.split("-LISTJOB-");
-                        DocumentReference doc1 = db.document("List_Job/"+ID_Job);
-                        doc1.update("slotnow",obj1[0]);
+                        if(obj.contains("failed")){
 
-                        String[] obj2 = obj1[1].split("-");
-                        for (int i = 0;i<obj2.length;i++){
-                            Toast.makeText(getContext(), obj2[i], Toast.LENGTH_SHORT).show();
-                            DocumentReference doc2 = db.document("List_Job/"+ID_Job+"/List_Task/"+obj2[i]);
-                            doc2.update("worker","none");
+                        }else {/*
+                            String[] obj1 = obj.split("-LISTJOB-");
+                            DocumentReference doc1 = db.document("List_Job/"+ID_Job);
+                            doc1.update("slotnow",obj1[0]);
+
+                            String[] obj2 = obj1[1].split("-");
+                            for (int i = 0;i<obj2.length;i++){
+                                Toast.makeText(getContext(), obj2[i], Toast.LENGTH_SHORT).show();
+                                DocumentReference doc2 = db.document("List_Job/"+ID_Job+"/List_Task/"+obj2[i]);
+                                doc2.update("worker","none");
+                            }*/
+                            getFragmentManager().popBackStack();
                         }
-                        getFragmentManager().popBackStack();
                     }
                 });
                 background1.execute("abandon_group-" + ID_Job + "-" + state);

@@ -68,10 +68,16 @@ public class leader_assign2 extends Fragment implements  dialog_yes_no_assign.di
         background1.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
+                if(obj.contains("failed")){
+
+                }else {
+                    getFragmentManager().popBackStack();
+                }
+                /*
                 CollectionReference notebookRef1 = FirebaseFirestore.getInstance()
                         .collection("Message/"+ID_User+"/"+"inbox/");
                 notebookRef1.add(new Frag_Inbox_recycler(state,"you got invitation to this task: "+ID_Task,"send","assign-task",obj));
-                Toast.makeText(getContext(), "complete", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "complete", Toast.LENGTH_SHORT).show();*/
             }
         });
         background1.execute("msg_assign-" + ID_User + "-" + ID_Task + "-" + ID_Job);

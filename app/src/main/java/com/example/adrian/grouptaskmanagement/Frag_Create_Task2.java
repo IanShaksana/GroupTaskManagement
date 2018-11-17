@@ -121,22 +121,29 @@ public class Frag_Create_Task2 extends Fragment implements DatePickerDialog.OnDa
         crt_job_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                background background = new background(getContext());
-                String send = "create_task-" + taskname.getText().toString() + "-" + taskdesc.getText().toString() + "-" + tasktype.getText().toString() + "-" + taskdiff.getText().toString() + "-" + getTag() + "-," + current_date + "," + current_time;
-                background.getListener(new background.OnUpdateListener() {
-                    @Override
-                    public void onUpdate(String obj) {
-                        if (obj.equals("failed")){
-                            crt_job_btn.setEnabled(true);
-                        }else {
-                            crt_job_btn.setEnabled(true);
-                            Snackbar.make(container1,"Create Task Success",1500).show();
-                            update();
+                if(taskdate.getText().toString().trim().isEmpty() ||  tasktype.getText().toString().trim().isEmpty() ||
+                        taskname.getText().toString().trim().isEmpty() ||  taskdesc.getText().toString().trim().isEmpty() ||
+                        tasktime.getText().toString().trim().isEmpty() ||  taskdiff.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(getContext(), "Data Incomplete", Toast.LENGTH_SHORT).show();
+                }else {
+                    background background = new background(getContext());
+                    String send = "create_task-" + taskname.getText().toString() + "-" + taskdesc.getText().toString() + "-" + tasktype.getText().toString() + "-" + taskdiff.getText().toString() + "-" + getTag() + "-," + current_date + "," + current_time;
+                    background.getListener(new background.OnUpdateListener() {
+                        @Override
+                        public void onUpdate(String obj) {
+                            if (obj.equals("failed")){
+                                crt_job_btn.setEnabled(true);
+                            }else {
+                                crt_job_btn.setEnabled(true);
+                                Snackbar.make(container1,"Create Task Success",1500).show();
+                                update();
+                            }
                         }
-                    }
-                });
-                crt_job_btn.setEnabled(false);
-                background.execute(send);
+                    });
+                    crt_job_btn.setEnabled(false);
+                    background.execute(send);
+                }
+
             }
         });
         return view;

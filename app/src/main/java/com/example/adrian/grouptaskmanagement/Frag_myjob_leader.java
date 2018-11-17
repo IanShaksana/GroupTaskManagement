@@ -28,7 +28,6 @@ public class Frag_myjob_leader extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        getActivity().setTitle("As Leader");
         final View view = inflater.inflate(R.layout.myjob2, container, false);
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");

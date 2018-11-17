@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -42,11 +43,13 @@ public class Frag_Home2 extends Fragment {
     private RadarChart chart;
     private static final float MAX =12, MIN = 1f;
     private static final int random =5;
+    View importPanel;
+    FrameLayout progressOverlay;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.home2, container, false);
+        final View view = inflater.inflate(R.layout.home2, container, false);
         //Snackbar.make(container,"hai from snackbar",500).show();
 
         final TextView username = (TextView) view.findViewById(R.id.username);
@@ -54,6 +57,8 @@ public class Frag_Home2 extends Fragment {
         final TextView Exp_nex = (TextView) view.findViewById(R.id.exp_nex);
         final ProgressBar exp = view.findViewById(R.id.exp_bar);
         final TextView level = view.findViewById(R.id.level);
+        //progressOverlay = view.findViewById(R.id.progress_overlay);
+        //progressOverlay.setVisibility(View.VISIBLE);
         chart = view.findViewById(R.id.radarchart);
 
         //chart.setBackgroundColor(Color.rgb(60,65,82));
@@ -100,6 +105,8 @@ public class Frag_Home2 extends Fragment {
                     int set3 = 100 * set1 / set2;
                     exp.setProgress(set3);
                     level.setText(split[6]);
+                    //progressOverlay.setVisibility(View.INVISIBLE);
+                    //importPanel.setVisibility(View.INVISIBLE);
                 }
             }
         });

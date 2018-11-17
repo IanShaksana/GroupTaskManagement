@@ -45,7 +45,6 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle("Job");
         activity = getActivity();
         ID_Job = getTag();
         context = activity.getApplicationContext();
@@ -63,7 +62,6 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
 
         final background background = new background(getContext());
         background.getListener(new background.OnUpdateListener() {
-            @Override
             public void onUpdate(String obj) {
                 if(obj.contains("failed")){
 
@@ -160,10 +158,12 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                     if (obj.equals("failed")){
 
                     }else{
+                        getFragmentManager().popBackStack();
+                        /*
                         CollectionReference notebookRef1 = FirebaseFirestore.getInstance()
                                 .collection("Message/"+wasd+"/"+"inbox/");
                         notebookRef1.add(new Frag_Inbox_recycler(state,state+" want to invite you to this job: "+ID_Job,"send","invite-job",obj));
-                        update();
+                        update();*/
                     }
 
                 }
@@ -181,6 +181,11 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
         background1.getListener(new background.OnUpdateListener() {
             @Override
             public void onUpdate(String obj) {
+                if(obj.contains("failed")){
+
+                }else {
+                    getFragmentManager().popBackStack();
+                }/*
                 String[] obj1 = obj.split("-LISTJOB-");
                 DocumentReference doc1 = db.document("List_Job/"+ID_Job);
                 doc1.update("slotnow",obj1[0]);
@@ -191,8 +196,7 @@ public class Frag_worker_management extends Fragment implements dialog_worker_in
                         DocumentReference doc2 = db.document("List_Job/"+ID_Job+"/List_Task/"+obj2[i]);
                         doc2.update("worker","none");
                     }
-                }
-                update();
+                }*/
             }
         });
         background1.execute("remove_worker-" + choosen + "-" + ID_Job);

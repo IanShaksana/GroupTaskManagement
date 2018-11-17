@@ -59,8 +59,6 @@ public class Frag_job_management_leader extends Fragment {
         });
         background.execute("get_job_detail-"+ID_Job);
 
-        //Toast.makeText(getContext(), ID_Job2, Toast.LENGTH_SHORT).show();
-
         finish = (ImageView) view.findViewById(R.id.Finish_Job);
         task = (ImageView) view.findViewById(R.id.View_Task);
         worker = (ImageView) view.findViewById(R.id.View_Worker);
@@ -73,25 +71,21 @@ public class Frag_job_management_leader extends Fragment {
                 background1.getListener(new background.OnUpdateListener() {
                     @Override
                     public void onUpdate(String obj) {
-                        //Toast.makeText(getContext(), obj, Toast.LENGTH_SHORT).show();
-
                         if(obj.contains("failed")){
-                        }else{
+
+                        }else{/*
                             String[] objsplit = obj.split("-");
                             DocumentReference doc2 = db.document("List_Job/"+ID_Job);
                             doc2.update("status","off");
                             for (int i =2; i<objsplit.length;i++){
+
                                 CollectionReference notebookRef1 = db
                                         .collection("Message/"+objsplit[i]+"/"+"inbox/");
                                 notebookRef1.add(new Frag_Inbox_recycler("System","Time to vote "+ID_Job,"send","vote",objsplit[i]+"-vote-"+objsplit[0]+"-"+objsplit[1]));
-                            }
+
+                            }*/
                             getFragmentManager().popBackStack();
                         }
-                        /*
-                        for (int i =2; i<objsplit.length;i++){
-                            Toast.makeText(getContext(), objsplit[i], Toast.LENGTH_SHORT).show();
-                        }
-                        */
                     }
                 });
                 background1.execute("finish_job-"+ID_Job);

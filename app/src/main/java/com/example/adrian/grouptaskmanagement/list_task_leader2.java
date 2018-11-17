@@ -45,7 +45,6 @@ public class list_task_leader2 extends Fragment {
     private list_task_leader2_recycler_adapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle("Avaible Task");
         final View view = inflater.inflate(R.layout.list_task_leader2, container, false);
         IDJOB = getTag();
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);

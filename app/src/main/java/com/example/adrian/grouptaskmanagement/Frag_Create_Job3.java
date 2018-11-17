@@ -85,23 +85,28 @@ public class Frag_Create_Job3 extends Fragment implements dialog_worker_slot.dia
         crt_job_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                background background = new background(getContext());
-                String send = "create_job-" + JobName.getText().toString() + "-" + desc.getText().toString() + "-" + state + "-" +worker.getText().toString()+ "-" + "," + current_date + "," + current_time;
-                background.getListener(new background.OnUpdateListener() {
-                    @Override
-                    public void onUpdate(String obj) {
-                        //saveNote(obj);
-                        if (obj.equals("failed")){
-                            crt_job_btn.setEnabled(true);
-                        }else {
-                            crt_job_btn.setEnabled(true);
-                            Snackbar.make(container1,"Job Created",1500).show();
-                            update();
+                if(JobName.getText().toString().trim().isEmpty() || date.getText().toString().trim().isEmpty() ||
+                time.getText().toString().trim().isEmpty() || worker.getText().toString().trim().isEmpty() ||
+                desc.getText().toString().trim().isEmpty()){
+                    Toast.makeText(getContext(), "Data Incomplete", Toast.LENGTH_SHORT).show();
+                }else {
+                    background background = new background(getContext());
+                    String send = "create_job-" + JobName.getText().toString() + "-" + desc.getText().toString() + "-" + state + "-" +worker.getText().toString()+ "-" + "," + current_date + "," + current_time;
+                    background.getListener(new background.OnUpdateListener() {
+                        @Override
+                        public void onUpdate(String obj) {
+                            if (obj.equals("failed")){
+                                crt_job_btn.setEnabled(true);
+                            }else {
+                                crt_job_btn.setEnabled(true);
+                                Snackbar.make(container1,"Job Created",1500).show();
+                                update();
+                            }
                         }
-                    }
-                });
-                crt_job_btn.setEnabled(false);
-                background.execute(send);
+                    });
+                    crt_job_btn.setEnabled(false);
+                    background.execute(send);
+                }
             }
         });
         return view;

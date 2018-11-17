@@ -30,10 +30,15 @@ public class background extends AsyncTask<String, Void, String> {
         String con = "not_send";
         int count_try = 0;
         TCP tcp = new TCP(currentAct);
-        //while (con.equals("not_send") && count_try != 5){
+        while (con.equals("not_send") && count_try != 3){
             con = tcp.setupCon(strings[0]);
-            count_try++;
-        //}
+            if(con.contains("failed")){
+                count_try++;
+            }else {
+                count_try = 4;
+            }
+
+        }
         return con;
     }
 

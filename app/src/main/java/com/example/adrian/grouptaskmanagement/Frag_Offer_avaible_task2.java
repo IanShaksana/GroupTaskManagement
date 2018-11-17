@@ -89,16 +89,18 @@ public class Frag_Offer_avaible_task2 extends Fragment implements dialog_yes_no_
             background1.getListener(new background.OnUpdateListener() {
                 @Override
                 public void onUpdate(String obj) {
+
                     if(obj.equals("failed")){
 
                     }else{
+                        getFragmentManager().popBackStack();
+                        /*
                         String objsplit[] = obj.split("\\|");
                         CollectionReference notebookRef1 = FirebaseFirestore.getInstance()
                                 .collection("Message/"+objsplit[0]+"/"+"inbox/");
                         notebookRef1.add(new Frag_Inbox_recycler(state,state+" want to apply "+ID_Task,"send","apply-task",objsplit[1]+"|"+objsplit[2]));
-                        update();
+                        update();*/
                     }
-
                 }
             });
             background1.execute("apply_req-" + state + "-" + ID_Task + "-" + ID_Job);

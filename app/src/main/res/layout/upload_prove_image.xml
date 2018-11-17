@@ -42,7 +42,7 @@
         android:layout_marginLeft="20dp"
         android:backgroundTint="#FEFBDE"
         android:background="@drawable/round_button"
-        android:text="Delete" />
+        android:text="Abandon" />
 
     <ProgressBar
         android:id="@+id/progbar"
