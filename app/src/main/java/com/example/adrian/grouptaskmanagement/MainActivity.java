@@ -1,7 +1,7 @@
 package com.example.adrian.grouptaskmanagement;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentBottom, new Frag_Home2()).commit();
+        Intent mServiceIntent = new Intent(this, pingService.class);
+        startService(mServiceIntent);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {

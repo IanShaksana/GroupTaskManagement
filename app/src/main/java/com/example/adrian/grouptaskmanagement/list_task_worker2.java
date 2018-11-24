@@ -161,6 +161,9 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
                     case "approved" :
                         Toast.makeText(getContext(), "Approved", Toast.LENGTH_SHORT).show();
                         break;
+                    case "late" :
+                        Toast.makeText(getContext(), "Late", Toast.LENGTH_SHORT).show();
+                        break;
                 }
             }
         });

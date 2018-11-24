@@ -14,7 +14,6 @@
         android:roundIcon="@drawable/image"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.android.fileprovider"
@@ -27,11 +26,10 @@
 
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-        <activity android:name=".MainActivity" android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".listviewtest" />
         <activity android:name=".AlarmActivity" />
         <activity android:name=".dialogBox" />
@@ -43,27 +41,25 @@
         <activity android:name=".camera_test" />
         <activity
             android:name=".z_firebase"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".z_new_recycler"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".z_recycler"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".a_firebase_image"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".a_firebase_image_show_act"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".zz_chat_1"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".zzz_test_global"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
 
         <service android:name=".zz_FirebaseService">
             <intent-filter>
@@ -81,12 +77,29 @@
 
         <receiver android:name=".MyWakefulReceiver" />
 
-        <activity android:name=".splashscreen" android:theme="@style/splash">
+        <activity
+            android:name=".splashscreen"
+            android:theme="@style/splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--
+        <service
+            android:name=".pingService"
+            android:exported="false" />
+
+        <receiver
+            android:name=".pingReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="restartservice" />
+            </intent-filter>
+        </receiver>
+-->
     </application>
 
 </manifest>

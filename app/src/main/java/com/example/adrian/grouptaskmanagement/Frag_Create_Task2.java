@@ -94,13 +94,13 @@ public class Frag_Create_Task2 extends Fragment implements DatePickerDialog.OnDa
             @Override
             public void onClick(View view) {
                 if (tasktype.getText().toString().equals("")) {
-                    tasktype.setText("Str");
-                } else if (tasktype.getText().toString().equals("Str")) {
-                    tasktype.setText("Dex");
-                } else if (tasktype.getText().toString().equals("Dex")) {
-                    tasktype.setText("Int");
-                } else if (tasktype.getText().toString().equals("Int")) {
-                    tasktype.setText("Str");
+                    tasktype.setText("Strength");
+                } else if (tasktype.getText().toString().equals("Strength")) {
+                    tasktype.setText("Creative");
+                } else if (tasktype.getText().toString().equals("Creative")) {
+                    tasktype.setText("Intelligence");
+                } else if (tasktype.getText().toString().equals("Intelligence")) {
+                    tasktype.setText("Strength");
                 }
             }
         });
@@ -127,7 +127,15 @@ public class Frag_Create_Task2 extends Fragment implements DatePickerDialog.OnDa
                     Toast.makeText(getContext(), "Data Incomplete", Toast.LENGTH_SHORT).show();
                 }else {
                     background background = new background(getContext());
-                    String send = "create_task-" + taskname.getText().toString() + "-" + taskdesc.getText().toString() + "-" + tasktype.getText().toString() + "-" + taskdiff.getText().toString() + "-" + getTag() + "-," + current_date + "," + current_time;
+                    String send;
+                    if(tasktype.getText().toString().contains("Strength")){
+                        send = "create_task-" + taskname.getText().toString() + "-" + taskdesc.getText().toString() + "-Str-" + taskdiff.getText().toString() + "-" + getTag() + "-," + current_date + "," + current_time;
+                    }else if(tasktype.getText().toString().contains("Intelligence")){
+                        send = "create_task-" + taskname.getText().toString() + "-" + taskdesc.getText().toString() + "-Int-" + taskdiff.getText().toString() + "-" + getTag() + "-," + current_date + "," + current_time;
+                    }else {
+                        send = "create_task-" + taskname.getText().toString() + "-" + taskdesc.getText().toString() + "-Dex-" + taskdiff.getText().toString() + "-" + getTag() + "-," + current_date + "," + current_time;
+
+                    }
                     background.getListener(new background.OnUpdateListener() {
                         @Override
                         public void onUpdate(String obj) {

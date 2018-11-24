@@ -28,6 +28,9 @@ public class TCP {
     public TCP(Context context) {
         currAct = context;
     }
+    public TCP() {
+
+    }
     public String setupCon(String newData) {
         String data;
         String address = "203.189.123.200";

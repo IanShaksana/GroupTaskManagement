@@ -157,7 +157,7 @@ public class Frag_Home2 extends Fragment {
         sets.add(set1);
 
         ArrayList<String> qualities = new ArrayList<String>();
-        qualities.add("AGL");
+        qualities.add("CRT");
         qualities.add("STR");
         qualities.add("INT");
 

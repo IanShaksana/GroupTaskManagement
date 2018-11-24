@@ -1,6 +1,7 @@
 package com.example.adrian.grouptaskmanagement;
 
 import android.app.DatePickerDialog;
+import android.app.IntentService;
 import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -73,19 +74,24 @@ public class Frag_Create_Job2 extends Fragment implements dialog_worker_slot.dia
         crt_job_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                background background = new background(getContext());
-                //worker minimal
-                String send = "create_job-" + JobName.getText().toString() + "-" + desc.getText().toString() + "-" + state + "-" +date.getText().toString()+ "-" +worker.getText().toString();
-                background.getListener(new background.OnUpdateListener() {
-                    @Override
-                    public void onUpdate(String obj) {
-                        Toast.makeText(getContext(), "Create Job Success", Toast.LENGTH_SHORT).show();
-                        update();
-                        //getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_Offer()).commit();
-                        //Toast.makeText(getContext(), obj, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                background.execute(send);
+                if(Integer.parseInt(worker.getText().toString())>10){
+                    Toast.makeText(getContext(),"Maximum worker is 10",Toast.LENGTH_SHORT).show();
+                }else {
+                    background background = new background(getContext());
+                    //worker minimal
+                    String send = "create_job-" + JobName.getText().toString() + "-" + desc.getText().toString() + "-" + state + "-" +date.getText().toString()+ "-" +worker.getText().toString();
+                    background.getListener(new background.OnUpdateListener() {
+                        @Override
+                        public void onUpdate(String obj) {
+                            Toast.makeText(getContext(), "Create Job Success", Toast.LENGTH_SHORT).show();
+                            update();
+                            //getFragmentManager().beginTransaction().replace(R.id.fragmentBottom,new Frag_Offer()).commit();
+                            //Toast.makeText(getContext(), obj, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    background.execute(send);
+                }
+
             }
         });
         return view;
