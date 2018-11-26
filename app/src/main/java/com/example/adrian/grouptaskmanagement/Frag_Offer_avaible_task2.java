@@ -115,7 +115,7 @@ public class Frag_Offer_avaible_task2 extends Fragment implements dialog_yes_no_
     }
 
     private void setup(View view){
-        Query query = ref.whereEqualTo("worker","none").whereEqualTo("status","on");
+        Query query = ref.whereEqualTo("worker","none");
         FirestoreRecyclerOptions<Frag_Offer_recycler_task> options = new FirestoreRecyclerOptions.Builder<Frag_Offer_recycler_task>().setQuery(query,Frag_Offer_recycler_task.class).build();
         adapter = new Frag_Offer_avaible_task_recycler_adapter(options);
 
