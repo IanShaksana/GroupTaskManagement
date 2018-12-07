@@ -71,15 +71,15 @@ public class Frag_Home2 extends Fragment {
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setTextColor(Color.BLACK);
-        xAxis.setYOffset(10);
-        xAxis.setXOffset(10);
+        xAxis.setYOffset(12f);
+        xAxis.setXOffset(12f);
         xAxis.setTextSize(13f);
 
         YAxis yAxis = chart.getYAxis();
         yAxis.setDrawLabels(false);
-        yAxis.setAxisMaxValue(10);
-        yAxis.setXOffset(10);
-        yAxis.setYOffset(10);
+        yAxis.setAxisMaxValue(20f);
+        yAxis.setXOffset(12f);
+        yAxis.setYOffset(12f);
         chart.setDescription("");
 
         Legend l = chart.getLegend();
@@ -157,9 +157,9 @@ public class Frag_Home2 extends Fragment {
         sets.add(set1);
 
         ArrayList<String> qualities = new ArrayList<String>();
-        qualities.add("CRT");
-        qualities.add("STR");
-        qualities.add("INT");
+        qualities.add("Crea");
+        qualities.add("Stre");
+        qualities.add("Intl");
 
         RadarData data = new RadarData(qualities,sets);
         data.setValueTextSize(15f);

@@ -64,7 +64,7 @@ public class advancedcustomadapter_list_worker extends ArrayAdapter<String> {
         //String[] splitted_time2 = splitted_time[1].split(" ");
 
         Worker_name = (TextView) cusView.findViewById(R.id.worker_name_view);
-        Worker_task = (TextView) cusView.findViewById(R.id.Task_name);
+        //Worker_task = (TextView) cusView.findViewById(R.id.Task_name);
         //date = (TextView) cusView.findViewById(R.id.date_input_view);
         //date2 = (TextView) cusView.findViewById(R.id.date_time_input_view);
 

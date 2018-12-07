@@ -79,7 +79,11 @@ public class Frag_Status_W extends Fragment {
                 name.setText(splitted_task[0]);
                 description.setText(splitted_task[1]);
                 difficulty.setText(splitted_task[3]);
-                type.setText(splitted_task[2]);
+                if(splitted_task[2].equals("Dex")){
+                    type.setText("Crea");
+                }else{
+                    type.setText(splitted_task[2]);
+                }
                 date.setText(splitted_time2[0]);
                 date2.setText(splitted_time2[1]);
             }

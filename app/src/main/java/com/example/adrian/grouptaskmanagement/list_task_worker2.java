@@ -52,7 +52,7 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
         title.setText("~ Task List ~");
         final SharedPreferences preferences = this.getActivity().getSharedPreferences("State", MODE_PRIVATE);
         state = preferences.getString("Login_State", "");
-        Toast.makeText(getContext(), ID_job +" "+state, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), ID_job +" "+state, Toast.LENGTH_SHORT).show();
         ref = db.collection("List_Job/"+ID_job+"/List_Task");
         setup(view);
 
@@ -152,7 +152,7 @@ public class list_task_worker2 extends Fragment implements dialog_yes_no_complet
                 String id = documentSnapshot.getId();
                 String status = note.getStatus();
                 switch (status){
-                    case "on":
+                    case "no":
                         getFragmentManager().beginTransaction().setCustomAnimations(R.anim.ani1, R.anim.ani2, R.animator.popenter, R.animator.popexit).replace(R.id.fragmentBottom, new showprove_deletetask_show_upload(),id+"-"+ID_job).addToBackStack(null).commit();
                         break;
                     case "Waiting for review":

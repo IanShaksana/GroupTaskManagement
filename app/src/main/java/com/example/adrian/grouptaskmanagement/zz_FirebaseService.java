@@ -38,13 +38,22 @@ public class zz_FirebaseService extends FirebaseMessagingService {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         String channelId = "Default";
+
+        //NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        //inboxStyle.setBigContentTitle("notif");
+        //inboxStyle.addLine("no 1");
+        //inboxStyle.addLine("no 2");
+        //inboxStyle.setSummaryText(" summary ");
+
         NotificationCompat.Builder builder = new  NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle(remoteMessage.getNotification().getTitle())
                 .setContentText(remoteMessage.getNotification().getBody())
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.image));
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.image))
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+                //.setStyle(inboxStyle);
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId, "Default channel", NotificationManager.IMPORTANCE_DEFAULT);
